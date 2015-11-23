@@ -1,0 +1,4 @@
+*.pyc
+myeventplanner
+/static
+.DS_Store
