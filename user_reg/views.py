@@ -5,3 +5,6 @@ def index_page(request):
     
 def member_login(request):
     return render(request, 'user_reg/members.html', {})
+    
+def vendor_login(request):
+    return render(request, 'user_reg/vendors.html', {})

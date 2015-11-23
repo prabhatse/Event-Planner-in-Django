@@ -8,5 +8,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('user_reg.urls')),
-    url(r'^members/', include('user_reg.urls'))
+    url(r'^members/', include('user_reg.urls')),
+    url(r'^vendors/', include('user_reg.urls'))
 ]
