@@ -72,7 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mep_project.wsgi.application'
 
 #User_reg Application
-ACCOUNT_ACTIVATION_DAYS = 1 #Sets number of days that user has to activate their account by email
+ACCOUNT_ACTIVATION_DAYS = 2 #Sets number of days that user has to activate their account by email
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

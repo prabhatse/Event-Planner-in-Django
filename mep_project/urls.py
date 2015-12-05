@@ -1,6 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+handler400='views.handler404'
+
 urlpatterns = [
     # Examples:
     # url(r'^$', 'mep_project.views.home', name='home'),
@@ -8,6 +10,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('user_reg.urls')),
-    url(r'^members/', include('user_reg.urls')),
-    url(r'^vendors/', include('user_reg.urls'))
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    
 ]

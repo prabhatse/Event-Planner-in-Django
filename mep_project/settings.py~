@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3j3o-$ceem4%&n$mhh7^-e5)adykwn2@k%^$91g8p)(d#=t^t('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -72,7 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mep_project.wsgi.application'
 
 #User_reg Application
-ACCOUNT_ACTIVATION_DAYS = 1 #Sets number of days that user has to activate their account by email
+ACCOUNT_ACTIVATION_DAYS = 2 #Sets number of days that user has to activate their account by email
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -107,5 +107,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 

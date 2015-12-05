@@ -7,7 +7,7 @@
     <title>My Event Planner | Planning Made Easy</title>
     <meta name="description" content="One Page Layout">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="{% static '.img/favicon.ico' %}" />
+    <link rel="shortcut icon" href="{% static '.img/favicon.png' %}" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700">
     <link rel="stylesheet" href="{% static 'styles/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'styles/font-awesome.css' %}">
@@ -51,35 +51,14 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right service-nav">
-              <li><a href="/members" title="Sign Up" data-ref="sign-up">Sign Up</a>
+              <li><a href="/accounts/register" title="Sign Up" data-ref="sign-up">Sign Up</a>
               </li>
-              <li><a id="dropdownMenuLogin" href="#" data-toggle="dropdown" class="upper dropdown-toggle">Login</a>
-                <div aria-labelledby="dropdownMenuLogin" class="dropdown-menu widget-box">
-                  <form>
-                    <div class="form-group">
-                      <label class="sr-only">Username or Email</label>
-                      <input type="text" value="" placeholder="Username or Email" name="" class="form-control input-lg">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only">Password</label>
-                      <input type="password" value="" placeholder="Password" name="" class="form-control input-lg">
-                    </div>
-                    <div class="form-inline form-group">
-                      <button type="button" class="btn btn-primary btn-xs">Login</button>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"><small> Remember me</small>
-                        </label>
-                      </div>
-                    </div><a href="#"><small>Lost your Password?</small></a><br/>
-                    <a href="/members"><small>Don't have an account yet?</small></a>
-                  </form>
-                </div>
+              <li><a  href="/accounts/login" title="Login" >Login</a>
               </li>
             </ul>
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
             <ul id="one-page-menu" role="menu" class="nav navbar-nav navbar-left">
-              <li><a href="/#home" title="Home" data-ref="home">Home</a>
+              <li><a href="/" title="Home" data-ref="home">Home</a>
               </li>
               <li><a href="/#about" title="About us" data-ref="about">About</a>
               </li>
@@ -124,7 +103,7 @@
                   <ul class="widget-address sep-top-xs">
                     <li><i class="fa fa-map-marker fa-lg"></i><small>Strathmore University, Madaraka<br>Nairobi, Kenya</small></li>
                     <li><i class="fa fa-phone fa-lg"></i><small>+254 705 863 889</small></li>
-                    <li><i class="fa fa-envelope fa-lg"></i><small>mbithe.nzomo@gmail.com /<br>mbithe@hengasystems.com</small></li>
+                    <li><i class="fa fa-envelope fa-lg"></i><small>mbithe.nzomo@strathmore.edu</small></li>
                     <li><i class="fa fa-clock-o fa-lg"></i><small>Mon / Friday<br>09:00 - 12.00 / 14:00 - 17:00</small></li>
                   </ul>
                 </div>

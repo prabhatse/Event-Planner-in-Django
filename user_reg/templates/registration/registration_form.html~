@@ -1,0 +1,282 @@
+{% extends "user_reg/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+      <!-- Start Home Section-->
+      <section id="home" class="demo-1">
+        <!--     Codrops top bar-->
+        <div id="slider" class="sl-slider-wrapper">
+          <div class="sl-slider">
+            <!-- start slide-->
+            <div data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2" class="sl-slide">
+              <div style="background-image: url({% static 'img/banner8.jpg' %});" class="sl-slide-inner">
+                <div class="slide-container">
+                  <div class="slide-content text-center">
+                    <div  style="background-image: url({% static 'img/backg.png' %});">
+                        <br/>
+                        <h2 class="main-title"">You're Invited to&nbsp;<strong>Sign Up</strong></h2>
+                        <blockquote>
+                        <p>Sign up either as an individual event planner (member), or as a service provider (vendor).<br/><br/>Whoever you are, we can't wait to welcome you to My Event Planner!</p><a href="#member" class="btn btn-primary btn-lg">Sign Up as a Member</a><a href="#vendor" class="btn btn-primary btn-lg">Sign Up as a Vendor</a>
+                        </blockquote>
+                        <br/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end slide-->
+          </div>
+      </section>
+      <!-- End Home Section-->
+     
+      <!-- Start member registration-->
+      <section id="member" class="sep-top-3x sep-bottom-3x">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="section-title text-center">
+                <div class="icon-box icon-horizontal icon-md">
+                  <div class="icon-content img-circle"><i class="fa fa-user"></i></div>
+                </div>
+                <h2 class="upper">Become a Member</h2>
+                <p class="lead">Make the first step in joining our community.</p>
+                <br/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="container">
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form role="form">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" tabindex="3">
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3 col-md-3">
+					<span class="button-checkbox">
+						<div class="checkbox">
+                            <label><input type="checkbox" value="">I agree</label>
+                        </div>
+                        <input type="checkbox" name="terms" id="terms" class="hidden" value="1">
+					</span>
+				</div>
+				<div class="col-xs-8 col-sm-9 col-md-9">
+					 Check this to confirm that you agree to the <a href="#" data-toggle="modal" data-target="#terms_popup">Terms and Conditions</a> set out by My Event Planner.
+				</div>
+			</div>
+			
+			<hr class="colorgraph">
+			<div class="row">
+				<div class="col-xs-12 col-md-5">
+				    <input type="submit" value="Create Account" class="btn btn-primary btn-block btn-lg" tabindex="7">
+			    </div>
+				<div class="col-xs-12 col-md-7">
+				    *All fields are required.
+				    <br/>
+				    Are you a service provider? Sign up <a href="#vendor">here</a>.
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="terms_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+			</div>
+			<div class="modal-body">
+				<p>1. We do not endorse any service provider, nor do we guarantee the quality of their goods or services.</p>
+				<p>2. Membership to My Event Planner is available only to entities and individuals at least 18 years of age who can form legally binding contracts under applicable law. Our services are not available to minors.</p>
+				<p>3. Visitors to and members of the site may not: 
+<li>Create an account in another's name</li> 
+<li>Create more than one account</li>
+<li>Use another's account</li> 
+<li>Impersonate another person or entity</li> </p>
+				<p>4. You are solely responsible for your interactions with other My Event Planner members, and we are not party to any such disputes. We reserve the right, but have no obligation, to monitor disputes between you and other members.</p>
+				<p>5. If you undermine the integrity of our Rating and Review system in any way, your membership may be suspended or terminated.</p>
+				<p>6. This site may contain links to other sites which are provided solely as a convenience to you, or which are provided by other members. My Event Planner is not responsible for the availability of external sites or resources linked to the site, and does not endorse and is not responsible or liable for any content, advertising, products or other materials on or available from such sites or resources.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+          </div>
+        </div>
+      </section>
+      <!-- End member registration-->
+      
+      <!-- Start vendor registration-->
+      <section id="vendor" class="sep-top-3x sep-bottom-3x">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <div class="section-title text-center">
+                <div class="icon-box icon-horizontal icon-md">
+                  <div class="icon-content img-circle"><i class="fa fa-gift"></i></div>
+                </div>
+                <h2 class="upper">Become a Vendor</h2>
+                <p class="lead">Showcase your products & services and find new clients!</p>
+                <br/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="container">
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form role="form">
+			<div class="form-group">
+				<input type="text" name="business-name" id="business-name" class="form-control input-lg" placeholder="Business name" tabindex="3">
+			</div>
+			<div class="form-group">
+				<input type="text" name="tagline" id="tagline" class="form-control input-lg" placeholder="Tagline/ Slogan" tabindex="3">
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+			</div>
+			<div class="row">
+			<p style="text-indent: 20px;">Select the categories of the products or services you offer:</p>
+			    <div class="col-xs-12 col-sm-6 col-md-6">
+			        <div class="form-group">
+			            <input type="checkbox" name="venues" value="Venues"> Venues <i class="fa fa-map-marker"></i><br>
+                        <input type="checkbox" name="photography" value="Photography"> Photography <i class="fa fa-camera"></i><br>
+                        <input type="checkbox" name="videography" value="Videography"> Videography <i class="fa fa-video-camera"></i><br>
+                        <input type="checkbox" name="cakes-pastries" value="Cakes & Pastries"> Cakes & Pastries <i class="fa fa-birthday-cake"></i><br>
+                        <input type="checkbox" name="flowers-decor" value="Flowers & Decor"> Flowers & Decor <i class="fa fa-star"></i><br>
+			        </div>
+			    </div>
+			    <div class="col-xs-12 col-sm-6 col-md-6">
+			        <div class="form-group">
+			            <input type="checkbox" name="catering" value="Catering"> Catering <i class="fa fa-cutlery"></i><br>
+                        <input type="checkbox" name="beauty" value="Beauty"> Beauty <i class="fa fa-eye"></i><br>
+                        <input type="checkbox" name="transport" value="Transport"> Transport <i class="fa fa-car"></i><br>
+                        <input type="checkbox" name="invites-favours" value="Invites & Favours"> Invites & Favours <i class="fa fa-gift"></i><br>
+                        <input type="checkbox" name="entertainment" value="Entertainment"> Entertainment <i class="fa fa-microphone"></i><br>
+			        </div>
+			    </div>
+		    </div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="form-group">
+						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-3 col-md-3">
+					<span class="button-checkbox">
+						<div class="checkbox">
+                            <label><input type="checkbox" value="">I agree</label>
+                        </div>
+                        <input type="checkbox" name="terms" id="terms" class="hidden" value="1">
+					</span>
+				</div>
+				<div class="col-xs-8 col-sm-9 col-md-9">
+					 Check this to confirm that you agree to the <a href="#" data-toggle="modal" data-target="#terms_popup">Terms and Conditions</a> set out by My Event Planner.
+				</div>
+			</div>
+			
+			<hr class="colorgraph">
+			<div class="row">
+				<div class="col-xs-12 col-md-5">
+				    <input type="submit" value="Create Account" class="btn btn-primary btn-block btn-lg" tabindex="7">
+			    </div>
+				<div class="col-xs-12 col-md-7">
+				    *All fields are required.
+				    <br/>
+				    Not a service provider? Sign up <a href="#member">here</a>.
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="terms_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+			</div>
+			<div class="modal-body">
+				<p>1. We do not endorse any service provider, nor do we guarantee the quality of their goods or services.</p>
+				<p>2. Membership to My Event Planner is available only to entities and individuals at least 18 years of age who can form legally binding contracts under applicable law. Our services are not available to minors.</p>
+				<p>3. Visitors to and members of the site may not: 
+<li>Create an account in another's name</li> 
+<li>Create more than one account</li>
+<li>Use another's account</li> 
+<li>Impersonate another person or entity</li> </p>
+				<p>4. You are solely responsible for your interactions with other My Event Planner members, and we are not party to any such disputes. We reserve the right, but have no obligation, to monitor disputes between you and other members.</p>
+				<p>5. If you undermine the integrity of our Rating and Review system in any way, your membership may be suspended or terminated.</p>
+				<p>6. This site may contain links to other sites which are provided solely as a convenience to you, or which are provided by other members. My Event Planner is not responsible for the availability of external sites or resources linked to the site, and does not endorse and is not responsible or liable for any content, advertising, products or other materials on or available from such sites or resources.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+          </div>
+        </div>
+      </section>
+      <!-- End vendor registration-->
+      
+      <!-- Start call to action section-->
+      <section class="call-to-action bg-primary sep-top-md sep-bottom-md">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <h5 class="action-title upper light">START PLANNING YOUR DREAM EVENT TODAY.</h5>
+            </div>
+            <div class="col-md-3 text-right"><a href="index.html#about" class="btn btn-light btn-bordered btn-lg" target="_blank">LEARN MORE</a></div>
+          </div>
+        </div>
+      </section>
+      <!-- End call to action section-->
+      {% endblock content %}
+      <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
+    </div>
+  </body>
+</html>
