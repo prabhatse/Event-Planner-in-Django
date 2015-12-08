@@ -1,0 +1,7 @@
+from django.shortcuts import render
+from user_reg.forms import UserForm, UserProfileForm
+
+def index_page(request):
+    return render(request, 'user_reg/index.html', {})
+   
+

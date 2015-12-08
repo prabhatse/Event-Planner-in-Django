@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mbithe.nzomo@strathmore.edu'
+EMAIL_HOST_PASSWORD = 'strathmore93!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
@@ -35,8 +41,13 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #third party apps
+    'registration',
+    'crispy_forms',
+    #my apps
     'user_reg',
 )
 
@@ -70,9 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mep_project.wsgi.application'
-
-#User_reg Application
-ACCOUNT_ACTIVATION_DAYS = 2 #Sets number of days that user has to activate their account by email
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -109,4 +117,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+#crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+#django-registration-redux
+ACCOUNT_ACTIVATION_DAYS = 7 #Sets number of days that user has to activate their account by email
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in when they click on the activation link in their email
+SITE_ID = 4
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
