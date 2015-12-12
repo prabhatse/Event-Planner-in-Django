@@ -32,6 +32,7 @@ EMAIL_HOST_USER = 'mbithe.nzomo@strathmore.edu'
 EMAIL_HOST_PASSWORD = 'strathmore93!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 # Application definition
@@ -125,4 +126,3 @@ ACCOUNT_ACTIVATION_DAYS = 7 #Sets number of days that user has to activate their
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in when they click on the activation link in their email
 SITE_ID = 4
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
