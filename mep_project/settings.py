@@ -32,6 +32,11 @@ EMAIL_HOST_USER = 'mbithe.nzomo@strathmore.edu'
 EMAIL_HOST_PASSWORD = 'strathmore93!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'mbithe.nzomo@strathmore.edu'
+ADMINS = (
+    ('Mbithe Nzomo', 'mbithe.nzomo@strathmore.edu'), 
+)
+MANAGERS = ADMINS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
@@ -48,6 +53,7 @@ INSTALLED_APPS = (
     #third party apps
     'registration',
     'crispy_forms',
+    'contact_form',
     #my apps
     'user_reg',
 )

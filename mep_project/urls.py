@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('user_reg.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    
+    url(r'^contact/', include('contact_form.urls')),
 ]
