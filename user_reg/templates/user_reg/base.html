@@ -7,26 +7,26 @@
     <title>My Event Planner | {% block title %} Planning Made Easy {% endblock %}</title>
     <meta name="description" content="One Page Layout">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
+    <link rel="shortcut icon" href="{% static 'front-end/img/favicon.png' %}" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,300,400,600,700">
-    <link rel="stylesheet" href="{% static 'styles/font-awesome.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/font-awesome.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/owl.theme.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/slit-slider-style.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/slit-slider-custom.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/idangerous.swiper.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/yamm.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/prettyPhoto.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/bootstrap-slider.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/device-mockups2.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/main-responsive.css' %}">
-    <link id="primary_color_scheme" rel="stylesheet" href="{% static 'styles/main_colour.css' %}">
-    <script src="{% static 'scripts/vendor/modernizr.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'front-end/styles/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/slit-slider-style.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/slit-slider-custom.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/idangerous.swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/yamm.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/prettyPhoto.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/bootstrap-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/device-mockups2.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'front-end/styles/main-responsive.css' %}">
+    <link id="primary_color_scheme" rel="stylesheet" href="{% static 'front-end/styles/main_colour.css' %}">
+    <script src="{% static 'front-end/scripts/vendor/modernizr.js' %}"></script>
     <noscript>
-      <link rel="stylesheet" href="{% static 'styles/styleNoJs.css' %}">
+      <link rel="stylesheet" href="{% static 'front-end/styles/styleNoJs.css' %}">
     </noscript>
   </head>
   <body>
@@ -47,7 +47,7 @@
         </form>
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="#" class="navbar-brand"><img src="{% static 'img/logo-white.png' %}" alt="" class="logo-white"><img src="{% static 'img/logo-dark.png' %}" alt="" class="logo-dark"></a><br/><br/>
+            <button type="button" class="navbar-toggle"><i class="fa fa-align-justify fa-lg"></i></button><a href="#" class="navbar-brand"><img src="{% static 'front-end/img/logo-white.png' %}" alt="" class="logo-white"><img src="{% static 'front-end/img/logo-dark.png' %}" alt="" class="logo-dark"></a><br/><br/>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right service-nav">
@@ -84,7 +84,7 @@
               <div class="col-md-3 col-sm-6">
                 <div class="widget sep-top-lg">
                 <h6 class="upper widget-title">About This Project</h6>
-                <img src="{% static 'img/logo-white.png' %}" alt="" class="logo" style="text-align:justify;"><small class="sep-top-xs sep-bottom-md"><p style="text-align:justify;">My Event Planner is being developed by Mbithe Nzomo as her final year Information Systems project at Strathmore University. Mbithe expects to graduate in June 2016, after which she intends to pursue a career in technology and software development.</p></small>
+                <img src="{% static 'front-end/img/logo-white.png' %}" alt="" class="logo" style="text-align:justify;"><small class="sep-top-xs sep-bottom-md"><p style="text-align:justify;">My Event Planner is being developed by Mbithe Nzomo as her final year Information Systems project at Strathmore University. Mbithe expects to graduate in June 2016, after which she intends to pursue a career in technology and software development.</p></small>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6">
@@ -116,7 +116,7 @@
                     <li><i class="fa fa-info"></i><a href="#about">About</a></li>
                     <li><i class="fa fa-gift"></i><a href="#services">Services</a></li>
                     <li><i class="fa fa-pencil"></i><a href="#blog">Blog</a></li>
-                    <li><i class="fa fa-envelope"></i><a href="#contacts">Contacts</a></li>
+                    <li><i class="fa fa-envelope"></i><a href="/contact">Contact</a></li>
                   </ul>
                 </div>
               </div>
@@ -134,36 +134,36 @@
       <!-- End Footer section-->
       <div id="back_to_top"><a href="#" class="fa fa-arrow-up fa-lg"></a></div>
     </div>
-    <script src="{% static 'scripts/vendor/jquery.js' %}"></script>
-    <script src="{% static 'scripts/vendor/queryloader2.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/owl.carousel.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.ba-cond.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.slitslider.js' %}"></script>
-    <script src="{% static 'scripts/vendor/idangerous.swiper.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.fitvids.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.countTo.js' %}"></script>
-    <script src="{% static 'scripts/vendor/TweenMax.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/ScrollToPlugin.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.scrollmagic.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.easypiechart.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.validate.js' %}"></script>
-    <script src="{% static 'scripts/vendor/wow.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.placeholder.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.easing.1.3.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.waitforimages.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.prettyPhoto.js' %}"></script>
-    <script src="{% static 'scripts/vendor/imagesloaded.pkgd.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.fillparent.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/raphael-min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/bootstrap.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.bootstrap-touchspin.min.js' %}"></script>
-    <script src="{% static 'scripts/vendor/bootstrap-slider.js' %}"></script>
-    <script src="{% static 'scripts/vendor/bootstrap-rating-input.js' %}"></script>
-    <script src="{% static 'scripts/vendor/bootstrap-hover-dropdown.min.js' %}"></script>
-    <script src="{% static 'scripts/jquery.gmap.min.js' %}"></script>
-    <script src="{% static 'scripts/circle_diagram.js' %}"></script>
-    <script src="{% static 'scripts/main.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/queryloader2.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/owl.carousel.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.ba-cond.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.slitslider.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/idangerous.swiper.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.fitvids.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.countTo.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/TweenMax.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/ScrollToPlugin.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.scrollmagic.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.easypiechart.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.validate.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/wow.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.placeholder.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.easing.1.3.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.waitforimages.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.fillparent.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/raphael-min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/bootstrap.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/jquery.bootstrap-touchspin.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/bootstrap-slider.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/bootstrap-rating-input.js' %}"></script>
+    <script src="{% static 'front-end/scripts/vendor/bootstrap-hover-dropdown.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/jquery.gmap.min.js' %}"></script>
+    <script src="{% static 'front-end/scripts/circle_diagram.js' %}"></script>
+    <script src="{% static 'front-end/scripts/main.js' %}"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
