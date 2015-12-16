@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index_page, name='index_page'),
+    url(r'^dashboard/', views.dashboard, name='dashboard'),
 ]
