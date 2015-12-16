@@ -43,6 +43,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = (
+    #third party apps
+    'registration',
+    'crispy_forms',
+    'contact_form',
+    #default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,10 +55,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #third party apps
-    'registration',
-    'crispy_forms',
-    'contact_form',
     #my apps
     'user_reg',
 )
