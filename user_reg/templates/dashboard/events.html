@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+
+{% block nav-events %}
+	<li class="nav-item start active open">
+        <a href="/dashboard/events/" class="nav-link nav-toggle">
+            <i class="icon-calendar"></i>
+            <span class="title">My Events</span>
+            <span class="selected"></span>
+            <span class="arrow open"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  ">
+                <a href="#" class="nav-link ">
+                    <span class="title">View Events</span>
+                </a>
+            </li>
+            <li class="nav-item  ">
+                <a href="#" class="nav-link ">
+                    <span class="title">Create Event</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+<h3 class="page-title"> Welcome to My Event Planner
+    <small>Planning Made Easy!</small>
+</h3>
+<div class="page-bar">
+    <img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/> 
+</div>
+{% endblock content %}

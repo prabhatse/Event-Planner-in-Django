@@ -1851,8 +1851,8 @@ Custom color buttons
 
 .btn.blue-madison:not(.btn-outline) {
   color: #FFFFFF;
-  background-color: #578ebe;
-  border-color: #578ebe; }
+  background-color: #4F2412;
+  border-color: #4F2412; }
   .btn.blue-madison:not(.btn-outline):focus,
   .btn.blue-madison:not(.btn-outline).focus {
     color: #FFFFFF;
@@ -1902,15 +1902,15 @@ Custom color buttons
   fieldset[disabled] .btn.blue-madison:not(.btn-outline).focus,
   fieldset[disabled] .btn.blue-madison:not(.btn-outline):active,
   fieldset[disabled] .btn.blue-madison:not(.btn-outline).active {
-    background-color: #578ebe;
-    border-color: #578ebe; }
+    background-color: #4F2412;
+    border-color: #4F2412; }
   .btn.blue-madison:not(.btn-outline) .badge {
-    color: #578ebe;
+    color: #4F2412;
     background-color: #FFFFFF; }
 
 .btn.btn-outline.blue-madison {
-  border-color: #578ebe;
-  color: #578ebe;
+  border-color: #4F2412;
+  color: #4F2412;
   background: none; }
   .btn.btn-outline.blue-madison:hover,
   .btn.btn-outline.blue-madison:active,
@@ -1918,12 +1918,12 @@ Custom color buttons
   .btn.btn-outline.blue-madison:active:focus,
   .btn.btn-outline.blue-madison:focus,
   .btn.btn-outline.blue-madison.active {
-    border-color: #578ebe;
+    border-color: #4F2412;
     color: #FFFFFF;
-    background-color: #578ebe; }
+    background-color: #4F2412; }
 
 .btn.blue-madison-stripe {
-  border-left: 4px solid #578ebe !important; }
+  border-left: 4px solid #4F2412 !important; }
 
 .btn.blue-chambray:not(.btn-outline) {
   color: #FFFFFF;
@@ -6808,12 +6808,12 @@ Custom color buttons
   border-color: #3598dc; }
 
 .form-control.blue-madison {
-  border-color: #578ebe; }
+  border-color: #4F2412; }
   .form-control.blue-madison:focus {
     border-color: #3f74a3; }
 
 .form-control.focus-blue-madison:focus {
-  border-color: #578ebe; }
+  border-color: #4F2412; }
 
 .form-control.blue-chambray {
   border-color: #2C3E50; }
@@ -8637,7 +8637,7 @@ Custom colored portlets
 
 .portlet > .portlet-body.blue-madison,
 .portlet.blue-madison {
-  background-color: #578ebe; }
+  background-color: #4F2412; }
 
 .portlet.solid.blue-madison > .portlet-title,
 .portlet.solid.blue-madison > .portlet-body {
@@ -8671,7 +8671,7 @@ Custom colored portlets
   border: 1px solid #7ca7cc;
   border-top: 0; }
   .portlet.box.blue-madison > .portlet-title {
-    background-color: #578ebe; }
+    background-color: #4F2412; }
     .portlet.box.blue-madison > .portlet-title > .caption {
       color: #FFFFFF; }
       .portlet.box.blue-madison > .portlet-title > .caption > i {
@@ -11582,7 +11582,7 @@ Customized Progress Bars
   color: #FFFFFF !important; }
 
 .progress-bar.blue-madison {
-  background: #578ebe !important;
+  background: #4F2412 !important;
   color: #FFFFFF !important; }
 
 .progress-bar.blue-chambray {
@@ -11936,7 +11936,7 @@ Dashboard Stats
     background-color: #258fd7; }
 
 .dashboard-stat.blue-madison {
-  background-color: #578ebe; }
+  background-color: #4F2412; }
   .dashboard-stat.blue-madison.dashboard-stat-light:hover {
     background-color: #4884b8; }
   .dashboard-stat.blue-madison .visual > i {
@@ -14907,31 +14907,31 @@ Custom color buttons
   border-right-color: #3598dc !important; }
 
 .bg-blue-madison {
-  background: #578ebe; }
+  background: #4F2412; }
 
 .bg-hover-blue-madison:hover {
-  background: #578ebe; }
+  background: #4F2412; }
 
 .font-blue-madison {
-  color: #578ebe !important; }
+  color: #4F2412 !important; }
 
 .bg-font-blue-madison {
   color: #FFFFFF !important; }
 
 .border-blue-madison {
-  border-color: #578ebe !important; }
+  border-color: #4F2412 !important; }
 
 .border-top-blue-madison {
-  border-top-color: #578ebe !important; }
+  border-top-color: #4F2412 !important; }
 
 .border-bottom-blue-madison {
-  border-bottom-color: #578ebe !important; }
+  border-bottom-color: #4F2412 !important; }
 
 .border-left-blue-madison {
-  border-left-color: #578ebe !important; }
+  border-left-color: #4F2412 !important; }
 
 .border-right-blue-madison {
-  border-right-color: #578ebe !important; }
+  border-right-color: #4F2412 !important; }
 
 .bg-blue-chambray {
   background: #2C3E50; }

@@ -1,4 +1,16 @@
 {% extends "dashboard/base.html" %}
+
+{% block nav-home %}
+	<li class="nav-item start active open">
+		<a href="/dashboard/home/" class="nav-link nav-toggle">
+			<i class="icon-home"></i>
+			<span class="title">My Dashboard</span>
+			<span class="selected"></span>
+			<span class="arrow open"></span>
+		</a>
+	</li>
+{% endblock %}
+
 {% load staticfiles %}
 
 {% block content %}
