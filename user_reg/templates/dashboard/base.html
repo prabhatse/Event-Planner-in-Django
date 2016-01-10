@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>My Event Planner | {% block title %} My Dashboard {% endblock %}</title>
+        <title>{% block title %} My Dashboard {% endblock %} | My Event Planner</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -35,7 +35,25 @@
         <link href="{% static 'back-end/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
         <link href="{% static 'back-end/global/plugins/jqvmap/jqvmap/jqvmap.css' %}" rel="stylesheet" type="text/css" />
         <!-- END DASHBOARD PAGE LEVEL PLUGINS -->
+        <!-- BEGIN INBOX PAGE LEVEL PLUGINS -->
+        <link href="{% static 'back-end/global/plugins/fancybox/source/jquery.fancybox.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/jquery-file-upload/css/jquery.fileupload.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END INBOX PAGE LEVEL PLUGINS -->
+        <!-- BEGIN INBOX PAGE LEVEL STYLES -->
+        <link href="{% static 'back-end/apps/css/inbox.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END INBOX PAGE LEVEL STYLES -->
         <link rel="shortcut icon" href="{% static 'front-end/img/favicon.png' %}">
+        <!-- BEGIN TASKS PAGE LEVEL PLUGINS -->
+        <link href="{% static 'back-end/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'back-end/global/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END TASKS PAGE LEVEL PLUGINS -->
+        <!-- BEGIN TASKS PAGE LEVEL STYLES -->
+        <link href="{% static 'back-end/apps/css/todo-2.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END TASKS PAGE LEVEL STYLES -->
     <!-- END HEAD -->
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -175,16 +193,8 @@
             <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar-wrapper">
                 <!-- END SIDEBAR -->
-                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                 <div class="page-sidebar navbar-collapse collapse">
                     <!-- BEGIN SIDEBAR MENU -->
-                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     {% block nav %}
                     <ul id="nav" class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         {% block nav-home %}
@@ -340,6 +350,7 @@
             <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
+                
                 {% block content %}
                 {% endblock content %}
                     
@@ -417,6 +428,34 @@
         <script src="{% static 'back-end/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js' %}" type="text/javascript"></script>
         <script src="{% static 'back-end/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js' %}" type="text/javascript"></script>
         <!-- END DASBOARD PAGE LEVEL PLUGINS -->
+        <!-- BEGIN INBOX PAGE LEVEL PLUGINS -->
+        <script src="{% static 'back-end/global/plugins/fancybox/source/jquery.fancybox.pack.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/vendor/load-image.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js' %}" type="text/javascript"></script>
+        <!-- END INBOX PAGE LEVEL PLUGINS -->
+        <!-- BEGIN INBOX PAGE LEVEL SCRIPTS -->
+        <script src="{% static 'back-end/apps/scripts/inbox.min.js' %}" type="text/javascript"></script>
+        <!-- END INBOX PAGE LEVEL SCRIPTS -->
+        <!-- BEGIN TASKS PAGE LEVEL PLUGINS -->
+        <script src="{% static 'back-end/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'back-end/global/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+        <!-- END TASKS PAGE LEVEL PLUGINS -->
+        <!-- BEGIN TASKS PAGE LEVEL SCRIPTS -->
+        <script src="{% static 'back-end/apps/scripts/todo-2.min.js' %}" type="text/javascript"></script>
+        <!-- END TASKS PAGE LEVEL SCRIPTS -->
 
     </body>
 

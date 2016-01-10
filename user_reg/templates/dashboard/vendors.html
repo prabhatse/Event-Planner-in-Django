@@ -1,0 +1,47 @@
+{% extends "dashboard/base.html" %}
+
+{% block nav-vendors %}
+<li class="nav-item start active open">
+    <a href="/dashboard/guests/" class="nav-link nav-toggle">
+        <i class="icon-present"></i>
+        <span class="title">My Vendors</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item  ">
+            <a href="form_controls.html" class="nav-link ">
+                <span class="title">View Connected Vendors</span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="form_controls_md.html" class="nav-link ">
+                <span class="title">Browse Vendors</span>
+            </a>
+        </li>
+    </ul>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} My Vendors {% endblock %} 
+
+{% block content %}
+<h3 class="page-title"> My Vendors
+    <small>Browse service providers for your events</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/dashboard/home/">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span>My Vendors</span>
+        </li>
+    </ul> 
+</div>
+<img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/>
+{% endblock content %}

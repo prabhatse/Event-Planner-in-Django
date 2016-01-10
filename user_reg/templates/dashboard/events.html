@@ -25,11 +25,61 @@
 
 {% load staticfiles %}
 
+{% block title %} My Events {% endblock %} 
+
 {% block content %}
-<h3 class="page-title"> Welcome to My Event Planner
-    <small>Planning Made Easy!</small>
+<h3 class="page-title">My Events
+    <small>Manage your upcoming events</small>
 </h3>
 <div class="page-bar">
-    <img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/> 
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/dashboard/home/">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span>My Events</span>
+        </li>
+    </ul> 
 </div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-events.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <!-- BEGIN DRAGGABLE EVENTS PORTLET-->
+                        <h3 class="event-form-title margin-bottom-20">Draggable Events</h3>
+                        <div id="external-events">
+                            <form class="inline-form">
+                                <input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title" />
+                                <br/>
+                                <a href="javascript:;" id="event_add" class="btn green"> Add Event </a>
+                            </form>
+                            <hr/>
+                            <div id="event_box" class="margin-bottom-10"></div>
+                            <label for="drop-remove">
+                                <input type="checkbox" id="drop-remove" />remove after drop </label>
+                            <hr class="visible-xs" /> </div>
+                        <!-- END DRAGGABLE EVENTS PORTLET-->
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                        <div id="calendar" class="has-toolbar"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
 {% endblock content %}

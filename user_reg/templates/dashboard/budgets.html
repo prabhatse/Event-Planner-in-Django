@@ -25,11 +25,24 @@
 
 {% load staticfiles %}
 
+{% block title %} My Budgets {% endblock %} 
+
 {% block content %}
-<h3 class="page-title"> Welcome to My Event Planner
-    <small>Planning Made Easy!</small>
+<h3 class="page-title">My Budgets
+    <small>Create and update budgets for your events</small>
 </h3>
 <div class="page-bar">
-    <img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/> 
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/dashboard/home/">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span>My Budgets</span>
+        </li>
+    </ul> 
 </div>
+<img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/>
 {% endblock content %}
+
