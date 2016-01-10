@@ -51,10 +51,16 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right service-nav">
-              <li><a href="/accounts/register" title="Sign Up" data-ref="sign-up">Sign Up</a>
-              </li>
-              <li><a  href="/accounts/login" title="Login" >Login</a>
-              </li>
+              {% if request.user.is_authenticated %}
+                <li><a>Welcome, {{user}}!</a></li>
+                <li><a href="/dashboard/home" title="Dashboard" data-ref="dashboard">My Dashboard</a></li>
+                <li><a href="/accounts/logout" title="Logout" data-ref="sign-up">Log out</a></li>
+              {% else %}
+                <li><a href="/accounts/register" title="Sign Up" data-ref="sign-up">Sign Up</a>
+                </li>
+                <li><a href="/accounts/login" title="Login" >Login</a>
+                </li>
+              {% endif %}
             </ul>
             <button type="button" class="navbar-toggle"><i class="fa fa-close fa-lg"></i></button>
             <ul id="one-page-menu" role="menu" class="nav navbar-nav navbar-left">
