@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'registration',
     'crispy_forms',
     'contact_form',
+    'sorl.thumbnail',
     #django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,15 +122,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-#crispy-forms
+# Media files
+MEDIA_URL = '/user_reg/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user_reg/media')
+UPLOAD_DIR = 'uploads/'
+
+# crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-#django-registration-redux
+# django-registration-redux
 ACCOUNT_ACTIVATION_DAYS = 7 #Sets number of days that user has to activate their account by email
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in when they click on the activation link in their email
 SITE_ID = 4
+
+# sorl.thumbnail
+THUMBNAIL_DEBUG = True
+
 

@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index_page, name='index_page'),
     url(r'^dashboard/home/', views.dashboard, name='dashboard'),
+    url(r'^dashboard/welcome/', views.welcome, name='welcome'),
     url(r'^dashboard/profile/', views.profile, name='profile'),
     url(r'^dashboard/events/', views.events, name='events'),
     url(r'^dashboard/tasks/', views.tasks, name='tasks'),
@@ -13,3 +14,4 @@ urlpatterns = [
     url(r'^dashboard/reviews/', views.reviews, name='reviews'),
     url(r'^dashboard/inbox/', views.inbox, name='inbox'),
 ]
+

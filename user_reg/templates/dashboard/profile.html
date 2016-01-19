@@ -1,5 +1,7 @@
 {% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
 {% load staticfiles %}
+{% load thumbnail %}
 
 {% block title %} My Profile {% endblock %} 
 
@@ -17,20 +19,29 @@
             <div class="portlet light profile-sidebar-portlet ">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="{% static 'back-end/img/avatar.png' %}" class="img-responsive" alt=""> </div>
+                   {% if member.image %}
+                        {% thumbnail member.image "250x250" crop="center" as im %}
+                            <img alt="{{ user.get_full_name }}" src="{{ im.url }}" class="img-responsive"/>
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="{% static 'back-end/img/icon-user.png' %}" class="img-responsive" alt="">
+                        <div class="col-md-12" style="text-align:center"><p> Upload a profile image in the editor on the right!</p></div>
+                    {% endif %}
+                </div>
                 <!-- END SIDEBAR USERPIC -->
+
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name"> Mbithe Nzomo </div>
-                    <div class="profile-usertitle-job"> Software Developer </div>
+                    <div class="profile-usertitle-name"> {{ user.get_full_name }} </div>
+                    <div class="profile-usertitle-job"> {{ member.title }} </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
+                <!--<div class="profile-userbuttons">
                     <button type="button" class="btn btn-circle green btn-sm">Follow</button>
                     <button type="button" class="btn btn-circle red btn-sm">Message</button>
-                </div>
-                <br/>
+                </div> -->
+                <br/> 
                 <!-- END SIDEBAR BUTTONS -->
             </div>
             <!-- END PORTLET MAIN -->
@@ -39,30 +50,33 @@
                 <!-- STAT -->
                 <div class="row list-separated profile-stat">
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 37 </div>
-                        <div class="uppercase profile-stat-text"> Projects </div>
+                        <div class="uppercase profile-stat-title"> 3 </div>
+                        <div class="uppercase profile-stat-text"> Events </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 51 </div>
+                        <div class="uppercase profile-stat-title"> 6 </div>
                         <div class="uppercase profile-stat-text"> Tasks </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> 61 </div>
-                        <div class="uppercase profile-stat-text"> Uploads </div>
+                        <div class="uppercase profile-stat-title"> 4 </div>
+                        <div class="uppercase profile-stat-text"> Guestlists </div>
                     </div>
                 </div>
                 <!-- END STAT -->
                 <div>
-                    <h4 class="profile-desc-title">About Mbithe Nzomo</h4>
-                    <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
+                    <h4 class="profile-desc-title">About {{ user.get_full_name }}</h4>
+                    <span class="profile-desc-text">{{ member.bio }}</span>
                     <div class="margin-top-20 profile-desc-link">
-                        <i class="fa fa-globe"></i>
-                        <a href="http://www.keenthemes.com">www.mbithenzomo.com</a>
+                        <i class="fa fa-map-marker"></i>
+                        <span class="profile-desc-text">{{ member.location }}</span>
                     </div>
-                    <div class="margin-top-20 profile-desc-link">
-                        <i class="fa fa-twitter"></i>
-                        <a href="http://www.twitter.com/keenthemes/">@mbithenzomo</a>
-                    </div>
+                    {% if member.website %}
+                        <div class="margin-top-20 profile-desc-link">
+                            <i class="fa fa-globe"></i>
+                            <a href="{{ member.website }}" target="_blank">{{ member.website }}</a>
+                        </div>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
             <!-- END PORTLET MAIN -->
@@ -76,150 +90,18 @@
                         <div class="portlet-title tabbable-line">
                             <div class="caption caption-md">
                                 <i class="icon-globe theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                                <span class="caption-subject font-blue-madison bold uppercase">Edit Your Profile</span>
                             </div>
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
-                                </li>
-                                <li>
-                                    <a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
-                                </li>
-                                <li>
-                                    <a href="#tab_1_3" data-toggle="tab">Change Password</a>
-                                </li>
-                                <li>
-                                    <a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
-                                </li>
-                            </ul>
                         </div>
                         <div class="portlet-body">
-                            <div class="tab-content">
-                                <!-- PERSONAL INFO TAB -->
-                                <div class="tab-pane active" id="tab_1_1">
-                                    <form role="form" action="#">
-                                        <div class="form-group">
-                                            <label class="control-label">First Name</label>
-                                            <input type="text" placeholder="Your First Name" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Last Name</label>
-                                            <input type="text" placeholder="Your Last Name" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Mobile Number</label>
-                                            <input type="text" placeholder="Your Mobile Number" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Interests</label>
-                                            <input type="text" placeholder="E.g Design, Web, Software" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Occupation</label>
-                                            <input type="text" placeholder="Your Occupation" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">About</label>
-                                            <textarea class="form-control" rows="3" placeholder="Your Bio"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Website</label>
-                                            <input type="text" placeholder="http://www.mywebsite.com" class="form-control" /> </div>
-                                        <div class="margiv-top-10">
-                                            <a href="javascript:;" class="btn green"> Save Changes </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
-                                    </form>
+                            <form method="POST" action="#">
+                                {% csrf_token %}
+                                {{ edit_form|crispy }}
+                                <div class="margiv-top-10">
+                                    <button type="submit" class="btn default">Save Changes </button>
+                                    <a href="javascript:;" class="btn default"> Cancel </a>
                                 </div>
-                                <!-- END PERSONAL INFO TAB -->
-            					<!-- CHANGE AVATAR TAB -->
-                                <div class="tab-pane" id="tab_1_2">
-                                    <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                        eiusmod. </p>
-                                    <form action="#" role="form">
-                                        <div class="form-group">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
-                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                                                <div>
-                                                    <span class="btn default btn-file">
-                                                        <span class="fileinput-new"> Select image </span>
-                                                        <span class="fileinput-exists"> Change </span>
-                                                        <input type="file" name="..."> </span>
-                                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix margin-top-10">
-                                                <span class="label label-danger">NOTE! </span>
-                                                <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
-                                            </div>
-                                        </div>
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn green"> Submit </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END CHANGE AVATAR TAB -->
-                                <!-- CHANGE PASSWORD TAB -->
-                                <div class="tab-pane" id="tab_1_3">
-                                    <form action="#">
-                                        <div class="form-group">
-                                            <label class="control-label">Current Password</label>
-                                            <input type="password" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">New Password</label>
-                                            <input type="password" class="form-control" /> </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Re-type New Password</label>
-                                            <input type="password" class="form-control" /> </div>
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn green"> Change Password </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END CHANGE PASSWORD TAB -->
-                                <!-- PRIVACY SETTINGS TAB -->
-                                <div class="tab-pane" id="tab_1_4">
-                                    <form action="#">
-                                        <table class="table table-light table-hover">
-                                            <tr>
-                                                <td> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus.. </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="radio" name="optionsRadios1" value="option1" /> Yes </label>
-                                                    <label class="uniform-inline">
-                                                        <input type="radio" name="optionsRadios1" value="option2" checked/> No </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes </label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td> Enim eiusmod high life accusamus terry richardson ad squid wolf moon </td>
-                                                <td>
-                                                    <label class="uniform-inline">
-                                                        <input type="checkbox" value="" /> Yes </label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <!--end profile-settings-->
-                                        <div class="margin-top-10">
-                                            <a href="javascript:;" class="btn red"> Save Changes </a>
-                                            <a href="javascript:;" class="btn default"> Cancel </a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END PRIVACY SETTINGS TAB -->
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

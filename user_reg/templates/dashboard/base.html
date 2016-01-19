@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -143,8 +144,14 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="{% static 'back-end/img/avatar.png' %}" />
-                                    <span class="username username-hide-on-mobile"> Welcome, {{user}}! </span>
+                                    {% if member.image %}
+                                        {% thumbnail member.image "250x250" crop="center" as im %}
+                                            <img alt="{{ user.get_full_name }}" src="{{ im.url }}" class="img-circle"/>
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        <img src="{% static 'back-end/img/icon-user.png' %}" class="img-circle" alt="">
+                                    {% endif %}
+                                    <span class="username username-hide-on-mobile"> Welcome, {{ user.first_name }}! </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
@@ -359,7 +366,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner">© Copyright 2015 - 2016  <em>My Event Planner</em> by <a href="http://mbithenzomo.com" target="_blank" style="color:#E9E0DB"><strong>Mbithe Nzomo</strong></a>. All Rights Reserved</a>
+            <div class="page-footer-inner">&copy;  {% now "Y" %} <em>My Event Planner</em> by <a href="http://mbithenzomo.com" target="_blank" style="color:#E9E0DB"><strong>Mbithe Nzomo</strong></a>. All Rights Reserved</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
