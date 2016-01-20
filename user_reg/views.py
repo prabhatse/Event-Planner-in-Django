@@ -46,7 +46,7 @@ def profile(request):
 
 
 def add_event(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(host=request.user)
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():

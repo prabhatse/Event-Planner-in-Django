@@ -79,11 +79,47 @@
                             <ul>
                                 {% for event in events %}
                                 <div class="todo-tasklist-item todo-tasklist-item-border-green">
-                                    <div class="todo-tasklist-item-title"> {{ event.title }} </div>
-                                    <div class="todo-tasklist-item-text"> {{ event.description }} </div>
+                                    <div class="todo-tasklist-item-title">
+                                        {% if event.category = 'Bab' %} 
+                                            <i class="fa fa-child"></i>
+                                        {% elif event.category = 'Bir' %} 
+                                            <i class="fa fa-birthday-cake"></i>
+                                        {% elif event.category = 'Cor' %} 
+                                            <i class="fa fa-glass"></i>
+                                        {% elif event.category = 'Gra' %} 
+                                            <i class="fa fa-graduation-cap"></i>
+                                        {% elif event.category = 'Wed' %}
+                                            <i class="fa fa-heart"></i>
+                                        {% elif event.category = 'Oth' %} 
+                                            <i class="fa fa-birthday-cake"></i>
+                                        {% endif %}
+                                        &nbsp&nbsp{{ event.title }} 
+                                    </div>
+                                    <div class="todo-tasklist-controls">
+                                        <span class="todo-tasklist-date">
+                                            {{ event.description }}
+                                        </span>
+                                    </div>
                                     <div class="todo-tasklist-controls pull-left">
                                         <span class="todo-tasklist-date">
-                                            <i class="fa fa-calendar"></i> {{ event.date }} </span>
+                                            <i class="fa fa-calendar"></i> 
+                                            {% if event.date %}
+                                                {{ event.date }} 
+                                            {% else %}
+                                                Date to be decided
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <br/>
+                                    <div class="todo-tasklist-controls">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-map-o"></i> 
+                                            {% if event.venue %}
+                                                {{ event.venue }} 
+                                            {% else %}
+                                                Venue to be decided
+                                            {% endif %}
+                                        </span>
                                     </div>
                                 </div>
                                 {% endfor %}
