@@ -43,7 +43,7 @@ class EventForm(forms.ModelForm):
                 if date < datetime.date.today():
                     raise forms.ValidationError("The date cannot be in the past!")
                 return date
-            else
+            else:
                 return date
     
 
