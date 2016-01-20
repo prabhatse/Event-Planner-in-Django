@@ -1,4 +1,7 @@
 {% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
 
 {% block nav-events %}
 	<li class="nav-item start active open">
@@ -50,27 +53,45 @@
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
+            <span class="caption-subject font-green-sharp bold uppercase">MY EVENTS </span>
             </div>
             <div class="portlet-body">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <!-- BEGIN DRAGGABLE EVENTS PORTLET-->
-                        <h3 class="event-form-title margin-bottom-20">Draggable Events</h3>
+                    <div class="col-md-7 col-sm-12">
+                        <h3 class="event-form-title margin-bottom-20">Add Event</h3>
                         <div id="external-events">
-                            <form class="inline-form">
-                                <input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title" />
-                                <br/>
-                                <a href="javascript:;" id="event_add" class="btn green"> Add Event </a>
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ event_form|crispy }}
+                                <div class="margiv-top-10">
+                                    <button type="submit" class="btn default">Save Changes </button>
+                                    <a href="javascript:;" class="btn default"> Cancel </a>
+                                </div>
                             </form>
                             <hr/>
                             <div id="event_box" class="margin-bottom-10"></div>
-                            <label for="drop-remove">
-                                <input type="checkbox" id="drop-remove" />remove after drop </label>
                             <hr class="visible-xs" /> </div>
-                        <!-- END DRAGGABLE EVENTS PORTLET-->
                     </div>
-                    <div class="col-md-9 col-sm-12">
-                        <div id="calendar" class="has-toolbar"> </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div class="todo-tasklist">
+                            {% if events %}
+                            <h3 class="event-form-title margin-bottom-20">Your Upcoming Events</h3>
+                            <ul>
+                                {% for event in events %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-green">
+                                    <div class="todo-tasklist-item-title"> {{ event.title }} </div>
+                                    <div class="todo-tasklist-item-text"> {{ event.description }} </div>
+                                    <div class="todo-tasklist-controls pull-left">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-calendar"></i> {{ event.date }} </span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                <h3 class="event-form-title margin-bottom-20">You have no events. Add one by filling in the form on the left.</h3>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

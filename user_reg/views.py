@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from user_reg.forms import MemberForm
-from user_reg.models import Member
+from user_reg.forms import *
+from user_reg.models import *
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 
@@ -45,8 +45,22 @@ def profile(request):
     return render(request, 'dashboard/profile.html', context_dict)
 
 
-def events(request):
-    return render(request, 'dashboard/events.html', {})
+def add_event(request):
+    events = Event.objects.all()
+    if request.method == 'POST':
+        event_form = EventForm(request.POST)
+        if event_form.is_valid():
+            event = event_form.save(commit=False)
+            event.host = request.user
+            event.save()
+            return HttpResponseRedirect('/dashboard/events') # Redirect after POST
+        else:
+            print event_form.errors
+    else:
+        event_form = EventForm()
+    context_dict = { 'events': events, 'event_form': event_form}
+    return render(request, 'dashboard/events.html', context_dict)
+
 
 def tasks(request):
     return render(request, 'dashboard/tasks.html', {})
