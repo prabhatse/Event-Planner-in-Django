@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from user_reg.forms import *
 from user_reg.models import *
 from django.http import HttpResponseRedirect
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 
 def index_page(request):
@@ -73,6 +73,21 @@ class delete_event(DeleteView):
         if not event.host == self.request.user:
             raise Http404
         return event
+
+
+class edit_event(UpdateView):
+    model = Event
+    form_class = EventForm
+    success_url = reverse_lazy('events')
+    template_name = 'dashboard/event_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(edit_event, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(edit_event, self).post(request, *args, **kwargs)
 
 def tasks(request):
     return render(request, 'dashboard/tasks.html', {})

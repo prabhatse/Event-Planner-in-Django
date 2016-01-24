@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from user_reg.views import delete_event
+from user_reg.views import delete_event, edit_event
 
 urlpatterns = [
     url(r'^$', views.index_page, name='index_page'),
@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^dashboard/welcome/', views.welcome, name='welcome'),
     url(r'^dashboard/profile/', views.profile, name='profile'),
     url(r'^dashboard/events/', views.add_event, name='events'),
-    url(r'^dashboard/delete/event/(?P<pk>\d+)/$', views.delete_event.as_view(), name='delete_event'), 
+    url(r'^dashboard/delete/event/(?P<pk>\d+)/$', views.delete_event.as_view(), name='delete_event'),
+    url(r'^dashboard/edit/event/(?P<pk>\d+)/$', views.edit_event.as_view(), name='edit_event'), 
     url(r'^dashboard/tasks/', views.tasks, name='tasks'),
     url(r'^dashboard/guests/', views.guests, name='guests'),
     url(r'^dashboard/budgets/', views.budgets, name='budgets'),

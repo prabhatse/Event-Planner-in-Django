@@ -30,6 +30,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
+            <i class="icon-calendar"></i>
             <span>My Events</span>
         </li>
     </ul> 
@@ -56,9 +57,9 @@
                                     <a href="javascript:;" class="btn default"> Cancel </a>
                                 </div>
                             </form>
-                            <hr/>
                             <div id="event_box" class="margin-bottom-10"></div>
-                            <hr class="visible-xs" /> </div>
+                            <hr class="visible-xs" /> 
+                        </div>
                     </div>
                     <div class="col-md-5 col-sm-12">
                         <div class="todo-tasklist">
@@ -115,7 +116,9 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                        <a href="{% url 'edit_event' pk=event.id %}">
+                                            <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                        </a>
                                     </div>
                                 </div>
                                 {% endfor %}
