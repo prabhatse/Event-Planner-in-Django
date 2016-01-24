@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from user_reg.forms import *
 from user_reg.models import *
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
 
 def index_page(request):
     return render(request, 'user_reg/index.html', {})
@@ -61,6 +62,17 @@ def add_event(request):
     context_dict = { 'events': events, 'event_form': event_form}
     return render(request, 'dashboard/events.html', context_dict)
 
+class delete_event(DeleteView):
+    model = Event
+    success_url = reverse_lazy('events')
+    template_name = 'dashboard/event_delete.html'
+
+    def get_event(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        event = super(delete_event, self).get_event()
+        if not event.host == self.request.user:
+            raise Http404
+        return event
 
 def tasks(request):
     return render(request, 'dashboard/tasks.html', {})

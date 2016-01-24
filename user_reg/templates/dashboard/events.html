@@ -79,7 +79,7 @@
                                         {% elif event.category = 'Wed' %}
                                             <i class="fa fa-heart"></i>
                                         {% elif event.category = 'Oth' %} 
-                                            <i class="fa fa-birthday-cake"></i>
+                                            <i class="fa fa-star"></i>
                                         {% endif %}
                                         &nbsp&nbsp{{ event.title }} 
                                     </div>
@@ -110,7 +110,9 @@
                                         </span>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                        <a href="{% url 'delete_event' pk=event.id %}">
+                                            <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                        </a>
                                     </div>
                                     <div>
                                         <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
