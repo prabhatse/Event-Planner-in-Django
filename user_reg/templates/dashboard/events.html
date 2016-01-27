@@ -47,14 +47,14 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
-                        <h3 class="event-form-title margin-bottom-20">Add Event</h3>
+                        <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Add Event</h3>
                         <div id="external-events">
                             <form method="POST">
                                 {% csrf_token %}
                                 {{ event_form|crispy }}
                                 <div class="margiv-top-10">
                                     <button type="submit" class="btn default">Save Changes </button>
-                                    <a href="javascript:;" class="btn default"> Cancel </a>
+                                    <a href= "{% url 'events' %}" class="btn default"> Cancel </a>
                                 </div>
                             </form>
                             <div id="event_box" class="margin-bottom-10"></div>
@@ -64,7 +64,7 @@
                     <div class="col-md-5 col-sm-12">
                         <div class="todo-tasklist">
                             {% if events %}
-                            <h3 class="event-form-title margin-bottom-20">Your Upcoming Events</h3>
+                            <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Your Upcoming Events</h3>
                             <ul>
                                 {% for event in events %}
                                 <div class="todo-tasklist-item todo-tasklist-item-border-green">

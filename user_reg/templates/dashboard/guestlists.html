@@ -79,12 +79,12 @@
                                                 </span>
                                             </div>
                                             <div>
-                                                <a href="#">
+                                                <a href="{% url 'delete_guestlist' pk=guestlist.id %}">
                                                     <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
                                                 </a>
                                             </div>
                                             <div>
-                                                <a href="#">
+                                                <a href="{% url 'edit_guestlist' pk=guestlist.id %}">
                                                     <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
                                                 </a>
                                             </div>
@@ -107,4 +107,5 @@
 <!-- END CONTENT -->
 
 {% endblock content %}
+
 

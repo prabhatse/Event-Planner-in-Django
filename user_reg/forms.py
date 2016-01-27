@@ -45,6 +45,18 @@ class EventForm(forms.ModelForm):
                 return date
             else:
                 return date
+
+class GuestlistForm(forms.ModelForm):
+
+    class Meta:
+        model = Guestlist
+        fields = ('name', 'description')
+
+class GuestForm(forms.ModelForm):
+
+    class Meta:
+        model = Guest
+        fields = ('guestlist', 'fname', 'lname', 'email', 'phone_number')
     
 
 

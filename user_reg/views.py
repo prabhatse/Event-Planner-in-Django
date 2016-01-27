@@ -74,7 +74,6 @@ class delete_event(DeleteView):
             raise Http404
         return event
 
-
 class edit_event(UpdateView):
     model = Event
     form_class = EventForm
@@ -92,8 +91,50 @@ class edit_event(UpdateView):
 def tasks(request):
     return render(request, 'dashboard/tasks.html', {})
 
-def guests(request):
-    return render(request, 'dashboard/guests.html', {})
+#def guests(request):
+#    return render(request, 'dashboard/guests.html', {})
+
+def add_guestlist(request):
+    guestlists = Guestlist.objects.filter(host=request.user)
+    if request.method == 'POST':
+        guestlist_form = GuestlistForm(request.POST)
+        if guestlist_form.is_valid():
+            guestlist = guestlist_form.save(commit=False)
+            guestlist.host = request.user
+            guestlist.save()
+            return HttpResponseRedirect('/dashboard/guests') # Redirect after POST
+        else:
+            print guestlist_form.errors
+    else:
+        guestlist_form = GuestlistForm()
+    context_dict = { 'guestlists': guestlists, 'guestlist_form': guestlist_form}
+    return render(request, 'dashboard/guestlists.html', context_dict)
+
+class delete_guestlist(DeleteView):
+    model = Guestlist
+    success_url = reverse_lazy('guestlists')
+    template_name = 'dashboard/guestlist_delete.html'
+
+    def get_guestlist(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        guestlist = super(delete_guestlist, self).get_event()
+        if not guestlist.host == self.request.user:
+            raise Http404
+        return guestlist
+
+class edit_guestlist(UpdateView):
+    model = Guestlist
+    form_class = GuestlistForm
+    success_url = reverse_lazy('guestlists')
+    template_name = 'dashboard/guestlist_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(edit_guestlist, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(edit_guestlist, self).post(request, *args, **kwargs)
 
 def budgets(request):
     return render(request, 'dashboard/budgets.html', {})

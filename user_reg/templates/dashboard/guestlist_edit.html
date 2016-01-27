@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-events %}
+    <li class="nav-item start active open">
+        <a href="/dashboard/events/" class="nav-link nav-toggle">
+            <i class="icon-calendar"></i>
+            <span class="title">My Guests</span>
+            <span class="selected"></span>
+            <span class="arrow open"></span>
+        </a>
+    </li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} Edit "{{ guestlist.name }}" {% endblock %} 
+
+{% block content %}
+<h3 class="page-title">Edit Your Guestlist, "{{ guestlist.name }}" </h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="/dashboard/home/">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-users"></i>
+            <a href="/dashboard/guestlists/">My Guestlists</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-note"></i>
+            <span>Edit Guestlist</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-guests.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+            <span class="caption-subject font-green-sharp bold uppercase">EDIT GUESTLIST </span>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <h3 class="event-form-title margin-bottom-20">
+                            Edit "{{ guestlist.name }}"
+                        </h3>
+                        <div id="external-events">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="margiv-top-10">
+                                    <button type="submit" value = "update" class="btn default">Save Changes </button>
+                                    <a href= "{% url 'events' %}" class="btn default"> Cancel </a>
+                                </div>
+                            </form>
+                            <div id="event_box" class="margin-bottom-10"></div>
+                            <hr class="visible-xs" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div class="todo-tasklist-item todo-tasklist-item-border-green">
+                            <div class="todo-tasklist-item-title">
+                                    <i class="fa fa-users"></i>
+                                &nbsp&nbsp{{ guestlist.name }} 
+                            </div>
+                            <div class="todo-tasklist-controls">
+                                <span class="todo-tasklist-date">
+                                    {{ guestlist.description }}
+                                </span>
+                            </div>
+                            <div>
+                                <a href= "{% url 'guestlists' %}">
+                                    <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-times"></i>&nbsp Cancel</button>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{% url 'delete_guestlist' pk=guestlist.id %}">
+                                    <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+{% endblock content %}
+
+
