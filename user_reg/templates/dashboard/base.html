@@ -236,8 +236,30 @@
                             <a href="/dashboard/guests/" class="nav-link nav-toggle">
                                 <i class="icon-users"></i>
                                 <span class="title">My Guests</span>
-                                <span class="arrow"></span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
                             </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="{% url 'guestlists' %}" class="nav-link ">
+                                        <i class="icon-list"></i>
+                                        <span class="title">My Guestlists</span>
+                                        <span class="selected"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="#" class="nav-link ">
+                                        <i class="icon-user"></i>
+                                        <span class="title">My Guest Profiles</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="#" class="nav-link ">
+                                        <i class="icon-envelope"></i>
+                                        <span class="title">My Invitations</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         {% endblock %}
                         {% block nav-budgets %}

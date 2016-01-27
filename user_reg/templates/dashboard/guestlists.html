@@ -11,6 +11,27 @@
         <span class="selected"></span>
         <span class="arrow open"></span>
     </a>
+    <ul class="sub-menu">
+        <li class="nav-item start active open">
+            <a href="{% url 'guestlists' %}" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">My Guestlists</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="#" class="nav-link ">
+                <i class="icon-user"></i>
+                <span class="title">My Guest Profiles</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="#" class="nav-link ">
+                <i class="icon-envelope"></i>
+                <span class="title">My Invitations</span>
+            </a>
+        </li>
+    </ul>
 </li>
 {% endblock %}
 
@@ -19,8 +40,8 @@
 {% block title %} My Guests {% endblock %} 
 
 {% block content %}
-<h3 class="page-title"> My Guests
-    <small>Keep track of which guests are coming to your event</small>
+<h3 class="page-title"> My Guestlists
+    <small>Organize your guests in lists</small>
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -31,7 +52,12 @@
         </li>
         <li>
             <i class="icon-users"></i>
-            <span>My Guests</span>
+            <a href="/dashboard/guests/">My Guests</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-list"></i>
+            <span>My Guestlists</span>
         </li>
     </ul> 
 </div>
