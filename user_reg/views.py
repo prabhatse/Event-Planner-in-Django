@@ -102,7 +102,7 @@ def add_guestlist(request):
             guestlist = guestlist_form.save(commit=False)
             guestlist.host = request.user
             guestlist.save()
-            return HttpResponseRedirect('/dashboard/guests') # Redirect after POST
+            return HttpResponseRedirect('/dashboard/guestlists') # Redirect after POST
         else:
             print guestlist_form.errors
     else:
