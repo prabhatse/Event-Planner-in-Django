@@ -80,8 +80,9 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <a href ="{% url 'add_guest' %}">
-                                    <button  class="btn green"> Add Guest
+                                    <button  class="btn green"> 
                                         <i class="fa fa-plus"></i>
+                                        Add Guest
                                     </button>
                                 </a>
                             </div>
@@ -106,48 +107,52 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover table-bordered" id="guests" style="color:#4f2412">
-                    <thead>
-                        <tr>
-                            <th> First Name </th>
-                            <th> Last Name </th>
-                            <th> Email Address </th>
-                            <th> Phone Number </th>
-                            <th> Guestlist </th>
-                            <th> Edit </th>
-                            <th> Delete </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for guest in guests %}
+                {% if guests %}
+                    <table class="table table-striped table-hover table-bordered" id="guests" style="color:#4f2412">
+                        <thead>
                             <tr>
-                                <td> {{ guest.fname }} </td>
-                                <td> {{ guest.lname }} </td>
-                                <td> {{ guest.email }} </td>
-                                <td> 
-                                    {% if guest.phone_number %}
-                                        {{ guest.phone_number }} 
-                                    {% else %}
-                                        None listed
-                                    {% endif %}
-                                </td>
-                                <td> 
-                                    {% if guest.guestlist %}
-                                        {{ guest.guestlist }} 
-                                    {% else %}
-                                        None listed
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <a href="{% url 'edit_guest' pk=guest.id %}"> Edit </a>
-                                </td>
-                                <td>
-                                    <a href="{% url 'delete_guest' pk=guest.id %}"> Delete </a>
-                                </td>
+                                <th> First Name </th>
+                                <th> Last Name </th>
+                                <th> Email Address </th>
+                                <th> Phone Number </th>
+                                <th> Guestlist </th>
+                                <th> Edit </th>
+                                <th> Delete </th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for guest in guests %}
+                                <tr>
+                                    <td> {{ guest.fname }} </td>
+                                    <td> {{ guest.lname }} </td>
+                                    <td> {{ guest.email }} </td>
+                                    <td> 
+                                        {% if guest.phone_number %}
+                                            {{ guest.phone_number }} 
+                                        {% else %}
+                                            None listed
+                                        {% endif %}
+                                    </td>
+                                    <td> 
+                                        {% if guest.guestlist %}
+                                            {{ guest.guestlist }} 
+                                        {% else %}
+                                            None listed
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'edit_guest' pk=guest.id %}"> Edit </a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'delete_guest' pk=guest.id %}"> Delete </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">You haven't added any guests! Add one by clicking the button above.</h3>
+                {% endif %}
             </div>
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
