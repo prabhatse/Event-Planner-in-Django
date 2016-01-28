@@ -206,7 +206,7 @@
                     <ul id="nav" class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         {% block nav-home %}
                         <li class="nav-item">
-                            <a href="/dashboard/home/" class="nav-link nav-toggle">
+                            <a href="{% url 'home' %}" class="nav-link nav-toggle">
                                 <i class="icon-home"></i>
                                 <span class="title">My Dashboard</span>
                                 <span class="arrow"></span>
@@ -215,7 +215,7 @@
                         {% endblock %}
                         {% block nav-events %}
                         <li class="nav-item">
-                            <a href="/dashboard/events/" class="nav-link nav-toggle">
+                            <a href="{% url 'events' %}" class="nav-link nav-toggle">
                                 <i class="icon-calendar"></i>
                                 <span class="title">My Events</span>
                                 <span class="arrow"></span>
@@ -224,7 +224,7 @@
                         {% endblock %}
                         {% block nav-tasks %}
                         <li class="nav-item">
-                            <a href="/dashboard/tasks/" class="nav-link nav-toggle">
+                            <a href="{% url 'tasks' %}" class="nav-link nav-toggle">
                                 <i class="icon-notebook"></i>
                                 <span class="title">My Tasks</span>
                                 <span class="arrow"></span>
@@ -233,7 +233,7 @@
                         {% endblock %}
                         {% block nav-guests %}
                         <li class="nav-item">
-                            <a href="/dashboard/guests/" class="nav-link nav-toggle">
+                            <a href="{% url 'guests' %}" class="nav-link nav-toggle">
                                 <i class="icon-users"></i>
                                 <span class="title">My Guests</span>
                                 <span class="selected"></span>
@@ -248,13 +248,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item start ">
-                                    <a href="#" class="nav-link ">
+                                    <a href="{% url 'guest_profiles' %}" class="nav-link ">
                                         <i class="icon-user"></i>
                                         <span class="title">My Guest Profiles</span>
                                     </a>
                                 </li>
                                 <li class="nav-item start ">
-                                    <a href="#" class="nav-link ">
+                                    <a href="{% url 'invitations' %}" class="nav-link ">
                                         <i class="icon-envelope"></i>
                                         <span class="title">My Invitations</span>
                                     </a>
@@ -264,7 +264,7 @@
                         {% endblock %}
                         {% block nav-budgets %}
                         <li class="nav-item">
-                            <a href="/dashboard/budgets/" class="nav-link nav-toggle">
+                            <a href="{% url 'budgets' %}" class="nav-link nav-toggle">
                                 <i class="icon-credit-card"></i>
                                 <span class="title">My Budgets</span>
                                 <span class="arrow"></span>
@@ -273,7 +273,7 @@
                         {% endblock %}
                         {% block nav-vendors %}
                         <li class="nav-item">
-                            <a href="/dashboard/vendors/" class="nav-link nav-toggle">
+                            <a href="{% url 'vendors' %}" class="nav-link nav-toggle">
                                 <i class="icon-present"></i>
                                 <span class="title">My Vendors</span>
                                 <span class="arrow"></span>
@@ -282,7 +282,7 @@
                         {% endblock %}
                         {% block nav-reviews %}
                         <li class="nav-item">
-                            <a href="/dashboard/reviews/" class="nav-link nav-toggle">
+                            <a href="{% url 'reviews' %}" class="nav-link nav-toggle">
                                 <i class="icon-bubbles"></i>
                                 <span class="title">My Reviews</span>
                                 <span class="arrow"></span>
@@ -290,7 +290,7 @@
                         </li>
                         {% endblock %}
                         <li class="nav-item  ">
-                            <a href="/#home" target="_blank" class="nav-link nav-toggle">
+                            <a href="/" target="_blank" class="nav-link nav-toggle">
                                 <i class="icon-info"></i>
                                 <span class="title">About My Event Planner</span>
                                 <span class="arrow"></span>

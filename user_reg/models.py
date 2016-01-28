@@ -47,12 +47,12 @@ class Guestlist(models.Model):
 
 class Guest(models.Model):
     host = models.ForeignKey('auth.User')
-    guestlist = models.ForeignKey(Guestlist)
+    guestlist = models.ForeignKey(Guestlist, blank=True, null=True)
     fname = models.CharField(max_length=70, verbose_name="First Name")
     lname = models.CharField(max_length=70, verbose_name="Last Name")
     email = models.EmailField(max_length=70, unique=True, verbose_name="Email Address")
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+254711123456'. Up to 15 digits allowed.")
-    phone_number = models.CharField(max_length=15, validators=[phone_regex], blank=True, null=True, unique=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+254712345678'. Up to 15 digits allowed. Please try again.")
+    phone_number = models.CharField(max_length=15, validators=[phone_regex], blank=True, null=True, unique=True, verbose_name="Phone Number (e.g +254712345678)")
 
     def __unicode__(self):
     		return self.email

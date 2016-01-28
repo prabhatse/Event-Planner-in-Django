@@ -1,0 +1,161 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-guests %}
+<li class="nav-item start active open">
+    <a href="{% url 'guests' %}" class="nav-link nav-toggle">
+        <i class="icon-users"></i>
+        <span class="title">My Guests</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="{% url 'guestlists' %}" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">My Guestlists</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        <li class="nav-item start active open">
+            <a href="{% url 'guest_profiles' %}" class="nav-link ">
+                <i class="icon-user"></i>
+                <span class="title">My Guest Profiles</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="{% url 'invitations' %}" class="nav-link ">
+                <i class="icon-envelope"></i>
+                <span class="title">My Invitations</span>
+            </a>
+        </li>
+    </ul>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} My Guests {% endblock %} 
+
+{% block content %}
+<h3 class="page-title"> My Guest Profiles
+    <small>Keep track of all your guests!</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-users"></i>
+            <a href="{% url 'guests' %}">My Guests</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-user"></i>
+            <span>My Guest Profiles</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-guest-profiles.jpg' %}" style="width:100%"/>
+</div>
+<!-- END PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-red sbold uppercase">My Guest Profiles</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <a href ="{% url 'add_guest' %}">
+                                    <button  class="btn green"> Add Guest
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group pull-right">
+                                <button class="btn green btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:;"> Print </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Save as PDF </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Export to Excel </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="guests" style="color:#4f2412">
+                    <thead>
+                        <tr>
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Email Address </th>
+                            <th> Phone Number </th>
+                            <th> Guestlist </th>
+                            <th> Edit </th>
+                            <th> Delete </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for guest in guests %}
+                            <tr>
+                                <td> {{ guest.fname }} </td>
+                                <td> {{ guest.lname }} </td>
+                                <td> {{ guest.email }} </td>
+                                <td> 
+                                    {% if guest.phone_number %}
+                                        {{ guest.phone_number }} 
+                                    {% else %}
+                                        None listed
+                                    {% endif %}
+                                </td>
+                                <td> 
+                                    {% if guest.guestlist %}
+                                        {{ guest.guestlist }} 
+                                    {% else %}
+                                        None listed
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_guest' pk=guest.id %}"> Edit </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'delete_guest' pk=guest.id %}"> Delete </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+            
+{% endblock content %}

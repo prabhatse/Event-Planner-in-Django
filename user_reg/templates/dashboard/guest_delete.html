@@ -12,14 +12,14 @@
             <span class="arrow open"></span>
         </a>
         <ul class="sub-menu">
-            <li class="nav-item start active open">
+            <li class="nav-item start ">
                 <a href="{% url 'guestlists' %}" class="nav-link ">
                     <i class="icon-list"></i>
                     <span class="title">My Guestlists</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item start ">
+            <li class="nav-item start active open">
                 <a href="{% url 'guest_profiles' %}" class="nav-link ">
                     <i class="icon-user"></i>
                     <span class="title">My Guest Profiles</span>
@@ -37,10 +37,10 @@
 
 {% load staticfiles %}
 
-{% block title %} Delete "{{ guestlist.name }}" {% endblock %} 
+{% block title %} Delete {{ guest.fname }} {{ guest.lname }}'s Profile {% endblock %} 
 
 {% block content %}
-<h3 class="page-title">Delete Your Guestlist, "{{ guestlist.name }}"</h3>
+<h3 class="page-title">Delete {{ guest.fname }} {{ guest.lname }}'s Profile</h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -54,18 +54,18 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <i class="icon-list"></i>
-            <a href="{% url 'guestlists' %}">My Guestlists</a>
+            <i class="icon-user"></i>
+            <a href="{% url 'guest_profiles' %}">My Guest Profiles</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
             <i class="icon-trash"></i>
-            <span>Delete Guestlist</span>
+            <span>Delete Guest Profile</span>
         </li>
     </ul> 
 </div>
 <div class="page-bar">
-    <img src="{% static 'back-end/img/banner-guestlists.jpg' %}" style="width:100%"/>
+    <img src="{% static 'back-end/img/banner-guest-profiles.jpg' %}" style="width:100%"/>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -75,13 +75,13 @@
             </div>
             <div class="portlet-body">
                 <div class="row" style="text-align:center">
-                    <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">You are about to delete your guestlist, "{{ guestlist.name }}".</h3>
+                    <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">You are about to delete your guest, {{ guest.fname }} {{ guest.lname }}'s profile.</h3>
                     <p style="color:#4f2412"> Are you sure you want to do this?</p>
                     <form method="post">
                         {% csrf_token %}
                         <div class="margiv-top-10">
                             <button type="submit" class="btn default">Yes, I'm sure </button>
-                            <a href= "{% url 'guestlists' %}" class="btn default"> Cancel </a>
+                            <a href= "{% url 'guest_profiles' %}" class="btn default"> Cancel </a>
                         </div>
                     </form>
                 </div>
@@ -95,3 +95,4 @@
 <!-- END CONTENT -->
 
 {% endblock content %}
+

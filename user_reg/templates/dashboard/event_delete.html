@@ -5,7 +5,7 @@
 
 {% block nav-events %}
 	<li class="nav-item start active open">
-        <a href="/dashboard/events/" class="nav-link nav-toggle">
+        <a href="{% url 'events' %}" class="nav-link nav-toggle">
             <i class="icon-calendar"></i>
             <span class="title">My Events</span>
             <span class="selected"></span>
@@ -24,12 +24,12 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="/dashboard/home/">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
             <i class="icon-calendar"></i>
-            <a href="/dashboard/events/">My Events</a>
+            <a href="{% url 'events' %}">My Events</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>

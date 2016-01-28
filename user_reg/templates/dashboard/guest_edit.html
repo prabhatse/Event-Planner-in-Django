@@ -12,14 +12,14 @@
             <span class="arrow open"></span>
         </a>
         <ul class="sub-menu">
-            <li class="nav-item start active open">
+            <li class="nav-item start ">
                 <a href="{% url 'guestlists' %}" class="nav-link ">
                     <i class="icon-list"></i>
                     <span class="title">My Guestlists</span>
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="nav-item start ">
+            <li class="nav-item start active open">
                 <a href="{% url 'guest_profiles' %}" class="nav-link ">
                     <i class="icon-user"></i>
                     <span class="title">My Guest Profiles</span>
@@ -37,10 +37,10 @@
 
 {% load staticfiles %}
 
-{% block title %} Edit "{{ guestlist.name }}" {% endblock %} 
+{% block title %} Edit {{ guest.fname }} {{ guest.lname }}'s Profile {% endblock %} 
 
 {% block content %}
-<h3 class="page-title">Edit Your Guestlist, "{{ guestlist.name }}" </h3>
+<h3 class="page-title">Edit {{ guest.fname }} {{ guest.lname }}'s Profile </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -54,30 +54,30 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <i class="icon-list"></i>
-            <a href="{% url 'guestlists' %}">My Guestlists</a>
+            <i class="icon-user"></i>
+            <a href="{% url 'guest_profiles' %}">My Guest Profiles</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
             <i class="icon-note"></i>
-            <span>Edit Guestlist</span>
+            <span>Edit Guest Profile</span>
         </li>
     </ul> 
 </div>
 <div class="page-bar">
-    <img src="{% static 'back-end/img/banner-guestlists.jpg' %}" style="width:100%"/>
+    <img src="{% static 'back-end/img/banner-guest-profiles.jpg' %}" style="width:100%"/>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
-            <span class="caption-subject font-green-sharp bold uppercase">EDIT GUESTLIST </span>
+                <span class="caption-subject font-green-sharp bold uppercase">EDIT GUEST PROFILE</span>
             </div>
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
                         <h3 class="event-form-title margin-bottom-20">
-                            Edit "{{ guestlist.name }}"
+                            Edit {{ guest.fname }} {{ guest.lname }}'s guest profile
                         </h3>
                         <div id="external-events">
                             <form method="POST">
@@ -85,7 +85,7 @@
                                 {{ form|crispy }}
                                 <div class="margiv-top-10">
                                     <button type="submit" value = "update" class="btn default">Save Changes </button>
-                                    <a href= "{% url 'events' %}" class="btn default"> Cancel </a>
+                                    <a href= "{% url 'guest_profiles' %}" class="btn default"> Cancel </a>
                                 </div>
                             </form>
                             <div id="event_box" class="margin-bottom-10"></div>
@@ -95,23 +95,46 @@
                     <div class="col-md-5 col-sm-12">
                         <div class="todo-tasklist-item todo-tasklist-item-border-green">
                             <div class="todo-tasklist-item-title">
-                                    <i class="fa fa-users"></i>
-                                &nbsp&nbsp{{ guestlist.name }} 
+                                &nbsp&nbsp{{ guest.fname }} {{ guest.lname }} 
                             </div>
-                            <div class="todo-tasklist-controls">
+                            <div class="todo-tasklist-controls pull-left">
                                 <span class="todo-tasklist-date">
-                                    {{ guestlist.description }}
+                                    <i class="fa fa-envelope"></i> 
+                                    <span style="color:#4f2412">Email address:</span> 
+                                    {{ guest.email}}
                                 </span>
                             </div>
                             <br/>
+                            <div class="todo-tasklist-controls">
+                                <span class="todo-tasklist-date">
+                                    <i class="fa fa-phone"></i> 
+                                    <span style="color:#4f2412">Phone number:</span>
+                                    {% if guest.phone_number %}
+                                        {{ guest.phone_number}}
+                                    {% else %}
+                                        None listed
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="todo-tasklist-controls">
+                                <span class="todo-tasklist-date">
+                                    <i class="fa fa-users"></i> 
+                                    <span style="color:#4f2412">Guestlist:</span>
+                                    {% if guest.guestlist %}
+                                        <a href="{% url 'guestlists' %}" target="_blank">{{ guest.guestlist }}</a>
+                                    {% else %}
+                                        None listed
+                                    {% endif %}
+                                </span>
+                            </div>
                             <div>
-                                <a href= "{% url 'guestlists' %}">
+                                <a href= "{% url 'guest_profiles' %}">
                                     <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-times"></i>&nbsp Cancel</button>
                                 </a>
                             </div>
                             <div>
-                                <a href="{% url 'delete_guestlist' pk=guestlist.id %}">
-                                    <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                <a href="{% url 'delete_guest' pk=guest.id %}">
+                                    <button type="submit" class="btn default pull-right"><i class="fa fa-trash"></i>&nbsp Delete</button>
                                 </a>
                             </div>
                         </div>
@@ -127,5 +150,6 @@
 <!-- END CONTENT -->
 
 {% endblock content %}
+
 
 

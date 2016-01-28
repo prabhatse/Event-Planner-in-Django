@@ -2,7 +2,7 @@
 
 {% block nav-vendors %}
 <li class="nav-item start active open">
-    <a href="/dashboard/guests/" class="nav-link nav-toggle">
+    <a href="{% url 'vendors' %}" class="nav-link nav-toggle">
         <i class="icon-present"></i>
         <span class="title">My Vendors</span>
         <span class="selected"></span>
@@ -23,7 +23,7 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="/dashboard/home/">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>

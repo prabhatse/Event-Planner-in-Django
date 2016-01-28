@@ -5,12 +5,33 @@
 
 {% block nav-guests %}
 <li class="nav-item start active open">
-    <a href="/dashboard/guests/" class="nav-link nav-toggle">
+    <a href="{% url 'guests' %}" class="nav-link nav-toggle">
         <i class="icon-users"></i>
         <span class="title">My Guests</span>
         <span class="selected"></span>
         <span class="arrow open"></span>
     </a>
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="{% url 'guestlists' %}" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">My Guestlists</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        <li class="nav-item start active open ">
+            <a href="{% url 'guest_profiles' %}" class="nav-link ">
+                <i class="icon-user"></i>
+                <span class="title">My Guest Profiles</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="{% url 'invitations' %}" class="nav-link ">
+                <i class="icon-envelope"></i>
+                <span class="title">My Invitations</span>
+            </a>
+        </li>
+    </ul>
 </li>
 {% endblock %}
 
@@ -19,92 +40,183 @@
 {% block title %} My Guests {% endblock %} 
 
 {% block content %}
-<h3 class="page-title"> My Guests
-    <small>Keep track of which guests are coming to your event</small>
+<h3 class="page-title"> My Guestlists
+    <small>Organize your guests in lists</small>
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="/dashboard/home/">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
             <i class="icon-users"></i>
-            <span>My Guests</span>
+            <a span>My Guests</span>
         </li>
     </ul> 
 </div>
 <div class="page-bar">
     <img src="{% static 'back-end/img/banner-guests.jpg' %}" style="width:100%"/>
 </div>
+<!-- END PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet light portlet-fit  calendar">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light portlet-fit ">
             <div class="portlet-title">
-            <span class="caption-subject font-green-sharp bold uppercase">MY GUESTLISTS </span>
+                <div class="caption">
+                    <span class="caption-subject font-red sbold uppercase">My Guest Profiles</span>
+                </div>
             </div>
             <div class="portlet-body">
-                <div class="row">
-                    <div class="col-md-7 col-sm-12">
-                        <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Add Guestlist</h3>
-                        <p> Add a new guestlist here. A guestlist is a group of guests. </p>
-                        <div id="external-events">
-                            <form method="POST">
-                                {% csrf_token %}
-                                {{ guestlist_form|crispy }}
-                                <div class="margiv-top-10">
-                                    <button type="submit" class="btn default">Save Changes </button>
-                                    <a href="javascript:;" class="btn default"> Cancel </a>
-                                </div>
-                            </form>
-                            <div id="event_box" class="margin-bottom-10"></div>
-                            <hr class="visible-xs" /> 
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button  class="btn green"> Add Guest
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-5 col-sm-12">
-                        <div class="todo-tasklist">
-                            <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Your Guestlists</h3>
-                            {% if guestlists %}
-                                <ul>
-                                    {% for guestlist in guestlists %}
-                                        <div class="todo-tasklist-item todo-tasklist-item-border-green">
-                                            <div class="todo-tasklist-item-title">
-                                                    <i class="fa fa-users"></i>
-                                                &nbsp&nbsp{{ guestlist.name }} 
-                                            </div>
-                                            <div class="todo-tasklist-controls">
-                                                <span class="todo-tasklist-date">
-                                                    {{ guestlist.description }}
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <a href="#">
-                                                    <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <a href="#">
-                                                    <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
+                        <div class="col-md-6">
+                            <div class="btn-group pull-right">
+                                <button class="btn green btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:;"> Print </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Save as PDF </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;"> Export to Excel </a>
+                                    </li>
                                 </ul>
-                            {% else %}
-                                <h3 class="event-form-title margin-bottom-20">You have no guestlists. Add one to the right!</h3>
-                            {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <table class="table table-striped table-hover table-bordered" id="guests" style="color:#4f2412">
+                    <thead>
+                        <tr>
+                            <th> Username </th>
+                            <th> Full Name </th>
+                            <th> Points </th>
+                            <th> Notes </th>
+                            <th> Edit </th>
+                            <th> Delete </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> alex </td>
+                            <td> Alex Nilson </td>
+                            <td> 1234 </td>
+                            <td class="center"> power user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> lisa </td>
+                            <td> Lisa Wong </td>
+                            <td> 434 </td>
+                            <td class="center"> new user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> nick12 </td>
+                            <td> Nick Roberts </td>
+                            <td> 232 </td>
+                            <td class="center"> power user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> goldweb </td>
+                            <td> Sergio Jackson </td>
+                            <td> 132 </td>
+                            <td class="center"> elite user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> alex </td>
+                            <td> Alex Nilson </td>
+                            <td> 1234 </td>
+                            <td class="center"> power user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> webriver </td>
+                            <td> Antonio Sanches </td>
+                            <td> 462 </td>
+                            <td class="center"> new user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> gist124 </td>
+                            <td> Nick Roberts </td>
+                            <td> 62 </td>
+                            <td class="center"> new user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> alex </td>
+                            <td> Alex Nilson </td>
+                            <td> 1234 </td>
+                            <td class="center"> power user </td>
+                            <td>
+                                <a class="edit" href="javascript:;"> Edit </a>
+                            </td>
+                            <td>
+                                <a class="delete" href="javascript:;"> Delete </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
     </div>
 </div>
 </div>
 <!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
-
+            
 {% endblock content %}
-

@@ -1,0 +1,108 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-guests %}
+<li class="nav-item start active open">
+    <a href="{% url 'guests' %}" class="nav-link nav-toggle">
+        <i class="icon-users"></i>
+        <span class="title">My Guests</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+    <ul class="sub-menu">
+        <li class="nav-item start ">
+            <a href="{% url 'guestlists' %}" class="nav-link ">
+                <i class="icon-list"></i>
+                <span class="title">My Guestlists</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        <li class="nav-item start active open">
+            <a href="{% url 'guest_profiles' %}" class="nav-link ">
+                <i class="icon-user"></i>
+                <span class="title">My Guest Profiles</span>
+            </a>
+        </li>
+        <li class="nav-item start ">
+            <a href="{% url 'invitations' %}" class="nav-link ">
+                <i class="icon-envelope"></i>
+                <span class="title">My Invitations</span>
+            </a>
+        </li>
+    </ul>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} My Guests {% endblock %} 
+
+{% block content %}
+<h3 class="page-title"> My Guest Profiles
+    <small>Keep track of all your guests!</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-users"></i>
+            <a href="{% url 'guests' %}">My Guests</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-users"></i>
+            <a href="{% url 'guest_profiles' %}">My Guest Profiles</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-plus"></i>
+            <span>Add Guest</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-guest-profiles.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+                <span class="caption-subject font-green-sharp bold uppercase">MY GUEST PROFILES </span>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Add Guest</h3>
+                        <div id="external-events">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ guest_form|crispy }}
+                                <div class="margiv-top-10">
+                                    <button type="submit" class="btn default">Save Changes </button>
+                                    <a href="{% url 'guest_profiles' %}" class="btn default"> Cancel </a>
+                                </div>
+                            </form>
+                            <div id="event_box" class="margin-bottom-10"></div>
+                            <hr class="visible-xs" /> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div >
+            <img src="{% static 'back-end/img/banner-add-guest.jpg' %}" style="width:100%"/>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
