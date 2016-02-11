@@ -15,7 +15,9 @@ urlpatterns = [
     url(r'^dashboard/events/edit/(?P<pk>\d+)/$', views.edit_event.as_view(), name='edit_event'), 
     url(r'^dashboard/events/', views.add_event, name='events'),
     #Tasks
-    url(r'^dashboard/tasks/', views.tasks, name='tasks'),
+    url(r'^dashboard/tasks/delete/(?P<pk>\d+)/$', views.delete_task.as_view(), name='delete_task'),
+    url(r'^dashboard/tasks/edit/(?P<pk>\d+)/$', views.edit_task.as_view(), name='edit_task'), 
+    url(r'^dashboard/tasks/', views.add_task, name='tasks'),
     #Guests
     # *** Guestlists ***
     url(r'^dashboard/guests/guestlists/delete/(?P<pk>\d+)/$', views.delete_guestlist.as_view(), name='delete_guestlist'),
@@ -27,7 +29,7 @@ urlpatterns = [
     url(r'^dashboard/guests/profiles/delete/(?P<pk>\d+)/$', views.delete_guest.as_view(), name='delete_guest'), 
     url(r'^dashboard/guests/profiles', views.guest_profiles, name='guest_profiles'),
     # *** Invitations ***
-    url(r'^dashboard/guests/invitations/', views.invitations, name='invitations'),
+    url(r'^dashboard/guests/invitations/', views.invitations.as_view(), name='invitations'),
     # *** Guests Home ***
     url(r'^dashboard/guests/', views.guests, name='guests'),
     #Budgets

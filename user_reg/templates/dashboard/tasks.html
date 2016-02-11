@@ -1,4 +1,7 @@
 {% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
 
 {% block nav-tasks %}
 <li class="nav-item start active open">
@@ -41,98 +44,19 @@
     <div class="todo-sidebar">
     <div class="portlet light ">
     <div class="portlet-title">
-    <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
-    <span class="caption-subject font-green-sharp bold uppercase">MY EVENTS </span>
-    <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
-    </div>
-    <div class="actions">
-    <div class="btn-group">
-    <a class="btn green btn-circle btn-outline btn-sm todo-projects-config" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-        <i class="icon-settings"></i> &nbsp;
-        <i class="fa fa-angle-down"></i>
-    </a>
-    <ul class="dropdown-menu pull-right">
-        <li>
-            <a href="javascript:;"> New Event </a>
-        </li>
-        <li class="divider"> </li>
-        <li>
-            <a href="javascript:;"> Next Month
-                <span class="badge badge-success"> 0 </span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;"> Next 6 Months
-                <span class="badge badge-success"> 1 </span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;"> Next Year
-                <span class="badge badge-success"> 0 </span>
-            </a>
-        </li>
-        <li class="divider"> </li>
-        <li>
-            <a href="javascript:;"> Archived Events 
-                <span class="badge badge-success"> 0 </span>
-            </a>
-        </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div class="portlet-body todo-project-list-content">
-    <div class="todo-project-list">
-    <ul class="nav nav-stacked">
-    <li class="active">
-        <a href="javascript:;">
-            <span class="badge badge-success"> 5 </span> 25th Birthday Party </a>
-    </li>
-    <li>
-        <a href="javascript:;">
-            <span class="badge badge-success"> 0 </span> Welcome Home Party </a>
-    </li>
-    <li>
-        <a href="javascript:;">
-            <span class="badge badge-success"> 0 </span> It's a Girl! </a>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div class="portlet light ">
-    <div class="portlet-title">
     <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content-tags">
-    <span class="caption-subject font-red bold uppercase">TAGS </span>
-    <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view</span>
-    </div>
-    <div class="actions">
-    <div class="actions">
-    <a class="btn btn-circle grey-salsa btn-outline btn-sm" href="javascript:;">
-        <i class="fa fa-plus"></i> Add </a>
-    </div>
+    <span class="caption-subject font-red bold uppercase"> KEY </span>
     </div>
     </div>
     <div class="portlet-body todo-project-list-content todo-project-list-content-tags">
     <div class="todo-project-list">
     <ul class="nav nav-pills nav-stacked">
-    <li>
-        <a href="javascript:;">
-            <span class="badge badge-danger"> 1 </span> Pending </a>
-    </li>
-    <li>
-        <a href="javascript:;">
-            <span class="badge badge-success"> 2 </span> In Progress </a>
-    </li>
-    <li>
-        <a href="javascript:;">
-            <span class="badge badge-success"> 1 </span> Completed </a>
-    </li>
-    <li>
-        <a href="javascript:;"> Overdue
-            <span class="badge badge-danger"> 1 </span>
-        </a>
-    </li>
+        <div>
+            <div class="todo-tasklist-item-title" style="color:#d8b2d8"> <i class="fa fa-pause"></i> Pending </div>
+            <div class="todo-tasklist-item-title" style="color:#ffb732"> <i class="fa fa-refresh"></i> In Progress </div>
+            <div class="todo-tasklist-item-title" style="color:#66b266"> <i class="fa fa-check"></i> Completed </div>
+            <div class="todo-tasklist-item-title" style="color:#d05454"> <i class="fa fa-warning" > </i> Overdue </div>
+        </div>
     </ul>
     </div>
     </div>
@@ -142,138 +66,67 @@
     <!-- BEGIN TODO CONTENT -->
     <div class="todo-content">
     <div class="portlet light ">
-    <!-- PROJECT HEAD -->
-    <div class="portlet-title">
-    <div class="caption">
-    <i class="icon-bar-chart font-green-sharp hide"></i>
-    <span class="caption-helper">Event:</span> &nbsp;
-    <span class="caption-subject font-green-sharp bold uppercase">25th Birthday Party</span>
-    </div>
-    <div class="actions">
-    <div class="btn-group">
-    <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> MANAGE
-        <i class="fa fa-angle-down"></i>
-    </a>
-    <ul class="dropdown-menu pull-right">
-        <li>
-            <a href="javascript:;"> New Task </a>
-        </li>
-        <li class="divider"> </li>
-        <li>
-            <a href="javascript:;"> Pending
-                <span class="badge badge-danger"> 1 </span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;"> In Progress
-                <span class="badge badge-success"> 2 </span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;"> Completed
-                <span class="badge badge-success"> 1 </span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;"> Overdue
-                <span class="badge badge-danger"> 1 </span>
-            </a>
-        </li>
-        <li class="divider"> </li>
-        <li>
-            <a href="javascript:;"> Delete Event </a>
-        </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <!-- end PROJECT HEAD -->
     <div class="portlet-body">
-    <div class="row">
-    <div class="col-md-5 col-sm-4">
-    <div class="todo-tasklist">
-        <div class="todo-tasklist-item todo-tasklist-item-border-green">
-            <div class="todo-tasklist-item-title"> Call Decor Vendor </div>
-            <div class="todo-tasklist-item-text"> Chiavari seats, gold and black colour scheme </div>
-            <div class="todo-tasklist-controls pull-left">
-                <span class="todo-tasklist-date">
-                    <i class="fa fa-calendar"></i> 05 Mar 2016 </span>
+        <div class="row">
+            <div class="col-md-5 col-sm-4">
+                <div class="todo-tasklist">
+                    {% if tasks %}
+                    <span class="caption-subject font-green-sharp bold uppercase">YOUR TASKS </span>
+                    <br/>
+                    <br/>
+                        {% for task in tasks %}
+                            {% if task.status = 'Pen' %} 
+                                <div class="todo-tasklist-item todo-tasklist-item-border-purple">
+                                    <div class="todo-tasklist-item-title" style="color:#d8b2d8"> <i class="fa fa-pause"></i> {{ task.title }} </div>
+                            {% elif task.status = 'Pro' %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-orange">
+                                    <div class="todo-tasklist-item-title" style="color:#ffb732"> <i class="fa fa-refresh"></i> {{ task.title }} </div>
+                            {% elif task.status = 'Ove' %} 
+                                <div class="todo-tasklist-item todo-tasklist-item-border-red">
+                                    <div class="todo-tasklist-item-title" style="color:#d05454"> <i class="fa fa-warning" > </i> {{ task.title }} </div>
+                            {% elif task.status = 'Com' %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-green">
+                                    <div class="todo-tasklist-item-title" style="color:#66b266"> <i class="fa fa-check"></i> {{ task.title }} </div>
+                            {% endif %}
+                                    <div class="todo-tasklist-item-text"> {{ task.description }} </div>
+                                    <div class="todo-tasklist-controls pull-left">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-calendar"></i> Due by: {{ task.due_date }} </span>
+                                    </div>
+                                    <div class="todo-tasklist-controls pull-left">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-calendar"></i> Due by: {{ task.due_date }} </span>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    <div>
+                                        <a href="{% url 'delete_task' pk=task.id %}">
+                                            <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'edit_task' pk=task.id %}">
+                                            <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                        </a>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    {% else %}
+                        <h3 class="event-form-title margin-bottom-20">You have no tasks. Add one by filling in the form on the right.</h3>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="todo-tasklist-item todo-tasklist-item-border-red">
-            <div class="todo-tasklist-item-title"> Find Good Baker </div>
-            <div class="todo-tasklist-item-text"> Need fabulous birthday cake </div>
-            <div class="todo-tasklist-controls pull-left">
-                <span class="todo-tasklist-date">
-                    <i class="fa fa-calendar"></i> 14 Feb 2016 </span>
-            </div>
-        </div>
-        <div class="todo-tasklist-item todo-tasklist-item-border-green">
-            <div class="todo-tasklist-item-title"> Create Guestlist </div>
-            <div class="todo-tasklist-item-text"> Maximum: 40 ppl. Must not invite Aunt Nelly! </div>
-            <div class="todo-tasklist-controls pull-left">
-                <span class="todo-tasklist-date">
-                    <i class="fa fa-calendar"></i> 10 Feb 2016 </span>
-            </div>
-        </div>
+            <div class="todo-tasklist-devider"> </div>
+        <div class="col-md-7 col-sm-8">
+            <form method="POST">
+                {% csrf_token %}
+                {{ task_form|crispy }}
+                <div class="margiv-top-10">
+                    <button type="submit" class="btn default">Save Changes </button>
+                    <a href= "{% url 'tasks' %}" class="btn default"> Cancel </a>
+                </div>
+            </form>
     </div>
-    </div>
-    <div class="todo-tasklist-devider"> </div>
-    <div class="col-md-7 col-sm-8">
-    <form action="#" class="form-horizontal">
-        <!-- TASK HEAD -->
-        <div class="form">
-            <div class="form-group">
-                <div class="col-md-8 col-sm-8">
-                    <div class="todo-taskbody-user">
-                        <span class="todo-username pull-left">Add New Task</span>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="todo-taskbody-date pull-right">
-                    </div>
-                </div>
-            </div>
-            <!-- END TASK HEAD -->
-            <!-- TASK TITLE -->
-            <div class="form-group">
-                <div class="col-md-12">
-                    <input type="text" class="form-control todo-taskbody-tasktitle" placeholder="Task Title..."> </div>
-            </div>
-            <!-- TASK DESC -->
-            <div class="form-group">
-                <div class="col-md-12">
-                    <textarea class="form-control todo-taskbody-taskdesc" rows="8" placeholder="Task Description..."></textarea>
-                </div>
-            </div>
-            <!-- END TASK DESC -->
-            <!-- TASK DUE DATE -->
-            <div class="form-group">
-                <div class="col-md-12">
-                    <div class="input-icon">
-                        <i class="fa fa-calendar"></i>
-                        <input type="text" class="form-control todo-taskbody-due" placeholder="Due Date..."> </div>
-                </div>
-            </div>
-            <!-- TASK TAGS -->
-            <div class="form-group">
-                <div class="col-md-12">
-                    <select class="form-control todo-taskbody-tags">
-                        <option value="Pending">Pending</option>
-                        <option value="Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Approved">Overdue</option>
-                    </select>
-                </div>
-            </div>
-            <!-- TASK TAGS -->
-            <div class="form-actions right todo-form-actions">
-                <button class="btn btn-circle btn-sm green">Save Changes</button>
-                <button class="btn btn-circle btn-sm btn-default">Cancel</button>
-            </div>
-        </div>
-    </form>
-</div>
 </div>
 </div>
 </div>
@@ -287,48 +140,4 @@
 <!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
-<!-- BEGIN QUICK SIDEBAR -->
-<a href="javascript:;" class="page-quick-sidebar-toggler">
-<i class="icon-login"></i>
-</a>
-<div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
-<div class="page-quick-sidebar">
-<ul class="nav nav-tabs">
-<li class="active">
-<a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> Users
-<span class="badge badge-danger">2</span>
-</a>
-</li>
-<li>
-<a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab"> Alerts
-<span class="badge badge-success">7</span>
-</a>
-</li>
-<li class="dropdown">
-<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> More
-<i class="fa fa-angle-down"></i>
-</a>
-<ul class="dropdown-menu pull-right">
-<li>
-    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-        <i class="icon-bell"></i> Alerts </a>
-</li>
-<li>
-    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-        <i class="icon-info"></i> Notifications </a>
-</li>
-<li>
-    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-        <i class="icon-speech"></i> Activities </a>
-</li>
-<li class="divider"></li>
-<li>
-    <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-        <i class="icon-settings"></i> Settings </a>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
 {% endblock content %}

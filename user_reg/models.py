@@ -56,3 +56,30 @@ class Guest(models.Model):
 
     def __unicode__(self):
     		return self.email
+
+class Invitation(models.Model):
+	host = models.ForeignKey('auth.User')
+	guestlist = models.ForeignKey(Guestlist, blank=True, null=True)
+	guest =  models.ForeignKey(Guest, blank=True, null=True)
+	event = models.ForeignKey(Event)
+	subject = models.CharField(max_length=100, verbose_name="Invitation Subject")
+	message = models.TextField(max_length=500, verbose_name="Invitation Message")
+
+task_status = (  
+    ('Pen', 'Pending'),
+    ('Pro', 'In Progress'),
+    ('Com', 'Completed'),
+    ('Ove', 'Overdue'),
+) 
+
+class Task(models.Model):
+	host = models.ForeignKey('auth.User')
+	title = models.CharField(max_length=70)
+	description = models.TextField(max_length=200)
+	event = models.ForeignKey(Event)
+	due_date = models.DateField(verbose_name="Date Due")
+	due_time = models.TimeField(verbose_name="Time Due")
+	status = models.CharField(max_length=3, choices=task_status)
+
+	def __unicode__(self):
+    		return self.title

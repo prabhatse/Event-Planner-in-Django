@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'contact_form',
     'sorl.thumbnail',
+    #'bootstrap3_datetime',
     #django apps
     'django.contrib.admin',
     'django.contrib.auth',
