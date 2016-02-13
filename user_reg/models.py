@@ -77,8 +77,8 @@ class Task(models.Model):
 	title = models.CharField(max_length=70)
 	description = models.TextField(max_length=200)
 	event = models.ForeignKey(Event)
-	due_date = models.DateField(verbose_name="Date Due")
-	due_time = models.TimeField(verbose_name="Time Due")
+	due_date = models.DateField(verbose_name="Date Due (DD/MM/YYYY, eg 31/12/2016)")
+	due_time = models.TimeField(verbose_name="Time Due (HH:MM 24 hour format, e.g 14:30")
 	status = models.CharField(max_length=3, choices=task_status)
 
 	def __unicode__(self):

@@ -87,19 +87,21 @@
                                 </div>
                                 <div class="todo-tasklist-controls pull-left">
                                     <span class="todo-tasklist-date">
-                                        <i class="fa fa-flag-checkered"></i> 
-                                        Event: {{ task.event }} 
+                                        <i class="fa fa-calendar-times-o"></i> 
+                                        <span style="color:#4f2412">Event:</span> {{ task.event }} 
                                     </span>
                                 </div>
                                 <div class="todo-tasklist-controls pull-left">
                                     <span class="todo-tasklist-date">
                                         <i class="fa fa-calendar"></i> 
-                                        Due by: {{ task.due_date }} </span>
+                                        <span style="color:#4f2412">Due Date:</span> {{ task.due_date }}
+                                    </span>
                                 </div>
-                                <div>
-                                    <a href="{% url 'tasks' %}"> 
-                                        <button type="submit" class="btn default pull-right" style="margin-top:34px; margin-left:10px"><i class="fa fa-times"></i>&nbsp Cancel</button>
-                                    </a>
+                                <div class="todo-tasklist-controls pull-left">
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-clock-o"></i> 
+                                        <span style="color:#4f2412">Due Time:</span> {{ task.due_time }}
+                                    </span>
                                 </div>
                                 <div>
                                     <a href="{% url 'delete_task' pk=task.id %}">
