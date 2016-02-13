@@ -3,23 +3,22 @@
 {% load staticfiles %}
 {% load thumbnail %}
 
-{% block nav-events %}
-	<li class="nav-item start active open">
-        <a href="{% url 'events' %}" class="nav-link nav-toggle">
-            <i class="icon-calendar"></i>
-            <span class="title">My Events</span>
-            <span class="selected"></span>
-            <span class="arrow open"></span>
-        </a>
-    </li>
+{% block nav-tasks %}
+<li class="nav-item start active open">
+    <a href="{% url 'tasks' %}" class="nav-link nav-toggle">
+        <i class="icon-notebook"></i>
+        <span class="title">My Tasks</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
 {% endblock %}
-
 {% load staticfiles %}
 
-{% block title %} Edit "{{ event.title }}" {% endblock %} 
+{% block title %} Edit "{{ task.title }}" {% endblock %} 
 
 {% block content %}
-<h3 class="page-title">Edit "{{ event.title }}" </h3>
+<h3 class="page-title">Edit "{{ task.title }}" </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -28,30 +27,30 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <i class="icon-calendar"></i>
-            <a href="{% url 'events' %}">My Events</a>
+            <i class="icon-notebook"></i>
+            <a href="{% url 'tasks' %}">My Tasks</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
             <i class="icon-note"></i>
-            <span>Edit Event</span>
+            <span>Edit Task</span>
         </li>
     </ul> 
 </div>
 <div class="page-bar">
-    <img src="{% static 'back-end/img/banner-events.jpg' %}" style="width:100%"/>
+    <img src="{% static 'back-end/img/banner-tasks.jpg' %}" style="width:100%"/>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
-            <span class="caption-subject font-green-sharp bold uppercase">EDIT EVENT </span>
+            <span class="caption-subject font-green-sharp bold uppercase">EDIT TASK </span>
             </div>
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
                         <h3 class="event-form-title margin-bottom-20">
-                            Edit "{{ event.title }}"
+                            Edit "{{ task.title }}"
                         </h3>
                         <div id="external-events">
                             <form method="POST">
@@ -68,59 +67,61 @@
                     </div>
                     <div class="col-md-5 col-sm-12">
                         <div class="todo-tasklist">
-                            <div class="todo-tasklist-item todo-tasklist-item-border-green">
-                                <div class="todo-tasklist-item-title">
-                                    {% if event.category = 'Bab' %} 
-                                        <i class="fa fa-child"></i>
-                                    {% elif event.category = 'Bir' %} 
-                                        <i class="fa fa-birthday-cake"></i>
-                                    {% elif event.category = 'Cor' %} 
-                                        <i class="fa fa-glass"></i>
-                                    {% elif event.category = 'Gra' %} 
-                                        <i class="fa fa-graduation-cap"></i>
-                                    {% elif event.category = 'Wed' %}
-                                        <i class="fa fa-heart"></i>
-                                    {% elif event.category = 'Oth' %} 
-                                        <i class="fa fa-star"></i>
-                                    {% endif %}
-                                    &nbsp&nbsp{{ event.title }} 
-                                </div>
+                            {% if task.status = 'Pen' %} 
+                                <div class="todo-tasklist-item todo-tasklist-item-border-purple">
+                                    <div class="todo-tasklist-item-title" style="color:#d8b2d8"> <i class="fa fa-pause"></i> {{ task.title }} </div>
+                            {% elif task.status = 'Pro' %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-orange">
+                                    <div class="todo-tasklist-item-title" style="color:#ffb732"> <i class="fa fa-refresh"></i> {{ task.title }} </div>
+                            {% elif task.status = 'Ove' %} 
+                                <div class="todo-tasklist-item todo-tasklist-item-border-red">
+                                    <div class="todo-tasklist-item-title" style="color:#d05454"> <i class="fa fa-warning" > </i> {{ task.title }} </div>
+                            {% elif task.status = 'Com' %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-green">
+                                    <div class="todo-tasklist-item-title" style="color:#66b266"> <i class="fa fa-check"></i> {{ task.title }} </div>
+                            {% endif %}
                                 <div class="todo-tasklist-controls">
                                     <span class="todo-tasklist-date">
-                                        {{ event.description }}
+                                        {{ task.description }}
+                                    </span>
+                                </div>
+                                <div class="todo-tasklist-controls pull-left">
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-flag-checkered"></i> 
+                                        Event: {{ task.event }} 
                                     </span>
                                 </div>
                                 <div class="todo-tasklist-controls pull-left">
                                     <span class="todo-tasklist-date">
                                         <i class="fa fa-calendar"></i> 
-                                        {% if event.date %}
-                                            {{ event.date }} 
-                                        {% else %}
-                                            Date to be decided
-                                        {% endif %}
-                                    </span>
+                                        Due by: {{ task.due_date }} </span>
                                 </div>
-                                <br/>
-                                <div class="todo-tasklist-controls">
-                                    <span class="todo-tasklist-date">
-                                        <i class="fa fa-map-o"></i> 
-                                        {% if event.venue %}
-                                            {{ event.venue }} 
-                                        {% else %}
-                                            Venue to be decided
-                                        {% endif %}
-                                    </span>
-                                </div>
-                                <br/>
                                 <div>
-                                    <a href= "{% url 'events' %}">
-                                        <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-times"></i>&nbsp Cancel</button>
+                                    <a href="{% url 'tasks' %}"> 
+                                        <button type="submit" class="btn default pull-right" style="margin-top:34px; margin-left:10px"><i class="fa fa-times"></i>&nbsp Cancel</button>
                                     </a>
                                 </div>
                                 <div>
-                                    <a href="{% url 'delete_event' pk=event.id %}">
-                                        <button type="submit" class="btn default pull-right"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                    <a href="{% url 'delete_task' pk=task.id %}">
+                                        <button type="submit" class="btn default pull-right" style="margin-top:10px;"><i class="fa fa-trash"></i>&nbsp Delete</button>
                                     </a>
+                                </div>
+                            </div>
+                            <div class="portlet-title">
+                                <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content-tags">
+                                    <span class="caption-subject font-red bold uppercase"> KEY </span>
+                                </div>
+                            </div>
+                            <div class="portlet-body todo-project-list-content todo-project-list-content-tags">
+                                <div class="todo-project-list">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <div>
+                                            <div class="todo-tasklist-item-title" style="color:#d8b2d8"> <i class="fa fa-pause"></i> Pending </div>
+                                            <div class="todo-tasklist-item-title" style="color:#ffb732"> <i class="fa fa-refresh"></i> In Progress </div>
+                                            <div class="todo-tasklist-item-title" style="color:#66b266"> <i class="fa fa-check"></i> Completed </div>
+                                            <div class="todo-tasklist-item-title" style="color:#d05454"> <i class="fa fa-warning" > </i> Overdue </div>
+                                        </div>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

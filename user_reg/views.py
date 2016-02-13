@@ -308,6 +308,3 @@ def vendors(request):
 def reviews(request):
     return render(request, 'dashboard/reviews.html', {})
 
-
-   
-

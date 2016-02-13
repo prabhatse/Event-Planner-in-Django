@@ -30,6 +30,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
+            <i class="icon-notebook"></i>
             <span>My Tasks</span>
         </li>
     </ul> 
@@ -88,31 +89,36 @@
                                 <div class="todo-tasklist-item todo-tasklist-item-border-green">
                                     <div class="todo-tasklist-item-title" style="color:#66b266"> <i class="fa fa-check"></i> {{ task.title }} </div>
                             {% endif %}
-                                    <div class="todo-tasklist-item-text"> {{ task.description }} </div>
-                                    <div class="todo-tasklist-controls pull-left">
-                                        <span class="todo-tasklist-date">
-                                            <i class="fa fa-calendar"></i> Due by: {{ task.due_date }} </span>
-                                    </div>
-                                    <div class="todo-tasklist-controls pull-left">
-                                        <span class="todo-tasklist-date">
-                                            <i class="fa fa-calendar"></i> Due by: {{ task.due_date }} </span>
-                                    </div>
-                                    <br/>
-                                    <br/>
-                                    <div>
-                                        <a href="{% url 'delete_task' pk=task.id %}">
-                                            <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="{% url 'edit_task' pk=task.id %}">
-                                            <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
-                                        </a>
-                                    </div>
+                                <div class="todo-tasklist-controls">
+                                    <span class="todo-tasklist-date">
+                                        {{ task.description }}
+                                    </span>
                                 </div>
+                                <div class="todo-tasklist-controls pull-left">
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-flag-checkered"></i> 
+                                        Event: {{ task.event }} 
+                                    </span>
+                                </div>
+                                <div class="todo-tasklist-controls pull-left" style="margin-bottom:10px">
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-calendar"></i> 
+                                        Due by: {{ task.due_date }} </span>
+                                </div>
+                                <div>
+                                    <a href="{% url 'delete_task' pk=task.id %}">
+                                        <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'edit_task' pk=task.id %}">
+                                        <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                    </a>
+                                </div>
+                            </div>
                         {% endfor %}
                     {% else %}
-                        <h3 class="event-form-title margin-bottom-20">You have no tasks. Add one by filling in the form on the right.</h3>
+                        <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">You have no tasks. Add one by filling in the form on the right.</h3>
                     {% endif %}
                 </div>
             </div>
