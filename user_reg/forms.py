@@ -196,8 +196,9 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ('title','description','event','due_date','due_time','status')
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, host, *args, **kwargs):
             super(TaskForm, self).__init__(*args, **kwargs)
+            self.fields['event'].queryset = Event.objects.filter(host=host)
             self.fields['due_date'].widget.format = '%d/%m/%Y'
 
             # at the same time, set the input format on the date field like you want it:
@@ -214,3 +215,15 @@ class TaskForm(forms.ModelForm):
                 return date
             else:
                 return date
+
+class BudgetForm(forms.ModelForm):
+
+    class Meta:
+        model = Budget
+        fields = ('title','event','description')
+
+class BudgetItemForm(forms.ModelForm):
+
+    class Meta:
+        model = BudgetItem
+        fields = ('budget','title', 'description', 'cost')

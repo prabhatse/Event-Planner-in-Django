@@ -105,12 +105,10 @@ class edit_event(UpdateView):
         return super(edit_event, self).post(request, *args, **kwargs)
 #Tasks
 
-#def tasks(request):
- #   return render(request, 'dashboard/tasks.html', {})
-
 # *** Add & Display ***
 def add_task(request):
     tasks = Task.objects.filter(host=request.user)
+    User = host=request.user
     if request.method == 'POST':
         task_form = TaskForm(request.POST)
         if task_form.is_valid():
@@ -121,7 +119,7 @@ def add_task(request):
         else:
             print task_form.errors
     else:
-        task_form = TaskForm()
+        task_form = TaskForm(User)
     context_dict = { 'tasks': tasks, 'task_form': task_form}
     return render(request, 'dashboard/tasks.html', context_dict)
 
@@ -295,8 +293,25 @@ class invitations(FormView):
 
 #Budgets
 
-def budgets(request):
-    return render(request, 'dashboard/budgets.html', {})
+#def budgets(request):
+ #   return render(request, 'dashboard/budgets.html', {})
+
+# *** Add & Display ***
+def add_budget(request):
+    budget = Budget.objects.filter(owner=request.user)
+    if request.method == 'POST':
+        budget_form = BudgetForm(request.POST)
+        if budget_form.is_valid():
+            budget = budget_form.save(commit=False)
+            budget.host = request.user
+            budget.save()
+            return HttpResponseRedirect('/dashboard/budgets') # Redirect after POST
+        else:
+            print task_form.errors
+    else:
+        budget_form = BudgetForm()
+    context_dict = { 'budget': budget, 'budget_form': budget_form}
+    return render(request, 'dashboard/budgets.html', context_dict)
 
 #Vendors
 
