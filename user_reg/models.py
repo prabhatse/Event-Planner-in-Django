@@ -83,3 +83,26 @@ class Task(models.Model):
 
 	def __unicode__(self):
     		return self.title
+
+class Budget(models.Model):
+	owner = models.ForeignKey('auth.User')
+	event = models.ForeignKey(Event)
+	title = models.CharField(max_length=70)
+	description = models.TextField(max_length=100)
+	#items = models.ForeignKey(BudgetItem, blank=True, null=True)
+	total_cost = models.DecimalField(blank=True, null=True, max_digits=7, decimal_places=2)
+
+	def __unicode__(self):
+	    		return self.title
+
+
+class BudgetItem(models.Model):
+	owner = models.ForeignKey('auth.User')
+	budget = models.ForeignKey(Budget)
+	title = models.CharField(max_length=70)
+	description = models.TextField(max_length=100)
+	cost = models.DecimalField(max_digits=7, decimal_places=2)
+
+	def __unicode__(self):
+	    		return self.title
+

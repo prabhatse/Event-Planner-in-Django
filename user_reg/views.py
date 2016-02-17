@@ -77,20 +77,20 @@ def add_event(request):
     return render(request, 'dashboard/events.html', context_dict)
 
 # *** Delete ***
-class delete_event(DeleteView):
+class DeleteEvent(DeleteView):
     model = Event
     success_url = reverse_lazy('events')
     template_name = 'dashboard/event_delete.html'
 
     def get_event(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        event = super(delete_event, self).get_event()
+        event = super(DeleteEvent, self).get_event()
         if not event.host == self.request.user:
             raise Http404
         return event
 
 # *** Edit ***
-class edit_event(UpdateView):
+class EditEvent(UpdateView):
     model = Event
     form_class = EventForm
     success_url = reverse_lazy('events')
@@ -98,19 +98,20 @@ class edit_event(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_event, self).get(request, *args, **kwargs)
+        return super(EditEvent, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_event, self).post(request, *args, **kwargs)
+        return super(EditEvent, self).post(request, *args, **kwargs)
+
 #Tasks
 
 # *** Add & Display ***
 def add_task(request):
     tasks = Task.objects.filter(host=request.user)
-    User = host=request.user
+    User = host = request.user
     if request.method == 'POST':
-        task_form = TaskForm(request.POST)
+        task_form = TaskForm(User, request.POST)
         if task_form.is_valid():
             task = task_form.save(commit=False)
             task.host = request.user
@@ -124,20 +125,20 @@ def add_task(request):
     return render(request, 'dashboard/tasks.html', context_dict)
 
 # *** Delete ***
-class delete_task(DeleteView):
+class DeleteTask(DeleteView):
     model = Task
     success_url = reverse_lazy('tasks')
     template_name = 'dashboard/task_delete.html'
 
     def get_task(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        task = super(delete_task, self).get_task()
+        task = super(DeleteTask, self).get_task()
         if not task.host == self.request.user:
             raise Http404
         return task
 
 # *** Edit ***
-class edit_task(UpdateView):
+class EditTask(UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
@@ -145,11 +146,16 @@ class edit_task(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_task, self).get(request, *args, **kwargs)
+        return super(EditTask, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_task, self).post(request, *args, **kwargs)
+        return super(EditTask, self).post(request, *args, **kwargs)
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(EditTask, self).get_form_kwargs(**kwargs)
+        kwargs['host'] = self.request.user
+        return kwargs
 
 #Guests
 
@@ -177,20 +183,20 @@ def add_guestlist(request):
     return render(request, 'dashboard/guestlists.html', context_dict)
 
 # *** Delete ***
-class delete_guestlist(DeleteView):
+class DeleteGuestlist(DeleteView):
     model = Guestlist
     success_url = reverse_lazy('guestlists')
     template_name = 'dashboard/guestlist_delete.html'
 
     def get_guestlist(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        guestlist = super(delete_guestlist, self).get_guestlist()
+        guestlist = super(DeleteGuestlist, self).get_guestlist()
         if not guestlist.host == self.request.user:
             raise Http404
         return guestlist
 
 # *** Edit ***
-class edit_guestlist(UpdateView):
+class EditGuestlist(UpdateView):
     model = Guestlist
     form_class = GuestlistForm
     success_url = reverse_lazy('guestlists')
@@ -198,11 +204,11 @@ class edit_guestlist(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_guestlist, self).get(request, *args, **kwargs)
+        return super(EditGuestlist, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_guestlist, self).post(request, *args, **kwargs)
+        return super(EditGuestlist, self).post(request, *args, **kwargs)
 
 # *** Profiles ***
 
@@ -230,20 +236,20 @@ def guest_profiles(request):
     return render(request, 'dashboard/guest_profiles.html', context_dict)
 
 # *** Delete ***
-class delete_guest(DeleteView):
+class DeleteGuest(DeleteView):
     model = Guest
     success_url = reverse_lazy('guest_profiles')
     template_name = 'dashboard/guest_delete.html'
 
     def get_guest(self, queryset=None):
         """ Hook to ensure object is owned by request.user. """
-        guest = super(delete_guest, self).get_guest()
+        guest = super(DeleteGuest, self).get_guest()
         if not guest.host == self.request.user:
             raise Http404
         return guest
 
 # *** Edit ***
-class edit_guest(UpdateView):
+class EditGuest(UpdateView):
     model = Guest
     form_class = GuestForm
     success_url = reverse_lazy('guest_profiles')
@@ -251,11 +257,11 @@ class edit_guest(UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_guest, self).get(request, *args, **kwargs)
+        return super(EditGuest, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return super(edit_guest, self).post(request, *args, **kwargs)
+        return super(EditGuest, self).post(request, *args, **kwargs)
 
 # *** Invitations ***
 #def invitations(request):
@@ -298,20 +304,27 @@ class invitations(FormView):
 
 # *** Add & Display ***
 def add_budget(request):
-    budget = Budget.objects.filter(owner=request.user)
+    budgets = Budget.objects.filter(owner=request.user)
+    User = host = request.user
     if request.method == 'POST':
-        budget_form = BudgetForm(request.POST)
+        budget_form = BudgetForm(User, request.POST)
         if budget_form.is_valid():
             budget = budget_form.save(commit=False)
-            budget.host = request.user
+            budget.owner = request.user
             budget.save()
             return HttpResponseRedirect('/dashboard/budgets') # Redirect after POST
         else:
             print task_form.errors
     else:
-        budget_form = BudgetForm()
-    context_dict = { 'budget': budget, 'budget_form': budget_form}
+        budget_form = BudgetForm(User)
+    context_dict = { 'budgets': budgets, 'budget_form': budget_form}
     return render(request, 'dashboard/budgets.html', context_dict)
+
+# *** View Budget ***
+def view_budget(request):
+    budgets = Budget.objects.filter(owner=request.user)
+    context_dict = { 'budgets': budgets}
+    return render(request, 'dashboard/budget_view.html', context_dict)
 
 #Vendors
 

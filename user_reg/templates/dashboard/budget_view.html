@@ -1,0 +1,132 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-budgets %}
+<li class="nav-item start active open">
+    <a href="{% url 'budgets' %}" class="nav-link nav-toggle">
+        <i class="icon-credit-card"></i>
+        <span class="title">My Budgets</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} View "{{ budget.title }}"  {% endblock %} 
+
+{% block content %}
+<h3 class="page-title">View Budget  
+    <small>Take a closer look at your budget</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-credit-card"></i>
+            <a href="{% url 'budgets' %}">My Budgets</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-magnifier"></i>
+            <span>View Budget</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-budgets.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-green-sharp bold uppercase">VIEW BUDGET </span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group pull-right" style="color:#4f2412">
+                        <button class="btn green btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;"> Print </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Save as PDF </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;"> Export to Excel </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="portlet grey-cascade box" style="border-color: #E9E0DB">
+                            <div class="portlet-title">
+                                <div class="caption" >
+                                    <i class="fa fa-credit-card" style="color:#4f2412"></i><span style="color:#4f2412"> {{ budget.title }} </span></div>
+                                <div class="actions" >
+                                    <a href="#" class="btn btn-default btn-sm" style="border-color: #4f2412">
+                                        <i class="fa fa-pencil" style="color:#4f2412"></i> <span style="color:#4f2412"> Edit </span> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered table-striped" style="color:#4f2412">
+                                        <thead>
+                                            <tr>
+                                                <th> Item </th>
+                                                <th> Description </th>
+                                                <th> Quantity </th>
+                                                <th> Cost Per Item </th>
+                                                <th> Edit </th>
+                                                <th> Delete </th>
+                                                <th> Total Cost</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td> Decor </td>
+                                                <td> Cost of tables + chairs which are dressed </td>
+                                                <td> 4 </td>
+                                                <td> Ksh. 10,000 </td>
+                                                <td> Edit </td>
+                                                <td> Delete </td>
+                                                <td> KSh. 40,000 </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"> </div>
+                    <div class="col-md-6">
+                        <div class="well" style="background-color: #E9E0DB;">
+                            <div class="row static-info align-reverse">
+                            <div class="row static-info align-reverse">
+                                <div class="col-md-8 name" style="color:#4f2412"> Grand Total: </div>
+                                <div class="col-md-3 value" style="color:#4f2412"> KSh. 40,000 {{ budget.total_cost }} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

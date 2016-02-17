@@ -58,7 +58,7 @@
                                 {{ form|crispy }}
                                 <div class="margiv-top-10">
                                     <button type="submit" value = "update" class="btn default">Save Changes </button>
-                                    <a href= "{% url 'events' %}" class="btn default"> Cancel </a>
+                                    <a href= "{% url 'tasks' %}" class="btn default"> Cancel </a>
                                 </div>
                             </form>
                             <div id="event_box" class="margin-bottom-10"></div>
@@ -104,7 +104,7 @@
                                     </span>
                                 </div>
                                 <div>
-                                    <a href="{% url 'delete_task' pk=task.id %}">
+                                    <a href="#">
                                         <button type="submit" class="btn default pull-right" style="margin-top:10px;"><i class="fa fa-trash"></i>&nbsp Delete</button>
                                     </a>
                                 </div>
