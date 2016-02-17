@@ -78,7 +78,7 @@
                         <div id="external-events">
                             <form method="POST">
                                 {% csrf_token %}
-                                {{ form|crispy }}
+                                {{ invitation_form|crispy }}
                                 <div class="margiv-top-10">
                                     <button type="submit" class="btn default">Send Invitation </button>
                                     <a href="{% url 'guest_profiles' %}" class="btn default"> Cancel </a>

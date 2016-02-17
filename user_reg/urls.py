@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^dashboard/guests/profiles/delete/(?P<pk>\d+)/$', views.DeleteGuest.as_view(), name='delete_guest'), 
     url(r'^dashboard/guests/profiles', views.guest_profiles, name='guest_profiles'),
     # *** Invitations ***
-    url(r'^dashboard/guests/invitations/', views.invitations.as_view(), name='invitations'),
+    url(r'^dashboard/guests/invitations/', views.add_invitation, name='invitations'),
     # *** Guests Home ***
     url(r'^dashboard/guests/', views.guests, name='guests'),
     #Budgets

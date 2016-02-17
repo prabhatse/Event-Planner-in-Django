@@ -210,7 +210,7 @@ class EditGuestlist(UpdateView):
         self.object = self.get_object()
         return super(EditGuestlist, self).post(request, *args, **kwargs)
 
-# *** Profiles ***
+# *** Guest Profiles ***
 
 # *** Add ***
 def add_guest(request):
@@ -267,7 +267,24 @@ class EditGuest(UpdateView):
 #def invitations(request):
  #   return render(request, 'dashboard/invitations.html', {})
 
-class invitations(FormView):
+def add_invitation(request):
+    invitations = Invitation.objects.filter(host=request.user)
+    User = host = request.user
+    if request.method == 'POST':
+        invitation_form = InvitationForm(User, request.POST)
+        if invitation_form.is_valid():
+            invitation = invitation_form.save(commit=False)
+            invitation.host = request.user
+            invitation.save()
+            return HttpResponseRedirect('/dashboard/invitations') # Redirect after POST
+        else:
+            print invitation_form.errors
+    else:
+        invitation_form = InvitationForm(User)
+    context_dict = { 'invitations': invitations, 'invitation_form': invitation_form}
+    return render(request, 'dashboard/invitations.html', context_dict)
+
+'''class Invitations(FormView):
     form_class = InvitationForm
     recipient_list = None
     template_name = 'dashboard/invitations.html'
@@ -286,7 +303,7 @@ class invitations(FormView):
         # instantiated.
         if self.recipient_list is not None:
             kwargs.update({'recipient_list': self.recipient_list})
-        return kwargs
+        return kwargs'''
 
    # def get_success_url(self):
         # This is in a method instead of the success_url attribute
