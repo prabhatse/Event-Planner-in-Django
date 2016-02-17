@@ -152,8 +152,8 @@ class EditTask(UpdateView):
         self.object = self.get_object()
         return super(EditTask, self).post(request, *args, **kwargs)
 
-    def get_form_kwargs(self, **kwargs):
-        kwargs = super(EditTask, self).get_form_kwargs(**kwargs)
+    def get_form_kwargs(self):
+        kwargs = super(EditTask, self).get_form_kwargs()
         kwargs['host'] = self.request.user
         return kwargs
 
@@ -284,40 +284,7 @@ def add_invitation(request):
     context_dict = { 'invitations': invitations, 'invitation_form': invitation_form}
     return render(request, 'dashboard/invitations.html', context_dict)
 
-'''class Invitations(FormView):
-    form_class = InvitationForm
-    recipient_list = None
-    template_name = 'dashboard/invitations.html'
-
-    def form_valid(self, form):
-        form.save()
-        return super(invitations, self).form_valid(form)
-
-    def get_form_kwargs(self):
-        # ContactForm instances require instantiation with an
-        # HttpRequest.
-        kwargs = super(invitations, self).get_form_kwargs()
-        kwargs.update({'request': self.request})
-
-        # We may also have been given a recipient list when
-        # instantiated.
-        if self.recipient_list is not None:
-            kwargs.update({'recipient_list': self.recipient_list})
-        return kwargs'''
-
-   # def get_success_url(self):
-        # This is in a method instead of the success_url attribute
-        # because doing it as an attribute would involve a
-        # module-level call to reverse(), creating a circular
-        # dependency between the URLConf (which imports this module)
-        # and this module (which would need to access the URLConf to
-        # make the reverse() call).
-      #  return reverse('contact_form_sent')
-
 #Budgets
-
-#def budgets(request):
- #   return render(request, 'dashboard/budgets.html', {})
 
 # *** Add & Display ***
 def add_budget(request):
@@ -342,6 +309,40 @@ def view_budget(request):
     budgets = Budget.objects.filter(owner=request.user)
     context_dict = { 'budgets': budgets}
     return render(request, 'dashboard/budget_view.html', context_dict)
+
+# *** Delete ***
+class DeleteBudget(DeleteView):
+    model = Budget
+    success_url = reverse_lazy('budgets')
+    template_name = 'dashboard/budget_delete.html'
+
+    def get_task(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        task = super(BudgetTask, self).get_task()
+        if not task.host == self.request.user:
+            raise Http404
+        return task
+
+# *** Edit ***
+class EditBudget(UpdateView):
+    model = Budget
+    form_class = BudgetForm
+    success_url = reverse_lazy('budgets')
+    template_name = 'dashboard/budget_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(EditBudget, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(EditBudget, self).post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(EditBudget, self).get_form_kwargs()
+        kwargs['host'] = self.request.user
+        return kwargs
+    
 
 #Vendors
 

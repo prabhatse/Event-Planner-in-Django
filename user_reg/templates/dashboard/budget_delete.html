@@ -1,0 +1,72 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-budgets %}
+<li class="nav-item start active open">
+    <a href="{% url 'budgets' %}" class="nav-link nav-toggle">
+        <i class="icon-credit-card"></i>
+        <span class="title">My Budgets</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} Delete "{{ budget.title }}"  {% endblock %} 
+
+{% block content %}
+<h3 class="page-title">Delete Budget</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-credit-card"></i>
+            <a href="{% url 'budgets' %}">My Budgets</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+        <li>
+            <i class="icon-trash"></i>
+            <span>Delete Budget</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-budgets.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+            <span class="caption-subject font-green-sharp bold uppercase">ARE YOU SURE?</span>
+            </div>
+            <div class="portlet-body">
+                <div class="row" style="text-align:center">
+                    <h3 class="budget-form-title margin-bottom-20" style="color:#4f2412">You are about to delete your budget, "{{ budget.title }}".</h3>
+                    <p style="color:#4f2412"> Are you sure you want to do this?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="margiv-top-10">
+                            <button type="submit" class="btn default">Yes, I'm sure </button>
+                            <a href= "{% url 'budgets' %}" class="btn default"> Cancel </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+{% endblock content %}

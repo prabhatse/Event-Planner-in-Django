@@ -1,0 +1,110 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block nav-budgets %}
+<li class="nav-item start active open">
+    <a href="{% url 'budgets' %}" class="nav-link nav-toggle">
+        <i class="icon-credit-card"></i>
+        <span class="title">My Budgets</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} Edit "{{ budget.title }}"  {% endblock %} 
+
+{% block content %}
+<h3 class="page-title">Edit Budget</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-credit-card"></i>
+            <a href="{% url 'budgets' %}">My Budgets</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-note"></i>
+            <span>Edit Budget</span>
+        </li>
+    </ul> 
+</div>
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-budgets.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+            <span class="caption-subject font-green-sharp bold uppercase">EDIT BUDGET </span>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <h3 class="budget-form-title margin-bottom-20">
+                            Edit "{{ budget.title }}"
+                        </h3>
+                        <div id="external-budgets">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="margiv-top-10">
+                                    <button type="submit" value = "update" class="btn default">Save Changes </button>
+                                    <a href= "{% url 'budgets' %}" class="btn default"> Cancel </a>
+                                </div>
+                            </form>
+                            <div id="budget_box" class="margin-bottom-10"></div>
+                            <hr class="visible-xs" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div class="todo-tasklist">
+                            <div class="todo-tasklist-item todo-tasklist-item-border-normal">
+                                <div class="todo-tasklist-item-title">
+                                    {{ budget.title }} 
+                                </div>
+                                <div class="todo-tasklist-controls">
+                                    <span class="todo-tasklist-date">
+                                        {{ budget.description }}
+                                    </span>
+                                </div>
+                                <div class="todo-tasklist-controls pull-left" style="margin-bottom:10px">
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-calendar-times-o"></i> 
+                                        <span style="color:#4f2412">Event:</span> {{ budget.event }} 
+                                    </span>
+                                </div>
+                                <div>
+                                    <a href="{% url 'delete_budget' pk=budget.id %}">
+                                        <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'view_budget' %}">
+                                        <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-eye"></i>&nbsp View</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
+
+{% endblock content %}
+

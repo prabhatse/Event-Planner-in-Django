@@ -76,14 +76,25 @@
                                             {{ budget.description }}
                                         </span>
                                     </div>
+                                    <div class="todo-tasklist-controls pull-left" style="margin-bottom:10px">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-calendar-times-o"></i> 
+                                            <span style="color:#4f2412">Event:</span> {{ budget.event }} 
+                                        </span>
+                                    </div>
                                     <div>
-                                        <a href="#}">
+                                        <a href="{% url 'delete_budget' pk=budget.id %}">
                                             <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-trash"></i>&nbsp Delete</button>
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="#">
-                                            <button type="submit" class="btn default pull-right"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                        <a href="{% url 'edit_budget' pk=budget.id %}">
+                                            <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-edit"></i>&nbsp Edit</button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'view_budget' %}">
+                                            <button type="submit" class="btn default pull-right" style="margin-left:10px"><i class="fa fa-eye"></i>&nbsp View</button>
                                         </a>
                                     </div>
                                 </div>

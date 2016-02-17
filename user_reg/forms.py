@@ -118,9 +118,9 @@ class BudgetForm(forms.ModelForm):
         model = Budget
         fields = ('title','event','description')
 
-    def __init__(self, owner, *args, **kwargs):
+    def __init__(self, host, *args, **kwargs):
             super(BudgetForm, self).__init__(*args, **kwargs)
-            self.fields['event'].queryset = Event.objects.filter(host=owner)
+            self.fields['event'].queryset = Event.objects.filter(host=host)
 
 class BudgetItemForm(forms.ModelForm):
 

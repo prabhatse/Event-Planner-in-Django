@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^dashboard/guests/', views.guests, name='guests'),
     #Budgets
     url(r'^dashboard/budgets/view', views.view_budget, name='view_budget'),
+    url(r'^dashboard/budgets/delete/(?P<pk>\d+)/$', views.DeleteBudget.as_view(), name='delete_budget'),
+    url(r'^dashboard/budgets/edit/(?P<pk>\d+)/$', views.EditBudget.as_view(), name='edit_budget'),
     url(r'^dashboard/budgets/', views.add_budget, name='budgets'),
     #Vendors
     url(r'^dashboard/vendors/', views.vendors, name='vendors'),
