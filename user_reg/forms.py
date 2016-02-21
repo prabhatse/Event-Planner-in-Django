@@ -126,5 +126,9 @@ class BudgetItemForm(forms.ModelForm):
 
     class Meta:
         model = BudgetItem
-        fields = ('budget','title', 'description', 'cost')
+        fields = ('budget','name','description','quantity','unit_cost')
+
+    def __init__(self, owner, *args, **kwargs):
+            super(BudgetItemForm, self).__init__(*args, **kwargs)
+            self.fields['budget'].queryset = Budget.objects.filter(owner=owner)
 

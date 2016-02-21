@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('user_reg', '0026_auto_20160213_2211'),
+        ('user_reg', '0026_auto_20160221_1845'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=70)),
                 ('description', models.TextField(max_length=100)),
-                ('total_cost', models.DecimalField(max_digits=7, decimal_places=2)),
+                ('total_cost', models.DecimalField(null=True, max_digits=7, decimal_places=2, blank=True)),
                 ('event', models.ForeignKey(to='user_reg.Event')),
                 ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
@@ -28,9 +28,11 @@ class Migration(migrations.Migration):
             name='BudgetItem',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=70)),
+                ('name', models.CharField(max_length=70, verbose_name=b'Name of Item')),
                 ('description', models.TextField(max_length=100)),
-                ('cost', models.DecimalField(max_digits=7, decimal_places=2)),
+                ('quantity', models.IntegerField(default=0, verbose_name=b'Number of Items')),
+                ('unit_cost', models.DecimalField(verbose_name=b'Cost Per Item', max_digits=7, decimal_places=2)),
+                ('total_cost', models.DecimalField(max_digits=7, decimal_places=2)),
                 ('budget', models.ForeignKey(to='user_reg.Budget')),
                 ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],

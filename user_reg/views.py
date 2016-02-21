@@ -20,12 +20,13 @@ def home(request):
 # *** Profile Add ***
 def welcome(request):
     if request.method == 'POST':
-        member_form = MemberForm(data=request.POST)
+        member_form = MemberForm(request.POST, request.FILES)
         if member_form.is_valid():
             member = member_form.save(commit=False)
             member.user = request.user
             if 'image' in request.FILES:
                 member.image = request.FILES['image']
+                member.image.save()
             member.save()
             return HttpResponseRedirect('/dashboard/profile') # Redirect after POST
         else:

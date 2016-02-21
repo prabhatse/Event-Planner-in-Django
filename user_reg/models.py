@@ -4,6 +4,7 @@ from widgets import RemovableImageField
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.validators import RegexValidator
+from multiselectfield import MultiSelectField
 
 event_cat = (  
     ('Bab', 'Baby Shower'),
@@ -89,20 +90,45 @@ class Budget(models.Model):
 	event = models.ForeignKey(Event)
 	title = models.CharField(max_length=70)
 	description = models.TextField(max_length=100)
-	#items = models.ForeignKey(BudgetItem, blank=True, null=True)
 	total_cost = models.DecimalField(blank=True, null=True, max_digits=7, decimal_places=2)
 
 	def __unicode__(self):
 	    		return self.title
 
-
 class BudgetItem(models.Model):
 	owner = models.ForeignKey('auth.User')
 	budget = models.ForeignKey(Budget)
-	title = models.CharField(max_length=70)
+	name = models.CharField(max_length=70, verbose_name="Name of Item")
 	description = models.TextField(max_length=100)
-	cost = models.DecimalField(max_digits=7, decimal_places=2)
+	quantity = models.IntegerField(default=0, verbose_name="Number of Items")
+	unit_cost = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Cost Per Item")
+	total_cost = models.DecimalField(max_digits=7, decimal_places=2)
 
 	def __unicode__(self):
-	    		return self.title
+	    		return self.name
+'''
+vendor_cat = (  
+    ('Bea', 'Beauty & Wellness'),
+    ('Ent', 'Entertainment'),
+    ('Dec', 'Flowers & Decor'),
+    ('Cat', 'Catering & Cakes'),
+    ('Sta', 'Stationery & Favours'),
+    ('Clo', 'Clothing & Accessories'),
+    ('Pho', 'Photography & Videography'),
+    ('Jew', 'Jewellery'),
+    ('Ven', 'Venues'),
+    ('Tra', 'Transport'),
+    ('Oth', 'Other'),
+) 
 
+class Vendor(models.Model):
+	name = models.CharField(max_length=70, verbose_name="What's the name of your business?")
+	description = models.TextField(max_length=200, verbose_name="Tell us a bit about your products or services.")
+	location = models.CharField(max_length=70, verbose_name="Where are you based?")
+	category = models.ManyToManyField(max_length=3, max_choices=3, choices=vendor_cat, verbose_name="What do you deal with? Select up to 2.")
+	website = models.URLField(blank=True)
+	logo = RemovableImageField(blank=True, null=True, upload_to='users', verbose_name="Please upload your business logo.")
+	
+	# Override the __unicode__() method to return out something meaningful!
+	def __unicode__(self):
+    		return self.user.username'''

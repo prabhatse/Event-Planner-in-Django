@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'contact_form',
     'sorl.thumbnail',
-    #'bootstrap3_datetime',
+    'multiselectfield',
     #django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,9 +127,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media files
-MEDIA_URL = '/user_reg/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'user_reg/media')
-UPLOAD_DIR = 'uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+UPLOAD_DIR = '/uploads/'
 
 # crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

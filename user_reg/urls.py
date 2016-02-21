@@ -2,8 +2,10 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    #Dashboard Home/Welcome
+    #Front-End
     url(r'^$', views.index_page, name='index_page'),
+    #url(r'^vendors', views.add_vendor, name='add_vendor'),
+    #Dashboard Home/Welcome
     url(r'^dashboard/home/', views.home, name='home'),
     url(r'^dashboard/welcome/', views.welcome, name='welcome'),
     #User Profile
@@ -32,6 +34,9 @@ urlpatterns = [
     # *** Guests Home ***
     url(r'^dashboard/guests/', views.guests, name='guests'),
     #Budgets
+    # *** Budget Items ***
+    url(r'^dashboard/budgets/view/add-item', views.add_budget_item, name='add_budget_item'),
+    # *** Individual budgets ***
     url(r'^dashboard/budgets/view', views.view_budget, name='view_budget'),
     url(r'^dashboard/budgets/delete/(?P<pk>\d+)/$', views.DeleteBudget.as_view(), name='delete_budget'),
     url(r'^dashboard/budgets/edit/(?P<pk>\d+)/$', views.EditBudget.as_view(), name='edit_budget'),
@@ -41,4 +46,5 @@ urlpatterns = [
     #Reviews
     url(r'^dashboard/reviews/', views.reviews, name='reviews'),
 ]
+
 
