@@ -40,12 +40,13 @@ def welcome(request):
 def profile(request):
     member = get_object_or_404(Member, user=request.user)
     if request.method == "POST":
-        edit_form = MemberForm(request.POST, instance=member)
+        edit_form = MemberForm(request.POST, request.FILES, instance=member)
         if edit_form.is_valid():
             member = edit_form.save(commit=False)
             member.user = request.user
             if 'image' in request.FILES:
                 member.image = request.FILES['image']
+                member.image.save()
             member.save()
             return HttpResponseRedirect('/dashboard/profile')
     else:
@@ -264,8 +265,6 @@ class EditGuest(UpdateView):
         return super(EditGuest, self).post(request, *args, **kwargs)
 
 # *** Invitations ***
-#def invitations(request):
- #   return render(request, 'dashboard/invitations.html', {})
 
 def add_invitation(request):
     invitations = Invitation.objects.filter(host=request.user)
@@ -286,6 +285,8 @@ def add_invitation(request):
 
 #Budgets
 
+# *** Individual Budgets ***
+
 # *** Add & Display ***
 def add_budget(request):
     budgets = Budget.objects.filter(owner=request.user)
@@ -298,17 +299,18 @@ def add_budget(request):
             budget.save()
             return HttpResponseRedirect('/dashboard/budgets') # Redirect after POST
         else:
-            print task_form.errors
+            print budget_form.errors
     else:
         budget_form = BudgetForm(User)
     context_dict = { 'budgets': budgets, 'budget_form': budget_form}
     return render(request, 'dashboard/budgets.html', context_dict)
 
-# *** View Budget ***
+# *** View ***
 def view_budget(request):
     budgets = Budget.objects.filter(owner=request.user)
     context_dict = { 'budgets': budgets}
     return render(request, 'dashboard/budget_view.html', context_dict)
+
 
 # *** Delete ***
 class DeleteBudget(DeleteView):
@@ -342,7 +344,27 @@ class EditBudget(UpdateView):
         kwargs = super(EditBudget, self).get_form_kwargs()
         kwargs['host'] = self.request.user
         return kwargs
-    
+
+# *** Budget Items ***
+
+# *** Add ***
+def add_budget_item(request):
+    budget_items = BudgetItem.objects.filter(owner=request.user)
+    total_cost = budget_item.quantity * budget_item.unit_cost
+    User = host = request.user
+    if request.method == 'POST':
+        budget_item_form = BudgetItemForm(User, request.POST)
+        if budget_item_form.is_valid():
+            budget_item = budget_item_form.save(commit=False)
+            budget_item.owner = request.user
+            budget_item.save()
+            return HttpResponseRedirect('/dashboard/budgets/view/add-item') # Redirect after POST
+        else:
+            print budget_item_form.errors
+    else:
+        budget_item_form = BudgetItemForm(User)
+    context_dict = { 'budget_items': budget_items, 'budget_item_form': budget_item_form }
+    return render(request, 'dashboard/budget_item_add.html', context_dict)
 
 #Vendors
 
