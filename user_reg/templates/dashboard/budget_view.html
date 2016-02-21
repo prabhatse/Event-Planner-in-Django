@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 {% load thumbnail %}
+{% load humanize %}
 
 {% block nav-budgets %}
 <li class="nav-item start active open">
@@ -83,6 +84,7 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
+                                {% if budget_items %}
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered table-striped" style="color:#4f2412">
                                         <thead>
@@ -91,22 +93,24 @@
                                                 <th> Description </th>
                                                 <th> Quantity </th>
                                                 <th> Cost Per Item </th>
+                                                <th> Total Cost</th>
                                                 <th> Edit </th>
                                                 <th> Delete </th>
-                                                <th> Total Cost</th>
                                             </tr>
                                         </thead>
+                                        {% for budget_item in budget_items %}
                                         <tbody>
                                             <tr>
-                                                <td> Decor </td>
-                                                <td> Cost of tables + chairs which are dressed </td>
-                                                <td> 4 </td>
-                                                <td> Ksh. 10,000 </td>
+                                                <td> {{ budget_item.name }} </td>
+                                                <td> {{ budget_item.description }} </td>
+                                                <td> {{ budget_item.quantity }} </td>
+                                                <td> Ksh. {{ budget_item.unit_cost|intcomma }} </td>
+                                                <td> KSh. {{ budget_item.total_cost|intcomma }} </td>
                                                 <td> Edit </td>
                                                 <td> Delete </td>
-                                                <td> KSh. 40,000 </td>
                                             </tr>
                                         </tbody>
+                                        {% endfor %}
                                     </table>
                                 </div>
                             </div>
@@ -114,17 +118,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"> </div>
+                    <div class="col-md-6">
+                    </div>
                     <div class="col-md-6">
                         <div class="well" style="background-color: #E9E0DB;">
                             <div class="row static-info align-reverse">
                             <div class="row static-info align-reverse">
                                 <div class="col-md-8 name" style="color:#4f2412"> Grand Total: </div>
-                                <div class="col-md-3 value" style="color:#4f2412"> KSh. 40,000 {{ budget.total_cost }} </div>
+                                <div class="col-md-3 value" style="color:#4f2412"> KSh. 40,000 {{ budget.title }} </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% else %}
+                    <p style="color:#4f2412">You have no items in this budget. Click the "Add Budget Item" button above to add one.</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from user_reg.forms import *
 from user_reg.models import *
 from django.http import HttpResponseRedirect
-from django.views.generic.edit import DeleteView, UpdateView
+from django.views.generic.edit import DeleteView, UpdateView, FormView
+from django.views.generic.detail import DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.core.urlresolvers import reverse
-from django.views.generic.edit import FormView
+from django.db.models import Sum
 
 #Dashboard Home/Welcome
 
@@ -307,10 +308,24 @@ def add_budget(request):
     return render(request, 'dashboard/budgets.html', context_dict)
 
 # *** View ***
-def view_budget(request):
-    budgets = Budget.objects.filter(owner=request.user)
-    context_dict = { 'budgets': budgets}
-    return render(request, 'dashboard/budget_view.html', context_dict)
+
+class ViewBudget(DetailView):
+    model = Budget
+    template_name = 'dashboard/budget_view.html'
+
+    def get_context_data(self, **kwargs):
+        owner=self.request.user
+        context = super(ViewBudget, self).get_context_data(**kwargs)
+        context['budget_items'] = BudgetItem.objects.filter(owner=owner)
+        #context['grand_total'] = BudgetItem.objects.all.aggregate(Sum('total_cost'))
+        return context
+
+    def get_queryset(self):
+        return Budget.objects.filter(owner=self.request.user)
+
+    def _get_grand_total(self):
+        return BudgetItem.objects.aggregate(Sum('total_cost'))
+    grand_total = property(_get_grand_total)
 
 
 # *** Delete ***
@@ -349,9 +364,9 @@ class EditBudget(UpdateView):
 # *** Budget Items ***
 
 # *** Add ***
+
 def add_budget_item(request):
     budget_items = BudgetItem.objects.filter(owner=request.user)
-    total_cost = budget_item.quantity * budget_item.unit_cost
     User = host = request.user
     if request.method == 'POST':
         budget_item_form = BudgetItemForm(User, request.POST)
@@ -359,8 +374,7 @@ def add_budget_item(request):
             budget_item = budget_item_form.save(commit=False)
             budget_item.owner = request.user
             budget_item.save()
-            return HttpResponseRedirect('/dashboard/budgets/view/add-item') # Redirect after POST
-        else:
+            return HttpResponseRedirect('view_budget') # Redirect after POST
             print budget_item_form.errors
     else:
         budget_item_form = BudgetItemForm(User)

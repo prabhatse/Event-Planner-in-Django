@@ -90,7 +90,6 @@ class Budget(models.Model):
 	event = models.ForeignKey(Event)
 	title = models.CharField(max_length=70)
 	description = models.TextField(max_length=100)
-	total_cost = models.DecimalField(blank=True, null=True, max_digits=7, decimal_places=2)
 
 	def __unicode__(self):
 	    		return self.title
@@ -102,10 +101,17 @@ class BudgetItem(models.Model):
 	description = models.TextField(max_length=100)
 	quantity = models.IntegerField(default=0, verbose_name="Number of Items")
 	unit_cost = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Cost Per Item")
-	total_cost = models.DecimalField(max_digits=7, decimal_places=2)
+	
+	def _get_total(self):
+		return self.unit_cost * self.quantity
+	total_cost = property(_get_total)
 
-	def __unicode__(self):
-	    		return self.name
+	'''def _get_grand_total(self):
+		return self.objects.aggregate(Sum('total_cost'))
+	grand_total = property(_get_grand_total)
+
+'''
+
 '''
 vendor_cat = (  
     ('Bea', 'Beauty & Wellness'),
