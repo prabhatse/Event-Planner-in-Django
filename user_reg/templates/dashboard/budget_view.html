@@ -99,18 +99,18 @@
                                             </tr>
                                         </thead>
                                         {% for budget_item in budget_items %}
-                                        <tbody>
-                                            <tr>
-                                                <td> {{ budget_item.name }} </td>
-                                                <td> {{ budget_item.description }} </td>
-                                                <td> {{ budget_item.quantity }} </td>
-                                                <td> Ksh. {{ budget_item.unit_cost|intcomma }} </td>
-                                                <td> KSh. {{ budget_item.total_cost|intcomma }} </td>
-                                                <td> Edit </td>
-                                                <td> Delete </td>
-                                            </tr>
-                                        </tbody>
-                                        {% endfor %}
+                                            <tbody>
+                                                <tr>
+                                                    <td> {{ budget_item.name }} </td>
+                                                    <td> {{ budget_item.description }} </td>
+                                                    <td> {{ budget_item.quantity }} </td>
+                                                    <td> Ksh. {{ budget_item.unit_cost|intcomma }} </td>
+                                                    <td> KSh. {{ budget_item.total_cost|intcomma }} </td>
+                                                    <td> <a href="{% url 'edit_budget_item' pk=budget_item.id %}">Edit</a> </td>
+                                                    <td> <a href="{% url 'delete_budget_item' pk=budget_item.id %}">Delete</a> </td>
+                                                </tr>
+                                            </tbody>
+                                        {% endfor %}    
                                     </table>
                                 </div>
                             </div>
@@ -124,9 +124,8 @@
                         <div class="well" style="background-color: #E9E0DB;">
                             <div class="row static-info align-reverse">
                             <div class="row static-info align-reverse">
-                                <div class="col-md-8 name" style="color:#4f2412"> Grand Total: </div>
-                                <div class="col-md-3 value" style="color:#4f2412"> KSh. 40,000 {{ budget.title }} </div>
-                            </div>
+                                <div class="col-md-5 name" style="color:#4f2412"> Grand Total: </div>
+                                <div class="col-md-5 value" style="color:#4f2412"> KSh. {{ budget.grand_total|intcomma }} </div>
                         </div>
                     </div>
                 </div>

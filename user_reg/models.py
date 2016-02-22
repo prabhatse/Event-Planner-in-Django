@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.validators import RegexValidator
 from multiselectfield import MultiSelectField
+from django.db.models import F, Sum
 
 event_cat = (  
     ('Bab', 'Baby Shower'),
@@ -91,8 +92,12 @@ class Budget(models.Model):
 	title = models.CharField(max_length=70)
 	description = models.TextField(max_length=100)
 
+	def _get_grand_total(self):
+		return BudgetItem.objects.all().aggregate(grand_total=Sum(F('quantity') * F('unit_cost'), output_field=models.DecimalField()))['grand_total']
+	grand_total = property(_get_grand_total)
+
 	def __unicode__(self):
-	    		return self.title
+    		return self.title
 
 class BudgetItem(models.Model):
 	owner = models.ForeignKey('auth.User')
@@ -106,11 +111,10 @@ class BudgetItem(models.Model):
 		return self.unit_cost * self.quantity
 	total_cost = property(_get_total)
 
-	'''def _get_grand_total(self):
-		return self.objects.aggregate(Sum('total_cost'))
-	grand_total = property(_get_grand_total)
+	def __unicode__(self):
+    		return self.name
 
-'''
+
 
 '''
 vendor_cat = (  

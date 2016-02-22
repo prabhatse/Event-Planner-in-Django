@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from user_reg.forms import *
 from user_reg.models import *
 from django.http import HttpResponseRedirect
-from django.views.generic.edit import DeleteView, UpdateView, FormView
+from django.views.generic.edit import DeleteView, UpdateView, FormView, CreateView
 from django.views.generic.detail import DetailView
+from django.views.generic import View
 from django.core.urlresolvers import reverse_lazy
 from django.core.urlresolvers import reverse
-from django.db.models import Sum
+from django.db.models import Sum, F
 
 #Dashboard Home/Welcome
 
@@ -56,6 +57,12 @@ def profile(request):
     context_dict = { 'member': member, 'edit_form': edit_form }
     return render(request, 'dashboard/profile.html', context_dict)
 
+    def get_context_data(self, **kwargs):
+        context = super(profileView, self).get_context_data(**kwargs)
+        context['events'] = Event.objects.count()
+        return context
+
+
 # *** Inbox ***
 def inbox(request):
     return render(request, 'dashboard/inbox.html', {})
@@ -63,6 +70,7 @@ def inbox(request):
 #Events
 
 # *** Add & Display ***
+
 def add_event(request):
     events = Event.objects.filter(host=request.user)
     if request.method == 'POST':
@@ -92,6 +100,11 @@ class DeleteEvent(DeleteView):
             raise Http404
         return event
 
+    def get_context_data(self, **kwargs):
+        context = super(DeleteEvent, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 # *** Edit ***
 class EditEvent(UpdateView):
     model = Event
@@ -106,6 +119,11 @@ class EditEvent(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(EditEvent, self).post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditEvent, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
 
 #Tasks
 
@@ -140,6 +158,11 @@ class DeleteTask(DeleteView):
             raise Http404
         return task
 
+    def get_context_data(self, **kwargs):
+        context = super(DeleteTask, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 # *** Edit ***
 class EditTask(UpdateView):
     model = Task
@@ -160,6 +183,11 @@ class EditTask(UpdateView):
         kwargs['host'] = self.request.user
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super(EditTask, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 #Guests
 
 # *** Guests Home ***
@@ -177,7 +205,7 @@ def add_guestlist(request):
             guestlist = guestlist_form.save(commit=False)
             guestlist.host = request.user
             guestlist.save()
-            return HttpResponseRedirect('/dashboard/guests/guestlists') # Redirect after POST
+            return HttpResponseRedirect('/dashboard/guests/guestlists/') # Redirect after POST
         else:
             print guestlist_form.errors
     else:
@@ -198,6 +226,11 @@ class DeleteGuestlist(DeleteView):
             raise Http404
         return guestlist
 
+    def get_context_data(self, **kwargs):
+        context = super(DeleteGuestlist, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 # *** Edit ***
 class EditGuestlist(UpdateView):
     model = Guestlist
@@ -212,6 +245,11 @@ class EditGuestlist(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(EditGuestlist, self).post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditGuestlist, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
 
 # *** Guest Profiles ***
 
@@ -251,6 +289,11 @@ class DeleteGuest(DeleteView):
             raise Http404
         return guest
 
+    def get_context_data(self, **kwargs):
+        context = super(DeleteGuest, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 # *** Edit ***
 class EditGuest(UpdateView):
     model = Guest
@@ -265,6 +308,11 @@ class EditGuest(UpdateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         return super(EditGuest, self).post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditGuest, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
 
 # *** Invitations ***
 
@@ -292,9 +340,9 @@ def add_invitation(request):
 # *** Add & Display ***
 def add_budget(request):
     budgets = Budget.objects.filter(owner=request.user)
-    User = host = request.user
+    owner = request.user
     if request.method == 'POST':
-        budget_form = BudgetForm(User, request.POST)
+        budget_form = BudgetForm(owner, request.POST)
         if budget_form.is_valid():
             budget = budget_form.save(commit=False)
             budget.owner = request.user
@@ -303,7 +351,7 @@ def add_budget(request):
         else:
             print budget_form.errors
     else:
-        budget_form = BudgetForm(User)
+        budget_form = BudgetForm(owner)
     context_dict = { 'budgets': budgets, 'budget_form': budget_form}
     return render(request, 'dashboard/budgets.html', context_dict)
 
@@ -314,19 +362,14 @@ class ViewBudget(DetailView):
     template_name = 'dashboard/budget_view.html'
 
     def get_context_data(self, **kwargs):
-        owner=self.request.user
+        owner = self.request.user
         context = super(ViewBudget, self).get_context_data(**kwargs)
         context['budget_items'] = BudgetItem.objects.filter(owner=owner)
-        #context['grand_total'] = BudgetItem.objects.all.aggregate(Sum('total_cost'))
+        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
     def get_queryset(self):
         return Budget.objects.filter(owner=self.request.user)
-
-    def _get_grand_total(self):
-        return BudgetItem.objects.aggregate(Sum('total_cost'))
-    grand_total = property(_get_grand_total)
-
 
 # *** Delete ***
 class DeleteBudget(DeleteView):
@@ -340,6 +383,11 @@ class DeleteBudget(DeleteView):
         if not task.host == self.request.user:
             raise Http404
         return task
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteBudget, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
 
 # *** Edit ***
 class EditBudget(UpdateView):
@@ -361,6 +409,11 @@ class EditBudget(UpdateView):
         kwargs['host'] = self.request.user
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super(EditBudget, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 # *** Budget Items ***
 
 # *** Add ***
@@ -374,12 +427,58 @@ def add_budget_item(request):
             budget_item = budget_item_form.save(commit=False)
             budget_item.owner = request.user
             budget_item.save()
-            return HttpResponseRedirect('view_budget') # Redirect after POST
+            return HttpResponseRedirect(reverse('view_budget', args=(budget_item.budget_id,))) # Redirect after POST
+            #return HttpResponseRedirect('view_budget') # Redirect after POST
+            #"{% url 'view_budget' pk=budgetitem.budget_id %}"
             print budget_item_form.errors
     else:
         budget_item_form = BudgetItemForm(User)
     context_dict = { 'budget_items': budget_items, 'budget_item_form': budget_item_form }
     return render(request, 'dashboard/budget_item_add.html', context_dict)
+
+# *** Delete ***
+class DeleteBudgetItem(DeleteView):
+    model = BudgetItem
+    success_url = reverse_lazy('budgets')
+    template_name = 'dashboard/budget_item_delete.html'
+
+    def get_guest(self, queryset=None):
+        """ Hook to ensure object is owned by request.user. """
+        guest = super(DeleteBudgetItem, self).get_guest()
+        if not guest.host == self.request.user:
+            raise Http404
+        return guest
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteBudgetItem, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
+# *** Edit ***
+class EditBudgetItem(UpdateView):
+    model = BudgetItem
+    form_class = BudgetItemForm
+    success_url = reverse_lazy('budgets')
+    template_name = 'dashboard/budget_item_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(EditBudgetItem, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(EditBudgetItem, self).post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(EditBudgetItem, self).get_form_kwargs()
+        kwargs['owner'] = self.request.user
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(EditBudgetItem, self).get_context_data(**kwargs)
+        context['member'] = get_object_or_404(Member, user=self.request.user)
+        return context
+
 
 #Vendors
 

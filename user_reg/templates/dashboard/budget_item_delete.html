@@ -16,11 +16,10 @@
 
 {% load staticfiles %}
 
-{% block title %} Add Budget Item {% endblock %} 
+{% block title %} Delete Budget Item {% endblock %} 
 
 {% block content %}
-<h3 class="page-title">Add Budget Item  
-    <small>Add an item to your budget</small>
+<h3 class="page-title">Delete Budget Item  
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -40,8 +39,8 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <i class="icon-plus"></i>
-            <span>Add Budget Item</span>
+            <i class="icon-trash"></i>
+            <span>Delete Budget Item</span>
         </li>
     </ul> 
 </div>
@@ -49,39 +48,30 @@
     <img src="{% static 'back-end/img/banner-budgets.jpg' %}" style="width:100%"/>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
-                <span class="caption-subject font-green-sharp bold uppercase">MY BUDGET ITEMS </span>
+            <span class="caption-subject font-green-sharp bold uppercase">ARE YOU SURE?</span>
             </div>
             <div class="portlet-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Add Budget Item</h3>
-                        <div id="external-events">
-                            <form method="POST">
-                                {% csrf_token %}
-                                {{ budget_item_form|crispy }}
-                                <div class="margiv-top-10">
-                                    <button type="submit" class="btn default">Save Changes </button>
-                                    <a href="#" class="btn default"> Cancel </a>
-                                </div>
-                            </form>
-                            <div id="event_box" class="margin-bottom-10"></div>
-                            <hr class="visible-xs" /> 
+                <div class="row" style="text-align:center">
+                    <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">You are about to delete your budget item, "{{ budgetitem.name }}".</h3>
+                    <p style="color:#4f2412"> Are you sure you want to do this?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="margiv-top-10">
+                            <button type="submit" class="btn default">Yes, I'm sure </button>
+                            <a href="{% url 'view_budget' pk=budgetitem.budget_id %}" class="btn default"> Cancel </a>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div >
-            <img src="{% static 'back-end/img/banner-add-budget-item.jpg' %}" style="width:100%"/>
-        </div>
-    </div>
 </div>
+</div>
+<!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->
 
 {% endblock content %}
-
-

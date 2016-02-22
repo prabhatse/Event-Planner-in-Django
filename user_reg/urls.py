@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'^dashboard/guests/', views.guests, name='guests'),
     #Budgets
     # *** Budget Items ***
+    url(r'^dashboard/budgets/view/delete-item/(?P<pk>\d+)/$', views.DeleteBudgetItem.as_view(), name='delete_budget_item'),
+    url(r'^dashboard/budgets/view/edit-item/(?P<pk>\d+)/$', views.EditBudgetItem.as_view(), name='edit_budget_item'),
     url(r'^dashboard/budgets/view/add-item', views.add_budget_item, name='add_budget_item'),
     # *** Individual budgets ***
     url(r'^dashboard/budgets/view/(?P<pk>\d+)/$', views.ViewBudget.as_view(), name='view_budget'),
