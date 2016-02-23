@@ -92,10 +92,6 @@ class Budget(models.Model):
 	title = models.CharField(max_length=70)
 	description = models.TextField(max_length=100)
 
-	def _get_grand_total(self):
-		return BudgetItem.objects.all().aggregate(grand_total=Sum(F('quantity') * F('unit_cost'), output_field=models.DecimalField()))['grand_total']
-	grand_total = property(_get_grand_total)
-
 	def __unicode__(self):
     		return self.title
 

@@ -119,13 +119,32 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        <div class="col-md-5 actions" style="margin-bottom:10px">
+                            <a href="{% url 'budgets' %}" class="btn btn-default btn-sm" style="border-color: #4f2412">
+                                <i class="fa fa-eye" style="color:#4f2412"></i> <span style="color:#4f2412"> View All Budgets </span> </a>
+                        </div>
+                        <div class="col-md-5" style="margin-bottom:10px">
+                            <a href="{% url 'budgets' %}" class="btn btn-default btn-sm" style="border-color: #4f2412">
+                                <i class="fa fa-plus" style="color:#4f2412"></i> <span style="color:#4f2412"> Add New Budget </span>
+                            </a>
+                        </div>
+                        <br/>
+                        <div class="col-md-5 actions">
+                            <a href="{% url 'edit_budget' pk=budget.id %}" class="btn btn-default btn-sm" style="border-color: #4f2412">
+                                <i class="fa fa-pencil" style="color:#4f2412"></i> <span style="color:#4f2412"> Edit This Budget </span> </a>
+                        </div>
+                        <div class="col-md-5">
+                            <a href="{% url 'delete_budget' pk=budget.id %}" class="btn btn-default btn-sm" style="border-color: #4f2412">
+                                <i class="fa fa-trash" style="color:#4f2412"></i> <span style="color:#4f2412"> Delete This Budget </span>
+                            </a>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="well" style="background-color: #E9E0DB;">
                             <div class="row static-info align-reverse">
                             <div class="row static-info align-reverse">
                                 <div class="col-md-5 name" style="color:#4f2412"> Grand Total: </div>
-                                <div class="col-md-5 value" style="color:#4f2412"> KSh. {{ budget.grand_total|intcomma }} </div>
+                                <div class="col-md-5 value" style="color:#4f2412"> KSh. {{ grand_total|intcomma }} </div>
                         </div>
                     </div>
                 </div>
