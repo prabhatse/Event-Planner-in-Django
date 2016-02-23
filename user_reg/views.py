@@ -428,8 +428,6 @@ def add_budget_item(request):
             budget_item.owner = request.user
             budget_item.save()
             return HttpResponseRedirect(reverse('view_budget', args=(budget_item.budget_id,))) # Redirect after POST
-            #return HttpResponseRedirect('view_budget') # Redirect after POST
-            #"{% url 'view_budget' pk=budgetitem.budget_id %}"
             print budget_item_form.errors
     else:
         budget_item_form = BudgetItemForm(User)
@@ -439,7 +437,6 @@ def add_budget_item(request):
 # *** Delete ***
 class DeleteBudgetItem(DeleteView):
     model = BudgetItem
-    success_url = reverse_lazy('budgets')
     template_name = 'dashboard/budget_item_delete.html'
 
     def get_guest(self, queryset=None):
@@ -454,11 +451,14 @@ class DeleteBudgetItem(DeleteView):
         context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
+    def get_success_url(self, **kwargs):
+        return reverse('view_budget', args=(self.object.budget_id,))
+
 # *** Edit ***
 class EditBudgetItem(UpdateView):
     model = BudgetItem
     form_class = BudgetItemForm
-    success_url = reverse_lazy('budgets')
+    
     template_name = 'dashboard/budget_item_edit.html'
 
     def get(self, request, *args, **kwargs):
@@ -478,6 +478,9 @@ class EditBudgetItem(UpdateView):
         context = super(EditBudgetItem, self).get_context_data(**kwargs)
         context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
+
+    def get_success_url(self, **kwargs):
+        return reverse('view_budget', args=(self.object.budget_id,))
 
 
 #Vendors
