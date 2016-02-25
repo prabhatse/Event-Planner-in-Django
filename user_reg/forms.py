@@ -31,14 +31,14 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
+        widgets = {
+            'date' : forms.DateInput(attrs={'class':'datepicker'})
+        }
         fields = ('title','date','description','venue','category')
 
-	def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
             super(EventForm, self).__init__(*args, **kwargs)
-            self.fields['date'].widget.format = '%d/%m/%Y'
-
-            # at the same time, set the input format on the date field like you want it:
-            self.fields['date'].input_formats = ['%d/%m/%Y']
+            self.fields['date'].widget.format = '%m/%d/%Y'
 
             def get_date(self):
                 return self.modified.date()
@@ -90,21 +90,21 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('title','description','event','due_date','due_time','status')
+        widgets = {
+            'date' : forms.DateInput(attrs={'class':'datepicker'}),
+        }
+        fields = ('title','description','event','date','time','status')
 
     def __init__(self, host, *args, **kwargs):
             super(TaskForm, self).__init__(*args, **kwargs)
             self.fields['event'].queryset = Event.objects.filter(host=host)
-            self.fields['due_date'].widget.format = '%d/%m/%Y'
-
-            # at the same time, set the input format on the date field like you want it:
-            self.fields['due_date'].input_formats = ['%d/%m/%Y']
+            self.fields['date'].widget.format = '%m/%d/%Y'
 
             def get_date(self):
                 return self.modified.date()
 
     def clean_date(self):
-            date = self.cleaned_data['due_date']
+            date = self.cleaned_data['date']
             if date:
                 if date < datetime.date.today():
                     raise forms.ValidationError("The date cannot be in the past!")
@@ -131,4 +131,5 @@ class BudgetItemForm(forms.ModelForm):
     def __init__(self, owner, *args, **kwargs):
             super(BudgetItemForm, self).__init__(*args, **kwargs)
             self.fields['budget'].queryset = Budget.objects.filter(owner=owner)
+
 

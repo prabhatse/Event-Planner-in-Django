@@ -58,6 +58,17 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js">
         </script>
         {{ form.media }}
+        <!-- DATE PICKER -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+        $(function() {
+            $( ".datepicker" ).datepicker();
+        });
+        </script>
+        <!-- END DATE PICKER -->
     <!-- END HEAD -->
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -81,68 +92,204 @@
                 <!-- END PAGE ACTIONS -->
                 <!-- BEGIN PAGE TOP -->
                 <div class="page-top">
-                    <!-- BEGIN HEADER SEARCH BOX -->
-                    <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-                    <form class="search-form search-form-expanded" action="page_general_search_3.html" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search..." name="query">
-                            <span class="input-group-btn">
-                                <a href="javascript:;" class="btn submit">
-                                    <i class="icon-magnifier"></i>
-                                </a>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- END HEADER SEARCH BOX -->
                     <!-- BEGIN TOP NAVIGATION MENU -->
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
-                            <!-- BEGIN NOTIFICATION DROPDOWN -->
+                            <!-- EVENTS DROPDOWN -->
                             <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-bell"></i>
-                                    <span class="badge badge-default"> 7 </span>
+                                    <i class="icon-calendar"></i>
+                                    <span class="badge badge-default"> {{ events.count }} </span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="external">
-                                        <h3>
-                                            <span class="bold">12 pending</span> notifications</h3>
-                                        <a href="page_user_profile_1.html">view all</a>
+                                    <li class="external" style="background: #E9E0DB";>
+                                        <h3 style="color: #4F2412">
+                                            You have <span class="bold">{{ events.count }}</span> event(s)
+                                        </h3>
+                                        <a href="{% url 'events' %}">
+                                            <span style="color: #4F2412">
+                                                {% if events %}
+                                                    View All
+                                                {% else %}
+                                                    Add One
+                                                {% endif %}
+                                            </span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">just now</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-success">
-                                                            <i class="fa fa-plus"></i>
-                                                        </span> New user registered. </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">3 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-danger">
-                                                            <i class="fa fa-bolt"></i>
-                                                        </span> Server #12 overloaded. </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">10 mins</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-warning">
-                                                            <i class="fa fa-bell-o"></i>
-                                                        </span> Server #2 not responding. </span>
-                                                </a>
-                                            </li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 150px;" data-handle-color="#637283">
+                                            {% for event in events %}
+                                                <li>
+                                                    <a href="{% url 'events' %}">
+                                                        <span class="details">
+                                                            <span class="label label-sm label-icon label-success">
+                                                                {% if event.category = 'Bab' %} 
+                                                                    <i class="fa fa-child"></i>
+                                                                {% elif event.category = 'Bir' %} 
+                                                                    <i class="fa fa-birthday-cake"></i>
+                                                                {% elif event.category = 'Cor' %} 
+                                                                    <i class="fa fa-glass"></i>
+                                                                {% elif event.category = 'Gra' %} 
+                                                                    <i class="fa fa-graduation-cap"></i>
+                                                                {% elif event.category = 'Wed' %}
+                                                                    <i class="fa fa-heart"></i>
+                                                                {% elif event.category = 'Oth' %} 
+                                                                    <i class="fa fa-star"></i>
+                                                                {% endif %}
+                                                            </span>
+                                                            <span> {{ event.title }} </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <!-- END NOTIFICATION DROPDOWN -->
+                            <!-- END EVENTS DROPDOWN -->
+                            <!-- TASKS DROPDOWN -->
+                            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-notebook"></i>
+                                    <span class="badge badge-default"> {{ tasks.count }} </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external" style="background: #E9E0DB">
+                                        <h3 style="color: #4F2412">
+                                            You have <span class="bold">{{ tasks.count }}</span> task(s)
+                                        </h3>
+                                        <a href="{% url 'tasks' %}">
+                                            <span style="color: #4F2412">
+                                                {% if tasks %}
+                                                    View All
+                                                {% else %}
+                                                    Add One
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 150px;" data-handle-color="#637283">
+                                            {% if tasks %}
+                                                {% for task in tasks %}
+                                                    <li>
+                                                        <a href="{% url 'tasks' %}">
+                                                            {% if task.status = 'Pen' %}
+                                                                <span class="time" style="color:#d8b2d8"> <strong> Pending </strong> </span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-success" style="background:#d8b2d8"> 
+                                                                        <i class="fa fa-pause"></i>
+                                                            {% elif task.status = 'Pro' %}
+                                                                <span class="time" style="color:#ffb732"> <strong> In Progress </strong> </span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-success" style="background:#ffb732"> 
+                                                                        <i class="fa fa-refresh"></i>
+                                                            {% elif task.status = 'Ove' %}
+                                                                <span class="time" style="color:#d05454"> <strong> Overdue </strong> </span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-success" style="background:#d05454"> 
+                                                                        <i class="fa fa-warning"></i>
+                                                            {% else %}
+                                                                <span class="time" style="color:#66b266"> <strong> Completed </strong> </span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-success" style="background:#66b266"> 
+                                                                        <i class="fa fa-check"></i>
+                                                            {% endif %}
+                                                                    </span> 
+                                                                    <span> {{ task.title }} </span>
+                                                                </span>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END TASKS DROPDOWN -->
+                            <!-- GUESTS DROPDOWN -->
+                            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-users"></i>
+                                    <span class="badge badge-default"> {{ guests.count }} </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external" style="background: #E9E0DB">
+                                        <h3 style="color: #4F2412">
+                                            You have <span class="bold">{{ guests.count }}</span> guest(s)
+                                        </h3>
+                                        <a href="{% url 'guest_profiles' %}">
+                                            <span style="color: #4F2412">
+                                                {% if guests %}
+                                                    View All
+                                                {% else %}
+                                                    Add One
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 150px;" data-handle-color="#637283">
+                                            {% if guests %}
+                                                {% for guest in guests %}
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <span class="time">{{ guest.guestlist }}</span>
+                                                            <span class="details">
+                                                                <span class="label label-sm label-icon label-success">
+                                                                    <i class="fa fa-user"></i>
+                                                                </span> 
+                                                                <span>{{ guest.fname }} {{ guest.lname }} </span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END GUESTS DROPDOWN -->
+                            <!-- BUDGETS DROPDOWN -->
+                            <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-credit-card"></i>
+                                    <span class="badge badge-default"> {{ budgets.count }} </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="external" style="background: #E9E0DB";>
+                                        <h3 style="color: #4F2412">
+                                            You have <span class="bold">{{ budgets.count }}</span> budget(s)
+                                        </h3>
+                                        <a href="{% url 'budgets' %}">
+                                            <span style="color: #4F2412">
+                                                {% if budgets %}
+                                                    View All
+                                                {% else %}
+                                                    Add One
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller" style="height: 150px;" data-handle-color="#637283">
+                                            {% for budget in budgets %}
+                                                <li>
+                                                    <a href="{% url 'budgets' %}">
+                                                        <span class="details">
+                                                            <span class="label label-sm label-icon label-success">
+                                                                <i class="fa fa-credit-card"></i>
+                                                            </span>
+                                                            <span> {{ budget.title }} </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END BUDGETS DROPDOWN -->
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-user">
@@ -161,22 +308,6 @@
                                     <li>
                                         <a href="/dashboard/profile/">
                                             <i class="icon-user"></i> My Profile </a>
-                                    </li>
-                                    <li>
-                                        <a href="/dashboard/events/">
-                                            <i class="icon-calendar"></i> My Events </a>
-                                    </li>
-                                    <li>
-                                        <a href="/dashboard/tasks/">
-                                            <i class="icon-notebook"></i> My Tasks
-                                            <span class="badge badge-success"> 7 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/dashboard/inbox/">
-                                            <i class="icon-envelope-open"></i> My Inbox
-                                            <span class="badge badge-danger"> 3 </span>
-                                        </a>
                                     </li>
                                     <li class="divider"> </li>
                                     <li>

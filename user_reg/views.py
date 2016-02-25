@@ -9,15 +9,29 @@ from django.views.generic import View
 from django.core.urlresolvers import reverse_lazy
 from django.core.urlresolvers import reverse
 from django.db.models import Sum, F
+from django.http import HttpResponse
+from django.template import RequestContext
 
-#Dashboard Home/Welcome
+# Front-End
 
 def index_page(request):
     return render(request, 'user_reg/index.html', {})
 
 # *** Home ***
 def home(request):
-    return render(request, 'dashboard/dashboard.html', {})
+    member = get_object_or_404(Member, user=request.user)
+    events = Event.objects.filter(host=request.user)
+    events_count = Event.objects.count()
+    tasks = Task.objects.filter(host=request.user)
+    tasks_count = Task.objects.count()
+    guests = Guest.objects.filter(host=request.user)
+    guests_count = Guest.objects.count()
+    budgets = Budget.objects.filter(owner=request.user)
+    budgets_count = Budget.objects.count()
+    context_dict = { 'member': member, 'events': events, 'events_count': events_count, 
+    'tasks': tasks, 'tasks_count': tasks_count, 'guests': guests, 'guests_count': guests_count, 
+    'budgets': budgets, 'budgets_count': budgets_count }
+    return render(request, 'dashboard/dashboard.html', context_dict)
 
 # *** Profile Add ***
 def welcome(request):

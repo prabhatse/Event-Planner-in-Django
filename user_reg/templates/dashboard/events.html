@@ -52,7 +52,7 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 {{ event_form|crispy }}
-                                <div class="margiv-top-10">
+                                    <div class="margiv-top-10">
                                     <button type="submit" class="btn default">Save Changes </button>
                                     <a href= "{% url 'events' %}" class="btn default"> Cancel </a>
                                 </div>
@@ -63,6 +63,7 @@
                     </div>
                     <div class="col-md-5 col-sm-12">
                         <div class="todo-tasklist">
+                        <p>Date: <input type="text" id="datepicker"></p>
                             {% if events %}
                             <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">Your Upcoming Events</h3>
                             <ul>

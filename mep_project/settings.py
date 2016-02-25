@@ -142,5 +142,3 @@ SITE_ID = 4
 
 # sorl.thumbnail
 THUMBNAIL_DEBUG = True
-
-
