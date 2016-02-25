@@ -19,19 +19,7 @@ def index_page(request):
 
 # *** Home ***
 def home(request):
-    member = get_object_or_404(Member, user=request.user)
-    events = Event.objects.filter(host=request.user)
-    events_count = Event.objects.count()
-    tasks = Task.objects.filter(host=request.user)
-    tasks_count = Task.objects.count()
-    guests = Guest.objects.filter(host=request.user)
-    guests_count = Guest.objects.count()
-    budgets = Budget.objects.filter(owner=request.user)
-    budgets_count = Budget.objects.count()
-    context_dict = { 'member': member, 'events': events, 'events_count': events_count, 
-    'tasks': tasks, 'tasks_count': tasks_count, 'guests': guests, 'guests_count': guests_count, 
-    'budgets': budgets, 'budgets_count': budgets_count }
-    return render(request, 'dashboard/dashboard.html', context_dict)
+    return render(request, 'dashboard/dashboard.html', {})
 
 # *** Profile Add ***
 def welcome(request):
@@ -87,7 +75,6 @@ def inbox(request):
 
 def add_event(request):
     events = Event.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():
@@ -99,7 +86,7 @@ def add_event(request):
             print event_form.errors
     else:
         event_form = EventForm()
-    context_dict = { 'events': events, 'member': member, 'event_form': event_form}
+    context_dict = { 'events': events, 'event_form': event_form}
     return render(request, 'dashboard/events.html', context_dict)
 
 # *** Delete ***
@@ -117,7 +104,6 @@ class DeleteEvent(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteEvent, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Edit ***
@@ -137,7 +123,6 @@ class EditEvent(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditEvent, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 #Tasks
@@ -145,7 +130,6 @@ class EditEvent(UpdateView):
 # *** Add & Display ***
 def add_task(request):
     tasks = Task.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
     User = host = request.user
     if request.method == 'POST':
         task_form = TaskForm(User, request.POST)
@@ -158,7 +142,7 @@ def add_task(request):
             print task_form.errors
     else:
         task_form = TaskForm(User)
-    context_dict = { 'tasks': tasks, 'member': member, 'task_form': task_form}
+    context_dict = { 'tasks': tasks, 'task_form': task_form}
     return render(request, 'dashboard/tasks.html', context_dict)
 
 # *** Delete ***
@@ -176,7 +160,6 @@ class DeleteTask(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteTask, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Edit ***
@@ -201,23 +184,19 @@ class EditTask(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditTask, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 #Guests
 
 # *** Guests Home ***
 def guests(request):
-    member = get_object_or_404(Member, user=request.user)
-    context_dict = { 'member': member}
-    return render(request, 'dashboard/guests.html', context_dict)
+    return render(request, 'dashboard/guests.html', {})
 
 # *** Guestlists ***
 
 # *** Add & Display ***
 def add_guestlist(request):
     guestlists = Guestlist.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
     if request.method == 'POST':
         guestlist_form = GuestlistForm(request.POST)
         if guestlist_form.is_valid():
@@ -229,7 +208,7 @@ def add_guestlist(request):
             print guestlist_form.errors
     else:
         guestlist_form = GuestlistForm()
-    context_dict = { 'guestlists': guestlists, 'member': member, 'guestlist_form': guestlist_form}
+    context_dict = { 'guestlists': guestlists, 'guestlist_form': guestlist_form}
     return render(request, 'dashboard/guestlists.html', context_dict)
 
 # *** Delete ***
@@ -247,7 +226,6 @@ class DeleteGuestlist(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteGuestlist, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Edit ***
@@ -267,7 +245,6 @@ class EditGuestlist(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditGuestlist, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Guest Profiles ***
@@ -275,7 +252,6 @@ class EditGuestlist(UpdateView):
 # *** Add ***
 def add_guest(request):
     guests = Guest.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
     if request.method == 'POST':
         guest_form = GuestForm(request.POST)
         if guest_form.is_valid():
@@ -287,14 +263,13 @@ def add_guest(request):
             print guest_form.errors
     else:
         guest_form = GuestForm()
-    context_dict = { 'guests': guests, 'member': member, 'guest_form': guest_form}
+    context_dict = { 'guests': guests, 'guest_form': guest_form}
     return render(request, 'dashboard/guest_add.html', context_dict)
 
 # *** Display ***
 def guest_profiles(request):
     guests = Guest.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
-    context_dict = { 'member': member, 'guests': guests}
+    context_dict = { 'guests': guests}
     return render(request, 'dashboard/guest_profiles.html', context_dict)
 
 # *** Delete ***
@@ -312,7 +287,6 @@ class DeleteGuest(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteGuest, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Edit ***
@@ -332,14 +306,12 @@ class EditGuest(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditGuest, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Invitations ***
 
 def add_invitation(request):
     invitations = Invitation.objects.filter(host=request.user)
-    member = get_object_or_404(Member, user=request.user)
     User = host = request.user
     if request.method == 'POST':
         invitation_form = InvitationForm(User, request.POST)
@@ -352,7 +324,7 @@ def add_invitation(request):
             print invitation_form.errors
     else:
         invitation_form = InvitationForm(User)
-    context_dict = { 'invitations': invitations, 'member': member, 'invitation_form': invitation_form}
+    context_dict = { 'invitations': invitations, 'invitation_form': invitation_form}
     return render(request, 'dashboard/invitations.html', context_dict)
 
 #Budgets
@@ -362,7 +334,6 @@ def add_invitation(request):
 # *** Add & Display ***
 def add_budget(request):
     budgets = Budget.objects.filter(owner=request.user)
-    member = get_object_or_404(Member, user=request.user)
     owner = request.user
     if request.method == 'POST':
         budget_form = BudgetForm(owner, request.POST)
@@ -375,7 +346,7 @@ def add_budget(request):
             print budget_form.errors
     else:
         budget_form = BudgetForm(owner)
-    context_dict = { 'budgets': budgets, 'member': member, 'budget_form': budget_form}
+    context_dict = { 'budgets': budgets, 'budget_form': budget_form}
     return render(request, 'dashboard/budgets.html', context_dict)
 
 # *** View ***
@@ -388,7 +359,6 @@ class ViewBudget(DetailView):
         owner = self.request.user
         context = super(ViewBudget, self).get_context_data(**kwargs)
         context['budget_items'] = BudgetItem.objects.filter(budget_id=self.object.id)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         context['grand_total'] = BudgetItem.objects.filter(budget_id=self.object.id).aggregate(grand_total=Sum(F('quantity') * F('unit_cost'), output_field=models.DecimalField()))['grand_total']
         return context
 
@@ -410,7 +380,6 @@ class DeleteBudget(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteBudget, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Edit ***
@@ -435,7 +404,6 @@ class EditBudget(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditBudget, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
 # *** Budget Items ***
@@ -444,7 +412,6 @@ class EditBudget(UpdateView):
 
 def add_budget_item(request):
     budget_items = BudgetItem.objects.filter(owner=request.user)
-    member = get_object_or_404(Member, user=request.user)
     User = host = request.user
     if request.method == 'POST':
         budget_item_form = BudgetItemForm(User, request.POST)
@@ -456,7 +423,7 @@ def add_budget_item(request):
             print budget_item_form.errors
     else:
         budget_item_form = BudgetItemForm(User)
-    context_dict = { 'budget_items': budget_items, 'member': member, 'budget_item_form': budget_item_form }
+    context_dict = { 'budget_items': budget_items, 'budget_item_form': budget_item_form }
     return render(request, 'dashboard/budget_item_add.html', context_dict)
 
 # *** Delete ***
@@ -473,7 +440,6 @@ class DeleteBudgetItem(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(DeleteBudgetItem, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
     def get_success_url(self, **kwargs):
@@ -501,7 +467,6 @@ class EditBudgetItem(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(EditBudgetItem, self).get_context_data(**kwargs)
-        context['member'] = get_object_or_404(Member, user=self.request.user)
         return context
 
     def get_success_url(self, **kwargs):
