@@ -44,6 +44,18 @@ urlpatterns = [
     url(r'^dashboard/budgets/edit/(?P<pk>\d+)/$', views.EditBudget.as_view(), name='edit_budget'),
     url(r'^dashboard/budgets/', views.add_budget, name='budgets'),
     #Vendors
+    url(r'^dashboard/vendors/beauty-wellness', views.vendors_beauty, name='vendors_beauty'),
+    url(r'^dashboard/vendors/flowers-decor', views.vendors_decor, name='vendors_decor'),
+    url(r'^dashboard/vendors/clothing-accessories', views.vendors_clothing, name='vendors_clothing'),
+    url(r'^dashboard/vendors/music-entertainment', views.vendors_entertainment, name='vendors_entertainment'),
+    url(r'^dashboard/vendors/photography-videography', views.vendors_photography, name='vendors_photography'),
+    url(r'^dashboard/vendors/food-drinks', views.vendors_food, name='vendors_food'),
+    url(r'^dashboard/vendors/cake-pastries-desserts', views.vendors_cake, name='vendors_cake'),
+    url(r'^dashboard/vendors/stationery', views.vendors_stationery, name='vendors_stationery'),
+    url(r'^dashboard/vendors/gifts-favours', views.vendors_favours, name='vendors_favours'),
+    url(r'^dashboard/vendors/transport', views.vendors_transport, name='vendors_transport'),
+    url(r'^dashboard/vendors/venue', views.vendors_venue, name='vendors_venue'),
+    url(r'^dashboard/vendors/other', views.vendors_other, name='vendors_other'),
     url(r'^dashboard/vendors/', views.vendors, name='vendors'),
     #Reviews
     url(r'^dashboard/reviews/', views.reviews, name='reviews'),

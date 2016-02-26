@@ -7,6 +7,7 @@ from django.template import loader
 from django.template import RequestContext
 from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
+from django.forms.widgets import CheckboxSelectMultiple
 import datetime
 
 class MemberForm(forms.ModelForm):
@@ -132,4 +133,24 @@ class BudgetItemForm(forms.ModelForm):
             super(BudgetItemForm, self).__init__(*args, **kwargs)
             self.fields['budget'].queryset = Budget.objects.filter(owner=owner)
 
+category_choices = (  
+    ('Bea', 'Beauty & Wellness'),
+    ('Ent', 'Entertainment'),
+    ('Dec', 'Flowers & Decor'),
+    ('Cat', 'Catering & Cakes'),
+    ('Sta', 'Stationery & Favours'),
+    ('Clo', 'Clothing & Accessories'),
+    ('Pho', 'Photography & Videography'),
+    ('Jew', 'Jewellery'),
+    ('Ven', 'Venues'),
+    ('Tra', 'Transport'),
+    ('Oth', 'Other'),
+)
 
+class VendorForm(forms.ModelForm):
+
+    category = forms.CheckboxSelectMultiple(choices=category_choices)
+
+    class Meta:
+        model = Vendor
+        fields = ('name','email','phone_number','description','location','category','website','logo')

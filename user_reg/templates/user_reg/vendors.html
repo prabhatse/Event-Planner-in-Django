@@ -1,0 +1,97 @@
+{% extends "user_reg/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Vendor Registration" %}{% endblock %}
+
+{% block content %}
+
+	<!-- Already registered
+	<section class="sep-top-2x sep-bottom-3x" style="background-image: url({% static 'front-end/img/banner9.jpg' %});"></section>
+    <section class="sep-top-3x sep-bottom-3x">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="section-title text-center">
+                        <div class="icon-box icon-horizontal icon-md">
+                            <div class="icon-content img-circle"><i class="fa fa-user"></i></div>
+                        </div>
+                        <h2 class="upper">Hi, {{user}}!</h2>
+                        <p class="lead">Looks like you're already signed up.<br/>Feel free to go to your dashboard and start planning your dream event! </p><a href="/dashboard/home" class="btn btn-primary btn-lg">Let's Go!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	Already Registered -->
+
+
+	<!-- Start member registration-->
+<section class="sep-top-2x sep-bottom-3x" style="background-image: url({% static 'front-end/img/banner9.jpg' %});"></section>
+<section id="sign-up" class="sep-top-3x sep-bottom-3x">
+    <div class="container">
+  		<div class="row">
+    		<div class="col-md-8 col-md-offset-2">
+              	<div class="section-title text-center">
+                	<div class="icon-box icon-horizontal icon-md">
+                  		<div class="icon-content img-circle"><i class="fa fa-gift"></i></div>
+                	</div>
+                	<h2 class="upper">Become a Vendor</h2>
+               	 	<p class="lead">Register your events-related business on <em>My Event Planner</em>!<br/><br/>We'll connect you to hundreds of potential clients<br/>seeking your services.</p>
+                	<br/>
+              	</div>
+            </div>
+      	</div>
+      	<div class="row">
+          	<div class="container">
+				<div class="row">
+    				<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+						<form method="post" action="">
+    						{% csrf_token %}
+			                {{ vendor_form|crispy }}
+							<div class="row">
+								<div class="col-xs-12 col-md-5">
+					    			<input type="submit" value="Register" class="btn btn-primary btn-block btn-lg wow bounceInRight" tabindex="7">
+				    			</div>
+								<div class="col-xs-12 col-md-7">
+					    			<p>*Required fields</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End member registration section-->
+
+<!-- Start call to action section-->
+<section class="call-to-action bg-primary sep-top-md sep-bottom-md">
+    <div class="container">
+      	<div class="row">
+            <div class="col-md-9">
+              <h5 class="action-title upper light">START PLANNING YOUR DREAM EVENT TODAY.</h5>
+            </div>
+            <div class="col-md-3 text-right">
+            	<a href="/#about" class="btn btn-light btn-bordered btn-lg" target="_blank">LEARN MORE</a>
+        	</div>
+        </div>
+    </div>
+</section>
+<!-- End call to action section-->
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_form.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

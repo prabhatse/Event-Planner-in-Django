@@ -475,8 +475,96 @@ class EditBudgetItem(UpdateView):
 
 #Vendors
 
+# *** Front-end ***
+
+# *** Register ***
+
+def vendors_reg(request):
+    vendors = Vendor.objects.all()
+    if request.method == 'POST':
+        vendor_form = VendorForm(request.POST)
+        if vendor_form.is_valid():
+            vendor = vendor_form.save(commit=False)
+            #budget_item.owner = request.user
+            vendor.save()
+            return HttpResponseRedirect('/vendors/success/') # Redirect after POST
+            print vendor_form.errors
+    else:
+        vendor_form = VendorForm()
+    context_dict = { 'vendors': vendors, 'vendor_form': vendor_form }
+    return render(request, 'user_reg/vendors.html', context_dict)
+
+# *** Success ***
+
+def vendors_success(request):
+    return render(request, 'user_reg/vendors_success.html', {})
+
+# *** Back-end ***
+
 def vendors(request):
-    return render(request, 'dashboard/vendors.html', {})
+    vendors = Vendor.objects.all()
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_view.html', context_dict)
+
+def vendors_beauty(request):
+    vendors = Vendor.objects.filter(category='Bea')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_beauty.html', context_dict)
+
+def vendors_decor(request):
+    vendors = Vendor.objects.filter(category='Flo')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_decor.html', context_dict)
+
+def vendors_clothing(request):
+    vendors = Vendor.objects.filter(category='Clo')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_clothing.html', context_dict)
+
+def vendors_entertainment(request):
+    vendors = Vendor.objects.filter(category='Mus')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_entertainment.html', context_dict)
+
+def vendors_photography(request):
+    vendors = Vendor.objects.filter(category='Pho')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_photography.html', context_dict)
+
+def vendors_food(request):
+    vendors = Vendor.objects.filter(category='Foo')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_food.html', context_dict)
+
+def vendors_cake(request):
+    vendors = Vendor.objects.filter(category='Cak')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_cake.html', context_dict)
+
+def vendors_stationery(request):
+    vendors = Vendor.objects.filter(category='Sta')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_stationery.html', context_dict)
+
+def vendors_favours(request):
+    vendors = Vendor.objects.filter(category='Fav')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_favours.html', context_dict)
+
+def vendors_transport(request):
+    vendors = Vendor.objects.filter(category='Tra')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_transport.html', context_dict)
+
+def vendors_venue(request):
+    vendors = Vendor.objects.filter(category='Ven')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_venue.html', context_dict)
+
+def vendors_other(request):
+    vendors = Vendor.objects.filter(category='Oth')
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_other.html', context_dict)
 
 #Reviews 
 

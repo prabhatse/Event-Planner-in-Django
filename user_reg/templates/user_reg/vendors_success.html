@@ -1,0 +1,45 @@
+{% extends "user_reg/base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Successfully Registered" %}{% endblock %}
+
+{% block content %}
+<section class="sep-top-2x sep-bottom-3x" style="background-image: url({% static 'front-end/img/banner9.jpg' %});"> </section>
+<section class="sep-top-2x sep-bottom-3x" >
+    <div class="container">
+      	<div class="row">
+            <div class="col-md-5 text-right">
+              	<div class="sep-top-md sep-bottom-sm">
+                	<div class="bordered-right section-title">
+                  		<h2 class="upper">{% trans "Registration" %}<span class="label-colored"> {% trans "Success!" %}</span></h2>
+                	</div>
+                		<p class="lead">{% trans "Congratulations! <br/> Your have successfully registered as a vendor on <em>My Event Planner</em>!" %}</p><p class="lead">{% trans "You will now be featured on our database of service providers." %}</p><a href="#" class="btn btn-primary btn-lg">View Your Page</a>
+              	</div>
+            </div>
+            <div class="col-md-7">
+              	<div data-device="macbook" data-orientation="landscape" data-color="black" class="device-mockup">
+                	<div class="device">
+                  		<div class="screen"><img src="{% static 'front-end/img/screenshot3.jpg' %}" alt="" width="577" height="433" class="img-responsive"></div>
+                	</div>
+              	</div>
+            </div>
+      	</div>
+    </div>
+</section>
+
+<!-- Start call to action section-->
+<section class="call-to-action bg-primary sep-top-md sep-bottom-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h5 class="action-title upper light">START PLANNING YOUR DREAM EVENT TODAY.</h5>
+            </div>
+            <div class="col-md-3 text-right">
+                <a href="/#about" class="btn btn-light btn-bordered btn-lg" target="_blank">LEARN MORE</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End call to action section-->
+{% endblock %}

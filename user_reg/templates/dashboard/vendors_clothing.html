@@ -1,0 +1,108 @@
+{% extends "dashboard/base.html" %}
+{% load thumbnail %}
+
+{% block nav-vendors %}
+<li class="nav-item start active open">
+    <a href="{% url 'vendors' %}" class="nav-link nav-toggle">
+        <i class="icon-present"></i>
+        <span class="title">My Vendors</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} Clothing & Accessories {% endblock %} 
+
+{% block content %}
+<h3 class="page-title"> Clothing & Accessories
+    <small>Key words: tailor, fashion, dress, suit, shoes</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-present"></i>
+            <a href="{% url 'vendors' %}">My Vendors</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <img src="{% static 'back-end/img/vendor-icons/clothing.png' %}" />
+            <span>Clothing & Accessories</span>
+        </li>
+    </ul> 
+</div>
+
+<div class="page-bar">
+    <img src="{% static 'back-end/img/banner-vendors-clothing.jpg' %}" style="width:100%"/>
+</div>
+
+<!-- BEGIN : USER CARDS -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+                    {% if vendors %}
+                        {% for vendor in vendors %}
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    {% thumbnail vendor.logo "250x250" crop="center" as im %}
+                                        <img alt="{{ vendor.name }}" src="{{ im.url }}" class="img-responsive"/>
+                                    {% endthumbnail %}
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="javascript:;">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">{{ vendor.name }}</h3>
+                                    <p class="mt-card-desc font-grey-mint" style="text-align:left; margin-bottom: 10px; margin-left: 10px;">{{vendor.description}}</p>
+                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-envelope"></i> {{vendor.email}}</p>
+                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-phone"></i> {{vendor.phone_number}}</p>
+                                    {% if vendor.website %}
+                                        <p class="mt-card-desc font-grey-mint"><i class="fa fa-globe"></i> {{vendor.website}}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="portlet light portlet-fit  calendar">
+                        <div class="portlet-title">
+                        <span class="caption-subject font-green-sharp bold uppercase">SORRY!</span>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row" style="text-align:center">
+                                <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">There are no vendors in this category.</h3>
+                                <p style="color:#4f2412"> Check back again later. </p>
+                                    <div class="margiv-top-10">
+                                        <a href="{% url 'vendors' %}"><button class="btn default">Back to Vendors </button></a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                    <!-- End Row 1 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END : USER CARDS -->
+{% endblock content %}
+

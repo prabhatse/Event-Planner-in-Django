@@ -1,0 +1,312 @@
+{% extends "dashboard/base.html" %}
+
+{% block nav-vendors %}
+<li class="nav-item start active open">
+    <a href="{% url 'vendors' %}" class="nav-link nav-toggle">
+        <i class="icon-present"></i>
+        <span class="title">My Vendors</span>
+        <span class="selected"></span>
+        <span class="arrow open"></span>
+    </a>
+</li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %} My Vendors {% endblock %} 
+
+{% block content %}
+<h3 class="page-title"> My Vendors
+    <small>Browse service providers for your events</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="icon-present"></i>
+            <span>My Vendors</span>
+        </li>
+    </ul> 
+</div>
+
+<!-- BEGIN : USER CARDS -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-body">
+                <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Beauty & Wellness -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/beauty.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_beauty' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Beauty & Wellness</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: beauty, spa, make-up, hair</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Flowers & Decor -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/decor.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_decor' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Flowers & Decor</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: flowers, chairs, tables, tents</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Clothing & Accessories -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/clothing.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_clothing' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Clothing & Accessories</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: tailor, fashion, dress, suit, shoes</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Music & Entertainment -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/entertainment.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_entertainment' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Music & Entertainment</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: MC, DJ, band, singer, sound</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Row 1 -->
+                    <!-- Row 2 -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Photography & Videography -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/photography.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_photography' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Photography & Videography</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: photo, video, film</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Food & Drinks -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/drinks.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_food' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Food & Drinks</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: catering, food, drinks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Cake, Pastries & Dessert -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/cake.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_cake' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Cake, Pastries & Dessert</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: cake, pastries, dessert</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Stationery -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/stationery.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_stationery' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Stationery</h3>
+                                    <p class="mt-card-desc font-grey-mint">Invitations, programs, thank-you cards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Row 2 -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Gifts & Favours -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/favours.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_favours' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Gifts & Favours</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: gifts, favours, presents</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Transport -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/transport.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_transport' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Transport</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: transport, driver, chauffeur, limousine, car</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Venue -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/venue.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_venue' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Venue</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: venue, location, garden, field, hall, church</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <!-- Other -->
+                            <div class="mt-card-item">
+                                <div class="mt-card-avatar mt-overlay-1">
+                                    <img src="{% static 'back-end/img/vendor-categories/other.jpg' %}" />
+                                    <div class="mt-overlay">
+                                        <ul class="mt-info">
+                                            <li>
+                                                <a class="btn default btn-outline" href="{% url 'vendors_other' %}">
+                                                    <i class="icon-link"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-card-content">
+                                    <h3 class="mt-card-name">Other</h3>
+                                    <p class="mt-card-desc font-grey-mint">Key words: security, mobile toilets, moving & storage</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Row 3 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END : USER CARDS -->
+{% endblock content %}

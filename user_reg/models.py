@@ -110,31 +110,32 @@ class BudgetItem(models.Model):
 	def __unicode__(self):
     		return self.name
 
-
-
-'''
-vendor_cat = (  
+category_choices = (  
     ('Bea', 'Beauty & Wellness'),
-    ('Ent', 'Entertainment'),
-    ('Dec', 'Flowers & Decor'),
-    ('Cat', 'Catering & Cakes'),
-    ('Sta', 'Stationery & Favours'),
+    ('Mus', 'Music & Entertainment'),
+    ('Flo', 'Flowers & Decor'),
+    ('Cak', 'Cakes, Pastries & Desserts'),
+    ('Sta', 'Stationery'),
+    ('Fav', 'Gifts & Favours'),
     ('Clo', 'Clothing & Accessories'),
     ('Pho', 'Photography & Videography'),
-    ('Jew', 'Jewellery'),
-    ('Ven', 'Venues'),
+    ('Foo', 'Food & Drinks'),
+    ('Ven', 'Venue'),
     ('Tra', 'Transport'),
     ('Oth', 'Other'),
-) 
+)
 
-class Vendor(models.Model):
-	name = models.CharField(max_length=70, verbose_name="What's the name of your business?")
-	description = models.TextField(max_length=200, verbose_name="Tell us a bit about your products or services.")
-	location = models.CharField(max_length=70, verbose_name="Where are you based?")
-	category = models.ManyToManyField(max_length=3, max_choices=3, choices=vendor_cat, verbose_name="What do you deal with? Select up to 2.")
+
+class Vendor(models.Model): 
+	name = models.CharField(max_length=70, verbose_name="What's the name of your business? ")
+	email = models.EmailField(max_length=70, unique=True, verbose_name="Email Address")
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+254712345678'. Up to 15 digits allowed. Please try again.")
+	phone_number = models.CharField(max_length=15, validators=[phone_regex], unique=True, verbose_name="Phone Number (e.g +254712345678)")
+	description = models.TextField(max_length=200, verbose_name="Tell us a bit about what makes your business unique. (Max characters: 200) ")
+	location = models.CharField(max_length=70, verbose_name="Where are you based? (City, Country) ")
+	category = models.CharField(max_length=3, choices=category_choices, verbose_name="Select categories below. ")
 	website = models.URLField(blank=True)
-	logo = RemovableImageField(blank=True, null=True, upload_to='users', verbose_name="Please upload your business logo.")
+	logo = RemovableImageField(blank=True, upload_to='vendors', verbose_name="Please upload your business logo or image. ")
 	
-	# Override the __unicode__() method to return out something meaningful!
 	def __unicode__(self):
-    		return self.user.username'''
+    		return self.name

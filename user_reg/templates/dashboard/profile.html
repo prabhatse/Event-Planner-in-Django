@@ -47,22 +47,22 @@
             <!-- END PORTLET MAIN -->
             <!-- PORTLET MAIN -->
             <div class="portlet light ">
-                <!-- STAT 
+                <!-- STATS --> 
                 <div class="row list-separated profile-stat">
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> {{ events }} </div>
+                        <div class="uppercase profile-stat-title"> {{ events_count }} </div>
                         <div class="uppercase profile-stat-text"> Events </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> {{ tasks }} </div>
+                        <div class="uppercase profile-stat-title"> {{ tasks_count }} </div>
                         <div class="uppercase profile-stat-text"> Tasks </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
-                        <div class="uppercase profile-stat-title"> {{ guestlists }} </div>
-                        <div class="uppercase profile-stat-text"> Guestlists </div>
+                        <div class="uppercase profile-stat-title"> {{ guests_count }} </div>
+                        <div class="uppercase profile-stat-text"> Guests </div>
                     </div>
                 </div>
-                END STAT -->
+                <!-- END STATS -->
                 <div>
                     <h4 class="profile-desc-title">About {{ user.get_full_name }}</h4>
                     <span class="profile-desc-text">{{ member.bio }}</span>
