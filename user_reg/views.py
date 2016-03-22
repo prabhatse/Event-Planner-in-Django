@@ -580,8 +580,26 @@ class ViewVendor(DetailView):
         context = super(ViewVendor, self).get_context_data(**kwargs)
         return context
 
+
 #Reviews 
 
 def reviews(request):
     return render(request, 'dashboard/reviews.html', {})
 
+# *** Add & Display ***
+
+def add_review(request):
+    reviews = TheReview.objects.all()
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.author = request.user
+            review.save()
+            return HttpResponseRedirect('/dashboard/reviews') # Redirect after POST
+        else:
+            print review_form.errors
+    else:
+        review_form = ReviewForm()
+    context_dict = { 'reviews': reviews, 'review_form': review_form}
+    return render(request, 'dashboard/vendors_add_reviews.html', context_dict)

@@ -59,6 +59,7 @@ urlpatterns = [
     url(r'^dashboard/vendors/other', views.vendors_other, name='vendors_other'),
     url(r'^dashboard/vendors/', views.vendors, name='vendors'),
     #Reviews
+    url(r'^dashboard/reviews/add', views.add_review, name='add_review'),
     url(r'^dashboard/reviews/', views.reviews, name='reviews'),
 ]
 

@@ -154,3 +154,22 @@ class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
         fields = ('name','email','phone_number','description','location','category','website','logo')
+
+rating_choices = (
+    ('Ter', 'Terrible'),  
+    ('Poo', 'Poor'),
+    ('Ave', 'Average'),
+    ('Goo', 'Good'),
+    ('Exc', 'Excellent'),
+)
+
+class ReviewForm(forms.ModelForm):
+    
+    rating = forms.ChoiceField(choices=rating_choices)
+
+    class Meta:
+        model = TheReview
+        fields = ('vendor', 'title','description','rating')
+
+    def __init__(self, *args, **kwargs):
+         super(ReviewForm, self).__init__(*args, **kwargs)

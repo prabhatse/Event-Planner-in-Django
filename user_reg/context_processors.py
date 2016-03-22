@@ -14,9 +14,12 @@ def context_processor(request):
     guests_count = Guest.objects.count()
     budgets = Budget.objects.filter(owner=request.user)
     budgets_count = Budget.objects.count()
+    vendors = Vendor.objects.all()
+    reviews = TheReview.objects.all()
+    my_reviews = TheReview.objects.filter(author=request.user)
     context_dict = {'member': member, 'events': events, 'events_count': events_count, 
     'tasks': tasks, 'tasks_count': tasks_count, 'guests': guests, 'guests_count': guests_count, 
-    'budgets': budgets, 'budgets_count': budgets_count }
+    'budgets': budgets, 'budgets_count': budgets_count, 'vendors': vendors, 'reviews': reviews, 'my_reviews': my_reviews }
     return context_dict
 
 

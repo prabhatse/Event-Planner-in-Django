@@ -139,3 +139,22 @@ class Vendor(models.Model):
 	
 	def __unicode__(self):
     		return self.name
+
+rating_choices = (
+	('Ter', 'Terrible'),  
+    ('Poo', 'Poor'),
+    ('Ave', 'Average'),
+    ('Goo', 'Good'),
+    ('Exc', 'Excellent'),
+)
+
+class TheReview(models.Model):
+	author = models.ForeignKey('auth.User')
+	vendor = models.ForeignKey(Vendor)
+	title = models.CharField(max_length=70)
+	description = models.TextField(max_length=1000)
+	rating = models.CharField(max_length=3, choices=rating_choices, verbose_name="Please rate this vendor.")
+	date = models.DateTimeField(default=timezone.now)
+
+	def __unicode__(self):
+    		return self.title

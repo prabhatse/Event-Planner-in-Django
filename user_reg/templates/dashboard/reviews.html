@@ -1,4 +1,7 @@
 {% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% load thumbnail %}
 
 {% block nav-reviews %}
 <li class="nav-item start active open">
@@ -27,10 +30,112 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
+            <i class="icon-bubbles"></i>
             <span>My Reviews</span>
         </li>
     </ul> 
 </div>
-<img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/>
+<div class="page-bar">
+    <img src="{% static 'front-end/img/banner10.jpg' %}" style="width:100%"/>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit  calendar">
+            <div class="portlet-title">
+            <span class="caption-subject font-green-sharp bold uppercase">MY REVIEWS</span>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="todo-tasklist">
+                            {% if my_reviews %}
+                            <h3 class="event-form-title margin-bottom-20" style="color:#4f2412">What You've Been Saying...</h3>
+                            <div  style="margin-bottom:10px">
+                                <a href="{% url 'add_review'%}">
+                                    <button class="btn default">Add New Review</button>
+                                </a>
+                            </div>
+                            <ul>
+                                {% for my_review in my_reviews %}
+                                <div class="todo-tasklist-item todo-tasklist-item-border-normal">
+                                    <div class="todo-tasklist-item-title">
+                                        {{ my_review.title }} 
+                                        {% if my_review.rating = 'Ter' %} 
+                                            <span style="color: #D4AF37">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            <span style="color: #D4AF37">
+                                        {% elif my_review.rating = 'Poo' %} 
+                                            <span style="color: #D4AF37">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                        {% elif my_review.rating = 'Ave' %} 
+                                            <span style="color: #D4AF37">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                        {% elif y_mreview.rating = 'Goo' %} 
+                                            <span style="color: #D4AF37">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                        {% elif my_review.rating = 'Exc' %}
+                                            <span style="color: #D4AF37">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="todo-tasklist-controls">
+                                        <span class="todo-tasklist-date">
+                                            Vendor Name: <strong> {{ my_review.vendor }} </strong>
+                                            <br/>
+                                            <br/>
+                                            {{ my_review.description }}
+                                        </span>
+                                    </div>
+                                    <br/>
+                                    <div class="todo-tasklist-controls pull-left">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-user"></i> 
+                                            {{ my_review.author }}
+                                        </span>
+                                    </div>
+                                    <br/>
+                                    <div class="todo-tasklist-controls">
+                                        <span class="todo-tasklist-date">
+                                            <i class="fa fa-calendar"></i> 
+                                            {{ my_review.date }} 
+                                        </span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                <h3 class="event-form-title margin-bottom-20">You haven't added any reviews. Add one below:</h3>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
