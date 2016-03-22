@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^dashboard/budgets/edit/(?P<pk>\d+)/$', views.EditBudget.as_view(), name='edit_budget'),
     url(r'^dashboard/budgets/', views.add_budget, name='budgets'),
     #Vendors
+    url(r'^dashboard/vendors/view/(?P<pk>\d+)/$', views.ViewVendor.as_view(), name='vendors_single'),
     url(r'^dashboard/vendors/beauty-wellness', views.vendors_beauty, name='vendors_beauty'),
     url(r'^dashboard/vendors/flowers-decor', views.vendors_decor, name='vendors_decor'),
     url(r'^dashboard/vendors/clothing-accessories', views.vendors_clothing, name='vendors_clothing'),

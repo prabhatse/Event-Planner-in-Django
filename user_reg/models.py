@@ -115,7 +115,7 @@ category_choices = (
     ('Mus', 'Music & Entertainment'),
     ('Flo', 'Flowers & Decor'),
     ('Cak', 'Cakes, Pastries & Desserts'),
-    ('Sta', 'Stationery'),
+    ('Sta', 'Stationery & Branding'),
     ('Fav', 'Gifts & Favours'),
     ('Clo', 'Clothing & Accessories'),
     ('Pho', 'Photography & Videography'),
@@ -132,7 +132,7 @@ class Vendor(models.Model):
 	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+254712345678'. Up to 15 digits allowed. Please try again.")
 	phone_number = models.CharField(max_length=15, validators=[phone_regex], unique=True, verbose_name="Phone Number (e.g +254712345678)")
 	description = models.TextField(max_length=200, verbose_name="Tell us a bit about what makes your business unique. (Max characters: 200) ")
-	location = models.CharField(max_length=70, verbose_name="Where are you based? (City, Country) ")
+	location = models.CharField(max_length=150, verbose_name="Where are you based?")
 	category = models.CharField(max_length=3, choices=category_choices, verbose_name="Select categories below. ")
 	website = models.URLField(blank=True)
 	logo = RemovableImageField(blank=True, upload_to='vendors', verbose_name="Please upload your business logo or image. ")

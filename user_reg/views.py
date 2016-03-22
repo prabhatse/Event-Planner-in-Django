@@ -566,6 +566,20 @@ def vendors_other(request):
     context_dict = { 'vendors': vendors }
     return render(request, 'dashboard/vendors_other.html', context_dict)
 
+'''def vendors_single(request):
+    vendors = Vendor.objects.all()
+    context_dict = { 'vendors': vendors }
+    return render(request, 'dashboard/vendors_single.html', context_dict)
+
+'''
+class ViewVendor(DetailView):
+
+    model = Vendor
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewVendor, self).get_context_data(**kwargs)
+        return context
+
 #Reviews 
 
 def reviews(request):

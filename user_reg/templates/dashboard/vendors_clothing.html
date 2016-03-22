@@ -70,12 +70,13 @@
                                 </div>
                                 <div class="mt-card-content">
                                     <h3 class="mt-card-name">{{ vendor.name }}</h3>
-                                    <p class="mt-card-desc font-grey-mint" style="text-align:left; margin-bottom: 10px; margin-left: 10px;">{{vendor.description}}</p>
-                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-envelope"></i> {{vendor.email}}</p>
-                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-phone"></i> {{vendor.phone_number}}</p>
+                                    <p class="mt-card-desc font-grey-mint" style="margin-bottom: 10px; margin-left: 15px; margin-right: 15px;">{{ vendor.description }}</p>
                                     {% if vendor.website %}
-                                        <p class="mt-card-desc font-grey-mint"><i class="fa fa-globe"></i> {{vendor.website}}</p>
+                                        <a href="{{ vendor.website }}" target="_blank"><p class="mt-card-desc font-grey-mint"><i class="fa fa-globe"></i> {{ vendor.website }}</p></a>
                                     {% endif %}
+                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-envelope"></i> {{ vendor.email }}</p>
+                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-phone"></i> {{ vendor.phone_number }}</p>
+                                    <p class="mt-card-desc font-grey-mint"><i class="fa fa-map-marker"></i> {{ vendor.location }}</p>
                                 </div>
                             </div>
                         </div>
